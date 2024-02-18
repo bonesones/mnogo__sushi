@@ -1,3 +1,106 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: "Montserrat";
+    font-weight: 400;
+    src: url("./fonts/Montserrat-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Montserrat";
+    font-weight: 500;
+    src: url("./fonts/Montserrat-Medium.ttf");
+}
+
+@font-face {
+    font-family: "Montserrat";
+    font-weight: 600;
+    src: url("./fonts/Montserrat-SemiBold.ttf");
+}
+
+@font-face {
+    font-family: "Montserrat";
+    font-weight: 700;
+    src: url("./fonts/Montserrat-Bold.ttf");
+}
+
+
+body {
+    background-color: #E9D5B0;
+}
+
+
+@media screen and (max-width: 450px) {
+    
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+}
+
+
+.company__name {
+    font-family: "Montserrat";
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.cart-item__counter {
+    background-color: #F35E62;
+    font-family: "Montserrat";
+    font-weight: 500;
+    font-size: 11px;
+    color: white;
+}
+
+.bg-main {
+    background-color: #E9D5B0;
+}
+
+
+.modal-nav {
+    font-family: "Montserrat";
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.modal-nav__arrow_rotated {
+    transform: rotate(180deg);
+}
+
+.modal-nav__element-submenu {
+    font-size: 16px;
+    font-family: "Montserrat";
+    font-weight: 400;
+}
+
+.modal-nav__element-submenu{
+    display: none;
+}
+
+.modal-nav__element-submenu_displayed {
+    display: block;
+}
+
+.header__contacts {
+    font-size: 14px;
+    font-family: "Montserrat";
+    font-weight: 400;
+}
+
+.modal-nav__background {
+    display: none;
+}
+
+
+.modal-nav__background_active {
+    display: block;
+}
+
+.modal-nav_inactive {
+    display: none;
+}
+
