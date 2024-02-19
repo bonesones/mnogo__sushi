@@ -6,6 +6,8 @@ import Arrow from "./../assets/modal-arrow.png"
 import Location from "./../assets/location.png"
 import Phone from "./../assets/phone.png"
 
+import { Link } from "react-router-dom"
+
 export default function Header() {
 
     const categories = [["combo", "Комбо"], // пара ссылка - название
@@ -56,7 +58,6 @@ export default function Header() {
         }
     }
 
-
     const handleChangeNav = function() {
         
         if(!isBurgerOpened) {
@@ -80,6 +81,7 @@ export default function Header() {
 
     }
     return (
+        <>
         <header className="container py-3.5">
             <div className="modal-nav__background absolute top-0 left-0 z-10 size-full bg-black opacity-40" 
                  onClick={handleChangeNav}
@@ -143,7 +145,7 @@ export default function Header() {
                     <button className="bg-transparent" type="button" onClick={handleChangeNav}>
                         <img src={Burger}  width="30px" alt="выпадающее меню" />
                     </button>
-                    <h1 className="company__name ml-2.5">МногоСуши</h1>
+                    <Link to="/" className="company__name ml-2.5">МногоСуши</Link>
                 </div>
                 <button type="button" className="shopping__card relative">
                     <img src={Cart} alt="Корзина" width="32px" />
@@ -151,5 +153,6 @@ export default function Header() {
                 </button>
             </div>
         </header>
+    </>
     )
 }

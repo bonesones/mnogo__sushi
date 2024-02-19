@@ -29,6 +29,7 @@
 
 body {
     background-color: #E9D5B0;
+    font-family: "Montserrat";
 }
 
 
@@ -46,6 +47,10 @@ body {
     font-family: "Montserrat";
     font-weight: 700;
     font-size: 18px;
+}
+
+.bg-second {
+    background-color: #F35E62;
 }
 
 .cart-item__counter {
@@ -87,7 +92,6 @@ body {
 
 .header__contacts {
     font-size: 14px;
-    font-family: "Montserrat";
     font-weight: 400;
 }
 
@@ -103,4 +107,3 @@ body {
 .modal-nav_inactive {
     display: none;
 }
-
