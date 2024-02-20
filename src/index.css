@@ -107,3 +107,12 @@ body {
 .modal-nav_inactive {
     display: none;
 }
+
+.product-card__sale {
+    background-image: url("./assets/sale.svg");
+}
+
+.product-card__cart-btn {
+    border: 1px solid #F35E62;
+    color: #F35E62;
+}
