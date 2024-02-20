@@ -1,4 +1,4 @@
-import CategoryCard from "../components/CategoryCard"
+
 import ProductCard from "../components/ProductCard"
 import Combo from "../assets/category-images/Combo4.png"
 import Meat from "../assets/category-images/Meat.png"
@@ -10,48 +10,43 @@ import BakedRolls from "../assets/category-images/baked_rolls.png"
 import HotRolls from "../assets/category-images/hot_rolls.png"
 import Snacks from "../assets/category-images/snacks.png"
 import Extras from "../assets/category-images/extras.png"
+import ProductsList from "../components/ProductsList"
+import { useState } from "react"
+
 
 export default function Menu() {
 
-    const categories = [["combo", "Комбо", Combo], // ссылка, название, изображение
-                        ["pizza", "Пицца", Meat],
-                        ["sushipizza", "Сушипицца", SushiPizza],
-                        ["cream_rolls", "Сливочные роллы", CreamRolls],
-                        ["maki", "Маки", Maki],
-                        ["cold_rolls", "Холодные роллы", ColdRolls],
-                        ["baked_rolls", "Запеченные роллы", BakedRolls],
-                        ["warm_rolls", "Теплые роллы", HotRolls],
-                        ["snacks", "Закуски", Snacks],
-                        ["additional", "Дополнительно", Extras]
-                       ]
+    const [category, setCategory] = useState("pizza")
+
+    const handleChangeCategory = function (e) {
+        setCategory()
+        e.target.classlist.add('category-list__btn_active')
+    }
+
+    const CategoryButton = function(props, isActive) {
+        return (
+            <button className="category-list__btn" id="combo">
+                {props.text}
+            </button>
+        )
+    }
 
     return (
-        <>
-            <section className="category-list container py-6 grid grid-cols-2 justify-items-center gap-y-5">
-                {categories.map(([link, title, image], key) => {
-                    return <CategoryCard 
-                            title={title} 
-                            image={image} 
-                            category={link} 
-                            key={key} />
-                })}
-            </section>
-            <section id="combo" className="hidden category-products grid grid-col-1 justify-center mt-12 gap-y-32">
-                <h1>Combo</h1>
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-            </section>
-            <section id="pizza" className="hidden category-products grid grid-col-1 justify-center mt-12 gap-y-32">
-                <h1>Pizza</h1>
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-            </section>
+        <> 
+            <div className="category-list container py-6 grid grid-cols-2 justify-items-center gap-y-5 font-medium"
+                 onClick={(e) => handleChangeCategory(e)}>
+                <button className="category-list__btn" id="combo">Наборы</button>
+                <button className="category-list__btn" id="pizza">Пицца</button>
+                <button className="category-list__btn" id="sushipizza">Сушипицца</button>
+                <button className="category-list__btn" id="cream_rolls">Сливочные роллы</button>
+                <button className="category-list__btn" id="maki">Маки</button>
+                <button className="category-list__btn" id="cold_rolls">Холодные роллы</button>
+                <button className="category-list__btn" id="baked_rolls">Запеченные роллы</button>
+                <button className="category-list__btn" id="warm_rolls">Теплые роллы</button>
+                <button className="category-list__btn" id="snacks">Закуски</button>
+                <button className="category-list__btn" id="additional">Дополнительно</button>
+            </div>
+            <ProductsList category={category} />
         </>
     )
 }

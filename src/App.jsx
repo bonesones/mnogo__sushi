@@ -4,7 +4,6 @@ import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Menu from './pages/menu'
 import MainPage from './pages/mainPage'
-import ComboMenu from './pages/comboMenu'
 
 function App() {
   return (

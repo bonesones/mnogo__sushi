@@ -1,0 +1,52 @@
+{
+    "combo": {
+        "group_title": "Наборы",
+        "products": [
+            {
+                "name": "МногоМяса",
+                "img": "/cheese.png",
+                "description": "Соус, сыр \"Пармезан\", сыр \"Моцарелла\", сыр \"Гауда\"., 30см",
+                "price": "350",
+                "sale": {
+                    "isSale": false,
+                    "sum": 500
+                }
+            }
+        ]
+    },
+    "pizza": {
+        "group_title": "Пицца",
+        "products": [
+            {
+                "name": "МногоМяса",
+                "img": "/cheese.png",
+                "description": "Соус, сыр \"Пармезан\", сыр \"Моцарелла\", сыр \"Гауда\"., 30см",
+                "price": "350",
+                "sale": {
+                    "isSale": false,
+                    "sum": 500
+                }
+            },
+            {
+                "name": "МногоМяса",
+                "img": "/cheese.png",
+                "description": "Соус, сыр \"Пармезан\", сыр \"Моцарелла\", сыр \"Гауда\"., 30см",
+                "price": "350",
+                "sale": {
+                    "isSale": false,
+                    "sum": 500
+                }
+            },
+            {
+                "name": "МногоМяса",
+                "img": "/cheese.png",
+                "description": "Соус, сыр \"Пармезан\", сыр \"Моцарелла\", сыр \"Гауда\"., 30см",
+                "price": "350",
+                "sale": {
+                    "isSale": false,
+                    "sum": 500
+                }
+            }
+        ]
+    }     
+}
