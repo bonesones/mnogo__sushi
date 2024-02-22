@@ -12,30 +12,25 @@ import Snacks from "../assets/category-images/snacks.png"
 import Extras from "../assets/category-images/extras.png"
 import ProductsList from "../components/ProductsList"
 import { useState } from "react"
+import ProductDetails from "../components/ProductDetails"
 
 
 export default function Menu() {
 
-    const [category, setCategory] = useState("pizza")
+    const [category, setCategory] = useState("combo")
+    const [isModalActive, setIsModalActive] = useState(false)
 
     const handleChangeCategory = function (e) {
-        setCategory()
-        e.target.classlist.add('category-list__btn_active')
-    }
-
-    const CategoryButton = function(props, isActive) {
-        return (
-            <button className="category-list__btn" id="combo">
-                {props.text}
-            </button>
-        )
+        document.querySelector('.category-list__btn_active')?.classList?.remove('category-list__btn_active')
+        e.target.classList.add('category-list__btn_active')
+        setCategory(e.target.id)
     }
 
     return (
         <> 
-            <div className="category-list container py-6 grid grid-cols-2 justify-items-center gap-y-5 font-medium"
+            <div className="category-list wrapper py-6 grid grid-cols-2 md:grid-cols-3 justify-items-center gap-y-5 md:gap-y-7 font-medium mx-auto"
                  onClick={(e) => handleChangeCategory(e)}>
-                <button className="category-list__btn" id="combo">Наборы</button>
+                <button className="category-list__btn category-list__btn_active" id="combo">Наборы</button>
                 <button className="category-list__btn" id="pizza">Пицца</button>
                 <button className="category-list__btn" id="sushipizza">Сушипицца</button>
                 <button className="category-list__btn" id="cream_rolls">Сливочные роллы</button>

@@ -3,13 +3,78 @@
         "group_title": "Наборы",
         "products": [
             {
-                "name": "МногоМяса",
-                "img": "/cheese.png",
-                "description": "Соус, сыр \"Пармезан\", сыр \"Моцарелла\", сыр \"Гауда\"., 30см",
-                "price": "350",
+                "name": "Комбо XXL",
+                "img": "/combo/xxl.png",
+                "description": "Пицца, большой сет роллов, закуски и соус",
+                "price": "2 499",
+                "weight": 1500,
+                "contains": [
+                    {
+                        "name": "МногоМяса",
+                        "img": "/pizza/meat.png",
+                        "description": "Соус, сыр, ветчина, пепперони, мясо, колбаса полукопченная, 30см",
+                        "price": "600",
+                        "sale": {
+                            "isSale": false,
+                            "sum": 500
+                        }
+                    }, 
+                    {
+                        "name": "МногоМяса",
+                        "img": "/pizza/meat.png",
+                        "description": "Соус, сыр, ветчина, пепперони, мясо, колбаса полукопченная, 30см",
+                        "price": "600",
+                        "sale": {
+                            "isSale": false,
+                            "sum": 500
+                        }
+                    }
+                ],
+                "sale": {
+                    "isSale": true,
+                    "sum": 500
+                }
+            },
+            {
+                "name": "Комбо №4",
+                "img": "/combo/num4.png",
+                "description": "Пицца, сет роллов “Премиум”",
+                "price": "1 599",
+                "weight": 1500,
+                "sale": {
+                    "isSale": true,
+                    "sum": 300
+                }
+            },
+            {
+                "name": "Комбо №3",
+                "img": "/combo/num3.png",
+                "description": "Пицца, большой сет роллов",
+                "price": "1 299",
+                "weight": 1500,
+                "sale": {
+                    "isSale": true,
+                    "sum": 200
+                }
+            },
+            {
+                "name": "Комбо №1",
+                "img": "/combo/num1.png",
+                "description": "Пицца, роллы 20 штук",
+                "price": "949",
+                "sale": {
+                    "isSale": true,
+                    "sum": "10%"
+                }
+            },
+            {
+                "name": "Сет №22",
+                "img": "/combo/num22.png",
+                "description": "Пицца, роллы 20 штук",
+                "price": "1 099",
                 "sale": {
                     "isSale": false,
-                    "sum": 500
+                    "sum": "10%"
                 }
             }
         ]
@@ -19,29 +84,43 @@
         "products": [
             {
                 "name": "МногоМяса",
-                "img": "/cheese.png",
-                "description": "Соус, сыр \"Пармезан\", сыр \"Моцарелла\", сыр \"Гауда\"., 30см",
-                "price": "350",
+                "img": "/pizza/meat.png",
+                "description": "Соус, сыр, ветчина, пепперони, мясо, колбаса полукопченная, 30см",
+                "price": "600",
+                "weight": 1500,
                 "sale": {
                     "isSale": false,
                     "sum": 500
                 }
             },
             {
-                "name": "МногоМяса",
-                "img": "/cheese.png",
+                "name": "Сырная",
+                "img": "/pizza/cheese.png",
                 "description": "Соус, сыр \"Пармезан\", сыр \"Моцарелла\", сыр \"Гауда\"., 30см",
-                "price": "350",
+                "price": "600",
+                "weight": 1500,
                 "sale": {
                     "isSale": false,
                     "sum": 500
                 }
             },
             {
-                "name": "МногоМяса",
-                "img": "/cheese.png",
-                "description": "Соус, сыр \"Пармезан\", сыр \"Моцарелла\", сыр \"Гауда\"., 30см",
-                "price": "350",
+                "name": "Пепперони",
+                "img": "/pizza/roni.png",
+                "description": "Тесто, соус, сыр, колбаса \"пепперони\"",
+                "price": "600",
+                "weight": 1500,
+                "sale": {
+                    "isSale": false,
+                    "sum": 500
+                }
+            },
+            {
+                "name": "С ветчиной и грибами",
+                "img": "/pizza/cheese.png",
+                "description": " Соус, сыр, ветчина, грибы, томат, перец болгарский, 30см",
+                "price": "600",
+                "weight": 1500,
                 "sale": {
                     "isSale": false,
                     "sum": 500

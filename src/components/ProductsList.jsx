@@ -1,12 +1,13 @@
 import ProductCard from "./ProductCard";
 import data from "../data/products.json"
+import BackGround from "./BackGround";
 
 export default function ProductsList({ category }) {
 
     const products = data[category].products
 
     return (
-        <section className="category-products grid grid-col-1 justify-center mt-12 gap-y-32">
+        <section className="category-products grid grid-cols-1 sm:grid-cols-2 place-items-center mt-12 mb-12 gap-y-32">
             {
                 products.map((product, key) => {
                     return <ProductCard title={product.name}
@@ -15,7 +16,10 @@ export default function ProductsList({ category }) {
                                         price={product.price}
                                         isSale={product.sale.isSale}
                                         sale={product.sale.sum}
-                                        key={key} />
+                                        weight={product.weight}
+                                        key={key}
+                                        isPriceVisible={true}
+                                         />
                 })
             }
         </section>

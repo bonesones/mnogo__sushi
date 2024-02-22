@@ -6,7 +6,11 @@ export default {
     "./src/**/*.jsx"
   ],
   theme: {
-    extend: {},
+    extend: {
+      height: {
+        '160': "40rem"
+      }
+    },
   },
   plugins: [],
 }

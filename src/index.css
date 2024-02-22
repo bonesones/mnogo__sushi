@@ -33,9 +33,9 @@ body {
 }
 
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 800px) {
     
-    .container {
+    .wrapper {
         padding-left: 15px;
         padding-right: 15px;
     }
@@ -115,4 +115,22 @@ body {
 .product-card__cart-btn {
     border: 1px solid #F35E62;
     color: #F35E62;
+}
+
+.category-list__btn_active {
+    color: #F35E62;
+    border-bottom: 1px solid #F35E62;
+}
+
+.product-card__cart-btn:hover {
+    background-color: #F35E62;
+    color: white;
+}
+
+.product-details {
+    background-color: #E9D5B0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
 }

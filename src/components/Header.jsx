@@ -7,6 +7,7 @@ import Location from "./../assets/location.png"
 import Phone from "./../assets/phone.png"
 
 import { Link } from "react-router-dom"
+import BackGround from "./BackGround"
 
 export default function Header() {
 
@@ -82,12 +83,8 @@ export default function Header() {
     }
     return (
         <>
-        <header className="container py-3.5">
-            <div className="modal-nav__background absolute top-0 left-0 z-10 size-full bg-black opacity-40" 
-                 onClick={handleChangeNav}
-                 ref={burgerBackground}
-            >
-            </div>
+        <header className="wrapper py-3.5">
+            <BackGround onClick={handleChangeNav} reference={burgerBackground} />
             <div className="modal-nav modal-nav_inactive flex flex-col items-center absolute top-0 left-0 z-20 bg-main h-full w-64 overflow-y-auto"
                  ref={burgerMenu}
             >
@@ -142,10 +139,13 @@ export default function Header() {
             </div>
             <div className="top-header flex justify-between items-center">
                 <div className="flex items-center">
-                    <button className="bg-transparent" type="button" onClick={handleChangeNav}>
+                    <button className="bg-transparent md:hidden" type="button" onClick={handleChangeNav}>
                         <img src={Burger}  width="30px" alt="выпадающее меню" />
                     </button>
-                    <Link to="/" className="company__name ml-2.5">МногоСуши</Link>
+                    <Link to="/" className="md:hidden company__name ml-2.5">МногоСуши</Link>
+                    <Link to="/" className="hidden md:block">
+                        <img src={Logo} width={150} height={150} alt="Логоти" />
+                    </Link>
                 </div>
                 <button type="button" className="shopping__card relative">
                     <img src={Cart} alt="Корзина" width="32px" />
