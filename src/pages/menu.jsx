@@ -11,35 +11,44 @@ import HotRolls from "../assets/category-images/hot_rolls.png"
 import Snacks from "../assets/category-images/snacks.png"
 import Extras from "../assets/category-images/extras.png"
 import ProductsList from "../components/ProductsList"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ProductDetails from "../components/ProductDetails"
 
 
-export default function Menu() {
+export default function Menu({ category, setCategory }) {
 
-    const [category, setCategory] = useState("combo")
     const [isModalActive, setIsModalActive] = useState(false)
+    const [isFirstRender, setIsFirstRender] = useState(true)
+
+
+    useEffect(() => {
+        if(!isFirstRender) {
+            document.querySelector('.category-list__btn_active')?.classList?.remove('category-list__btn_active')
+            document.querySelector(`[data-id='${category}'`).classList.add('category-list__btn_active')
+        } else {
+            setIsFirstRender(false)
+        }
+        
+    }, [category])
 
     const handleChangeCategory = function (e) {
-        document.querySelector('.category-list__btn_active')?.classList?.remove('category-list__btn_active')
-        e.target.classList.add('category-list__btn_active')
-        setCategory(e.target.id)
+        setCategory(e.target.getAttribute('data-id'))
     }
 
     return (
         <> 
-            <div className="category-list wrapper py-6 grid grid-cols-2 md:grid-cols-3 justify-items-center gap-y-5 md:gap-y-7 font-medium mx-auto"
+            <div className="category-list wrapper py-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 justify-items-center gap-y-5 md:gap-y-7 font-medium mx-auto lg:text-lg mt-6"
                  onClick={(e) => handleChangeCategory(e)}>
-                <button className="category-list__btn category-list__btn_active" id="combo">Наборы</button>
-                <button className="category-list__btn" id="pizza">Пицца</button>
-                <button className="category-list__btn" id="sushipizza">Сушипицца</button>
-                <button className="category-list__btn" id="cream_rolls">Сливочные роллы</button>
-                <button className="category-list__btn" id="maki">Маки</button>
-                <button className="category-list__btn" id="cold_rolls">Холодные роллы</button>
-                <button className="category-list__btn" id="baked_rolls">Запеченные роллы</button>
-                <button className="category-list__btn" id="warm_rolls">Теплые роллы</button>
-                <button className="category-list__btn" id="snacks">Закуски</button>
-                <button className="category-list__btn" id="additional">Дополнительно</button>
+                <button className="category-list__btn category-list__btn_active" data-id="combo">Наборы</button>
+                <button className="category-list__btn" data-id="pizza">Пицца</button>
+                <button className="category-list__btn" data-id="sushipizza">Сушипицца</button>
+                <button className="category-list__btn" data-id="cream_rolls">Сливочные роллы</button>
+                <button className="category-list__btn" data-id="maki">Маки</button>
+                <button className="category-list__btn" data-id="cold_rolls">Холодные роллы</button>
+                <button className="category-list__btn" data-id="baked_rolls">Запеченные роллы</button>
+                <button className="category-list__btn" data-id="warm_rolls">Теплые роллы</button>
+                <button className="category-list__btn" data-id="snacks">Закуски</button>
+                <button className="category-list__btn" data-id="additional">Дополнительно</button>
             </div>
             <ProductsList category={category} />
         </>

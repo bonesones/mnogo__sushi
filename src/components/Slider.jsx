@@ -8,14 +8,24 @@ import Combo7 from "./../assets/Combo7.png"
 export default function Slider() {
     return (
         <Swiper pagination={window.innerWidth > 700 ? true : false} modules={[Pagination]} className="mySwiper w-full">
-            <SwiperSlide className='relative'>
+            <SwiperSlide>
               <picture>
-                <source media='(min-width: 500px)' srcSet='/slider/tablet_slider-1.png' />
-                <img className='w-full' src='/slider/mobile_slider-1.png' alt='Сет 60 штук' />
+                <source media='(min-width: 1100px)' srcSet='/slider/desktop_slider-1.png' />
+                <img className='w-full' src='/slider/tablet_slider-1.png' alt='Сет 60 штук' />
               </picture>
             </SwiperSlide>
-            <SwiperSlide>Slide 2</SwiperSlide>
-            <SwiperSlide>Slide 3</SwiperSlide>
+            <SwiperSlide>
+            <picture>
+                <source media='(min-width: 1100px)' srcSet='/slider/desktop_slider-1.png' />
+                <img className='w-full' src='/slider/tablet_slider-1.png' alt='Сет 60 штук' />
+              </picture>
+            </SwiperSlide>
+            <SwiperSlide>
+            <picture>
+                <source media='(min-width: 1100px)' srcSet='/slider/desktop_slider-1.png' />
+                <img className='w-full' src='/slider/tablet_slider-1.png' alt='Сет 60 штук' />
+              </picture>
+            </SwiperSlide>
         </Swiper>
     )
 }

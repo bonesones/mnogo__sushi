@@ -28,6 +28,26 @@
                             "isSale": false,
                             "sum": 500
                         }
+                    },
+                    {
+                        "name": "МногоМяса",
+                        "img": "/pizza/meat.png",
+                        "description": "Соус, сыр, ветчина, пепперони, мясо, колбаса полукопченная, 30см",
+                        "price": "600",
+                        "sale": {
+                            "isSale": false,
+                            "sum": 500
+                        }
+                    },
+                    {
+                        "name": "МногоМяса",
+                        "img": "/pizza/meat.png",
+                        "description": "Соус, сыр, ветчина, пепперони, мясо, колбаса полукопченная, 30см",
+                        "price": "600",
+                        "sale": {
+                            "isSale": false,
+                            "sum": 500
+                        }
                     }
                 ],
                 "sale": {
@@ -41,6 +61,28 @@
                 "description": "Пицца, сет роллов “Премиум”",
                 "price": "1 599",
                 "weight": 1500,
+                "contains": [
+                    {
+                        "name": "МногоМяса",
+                        "img": "/pizza/meat.png",
+                        "description": "Соус, сыр, ветчина, пепперони, мясо, колбаса полукопченная, 30см",
+                        "price": "600",
+                        "sale": {
+                            "isSale": false,
+                            "sum": 500
+                        }
+                    }, 
+                    {
+                        "name": "МногоМяса",
+                        "img": "/pizza/meat.png",
+                        "description": "Соус, сыр, ветчина, пепперони, мясо, колбаса полукопченная, 30см",
+                        "price": "600",
+                        "sale": {
+                            "isSale": false,
+                            "sum": 500
+                        }
+                    }
+                ],
                 "sale": {
                     "isSale": true,
                     "sum": 300
@@ -52,6 +94,28 @@
                 "description": "Пицца, большой сет роллов",
                 "price": "1 299",
                 "weight": 1500,
+                "contains": [
+                    {
+                        "name": "МногоМяса",
+                        "img": "/pizza/meat.png",
+                        "description": "Соус, сыр, ветчина, пепперони, мясо, колбаса полукопченная, 30см",
+                        "price": "600",
+                        "sale": {
+                            "isSale": false,
+                            "sum": 500
+                        }
+                    }, 
+                    {
+                        "name": "МногоМяса",
+                        "img": "/pizza/meat.png",
+                        "description": "Соус, сыр, ветчина, пепперони, мясо, колбаса полукопченная, 30см",
+                        "price": "600",
+                        "sale": {
+                            "isSale": false,
+                            "sum": 500
+                        }
+                    }
+                ],
                 "sale": {
                     "isSale": true,
                     "sum": 200
@@ -62,6 +126,29 @@
                 "img": "/combo/num1.png",
                 "description": "Пицца, роллы 20 штук",
                 "price": "949",
+                "weight": 1500,
+                "contains": [
+                    {
+                        "name": "МногоМяса",
+                        "img": "/pizza/meat.png",
+                        "description": "Соус, сыр, ветчина, пепперони, мясо, колбаса полукопченная, 30см",
+                        "price": "600",
+                        "sale": {
+                            "isSale": false,
+                            "sum": 500
+                        }
+                    }, 
+                    {
+                        "name": "МногоМяса",
+                        "img": "/pizza/meat.png",
+                        "description": "Соус, сыр, ветчина, пепперони, мясо, колбаса полукопченная, 30см",
+                        "price": "600",
+                        "sale": {
+                            "isSale": false,
+                            "sum": 500
+                        }
+                    }
+                ],
                 "sale": {
                     "isSale": true,
                     "sum": "10%"
@@ -72,6 +159,29 @@
                 "img": "/combo/num22.png",
                 "description": "Пицца, роллы 20 штук",
                 "price": "1 099",
+                "weight": 1500,
+                "contains": [
+                    {
+                        "name": "МногоМяса",
+                        "img": "/pizza/meat.png",
+                        "description": "Соус, сыр, ветчина, пепперони, мясо, колбаса полукопченная, 30см",
+                        "price": "600",
+                        "sale": {
+                            "isSale": false,
+                            "sum": 500
+                        }
+                    }, 
+                    {
+                        "name": "МногоМяса",
+                        "img": "/pizza/meat.png",
+                        "description": "Соус, сыр, ветчина, пепперони, мясо, колбаса полукопченная, 30см",
+                        "price": "600",
+                        "sale": {
+                            "isSale": false,
+                            "sum": 500
+                        }
+                    }
+                ],
                 "sale": {
                     "isSale": false,
                     "sum": "10%"

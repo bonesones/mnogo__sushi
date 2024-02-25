@@ -7,9 +7,10 @@ export default function ProductsList({ category }) {
     const products = data[category].products
 
     return (
-        <section className="category-products grid grid-cols-1 sm:grid-cols-2 place-items-center mt-12 mb-12 gap-y-32">
+        <section className="wrapper category-products grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 place-items-center mt-12 lg:mt-24 mb-12 gap-y-32">
             {
                 products.map((product, key) => {
+                    console.log(product.weight)
                     return <ProductCard title={product.name}
                                         image={product.img}
                                         description={product.description}
@@ -17,6 +18,7 @@ export default function ProductsList({ category }) {
                                         isSale={product.sale.isSale}
                                         sale={product.sale.sum}
                                         weight={product.weight}
+                                        contains={product.contains}
                                         key={key}
                                         isPriceVisible={true}
                                          />

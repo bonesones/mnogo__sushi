@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @font-face {
     font-family: "Montserrat";
     font-weight: 400;
@@ -32,15 +33,28 @@ body {
     font-family: "Montserrat";
 }
 
-
-@media screen and (max-width: 800px) {
+.wrapper {
+    padding-left: 15px;
+    padding-right: 15px;
+}
     
+@media screen and (min-width: 768px) {
+
     .wrapper {
-        padding-left: 15px;
-        padding-right: 15px;
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+
+    .wrapper {
+        padding-left: 8rem;
+        padding-right: 8rem;
     }
     
 }
+
 
 
 .company__name {
@@ -132,5 +146,41 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    box-sizing: border-box;
+}
+
+
+.the-top-header {
+    background-color: #F35E62;
+    color: white;
+}
+
+.modal-menu {
+    background-color: #E9D5B0;
+    width: 540%;
+}
+
+.arrow-rotate {
+    transform: rotate(180deg);
+}
+
+.swiper-pagination {
+    margin-top: 1rem;
+    position: sticky !important;
+}
+
+.swiper {
+    height: auto;
+    position: sticky !important;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: #F35E62 !important;
+}
+
+footer {
+    box-shadow: 1px -10px 1em rgba(0, 0, 0, 0.2);
+}
+
+.image-vk:hover {
+    fill: #F35E62;
 }

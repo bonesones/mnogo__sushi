@@ -8,7 +8,15 @@ export default {
   theme: {
     extend: {
       height: {
-        '160': "40rem"
+        '128': "32rem",
+        '140': "35rem",
+        '160': "40rem",
+        '168': "42rem"
+      },
+      width: {
+        '120': '30rem',
+        '152': '38rem',
+        '232': '58rem'
       }
     },
   },
