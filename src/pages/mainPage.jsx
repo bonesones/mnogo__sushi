@@ -8,15 +8,15 @@ export default function MainPage({ setCategory }) {
 
 
     const handleChangeCategory = function (e) {
-        document.querySelector('.category-list__btn_active')?.classList?.remove('category-list__btn_active')
-        e.target.classList.add('category-list__btn_active')
+        const categories = document.querySelector('.category-list')
+        categories.querySelector('.category-list__btn_active')?.classList?.remove('category-list__btn_active')
+        categories.querySelector('[data-id=' + e.target.dataset.id + "]").add('category-list__btn_active')
         setCategory(e.target.getAttribute('data-id'))
     }
 
     return (
         <>
-            <Header />
-            <Slider />
+            <Header setCategory={setCategory} />
             <main>
                 <Outlet />
             </main>

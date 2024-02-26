@@ -7,7 +7,7 @@ export default function Footer() {
     }
 
     return (
-        <footer className="hidden md:grid grid-cols-2 border border-black py-10 wrapper mt-44">
+        <footer className="hidden md:grid grid-cols-2 border-t border-black py-10 wrapper mt-44">
             <div>
                 <span className="footer__title font-semibold text-xl">Меню</span>
                 <ul className="grid grid-cols-2 mt-10 gap-y-3 font-medium opacity-70">
@@ -45,16 +45,16 @@ export default function Footer() {
             </div>
             <div className="flex flex-col justify-between justify-self-end lg:justify-self-start">
                 <div className="font-semibold text-xl col grid grid-cols-2 lg:flex h-fit gap-y-6 lg:gap-10 gap-x-10">
-                    <Link to="/">
+                    <Link to="/promo">
                         Акции
                     </Link>
-                    <Link to="/">
+                    <Link to="/help">
                         Помощь
                     </Link>
-                    <Link to="/">
+                    <Link to="/contacts">
                         Контакты
                     </Link> 
-                    <Link to="/">
+                    <Link to="/delivery">
                         Доставка
                     </Link>
                 </div>

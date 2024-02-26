@@ -184,3 +184,37 @@ footer {
 .image-vk:hover {
     fill: #F35E62;
 }
+ 
+.reply__input::placeholder {
+    color: black;
+}
+
+.data-switch-btn_active {
+    background-color: #F35E62;
+    color: white;
+}
+
+.reply__input:focus {
+    outline: none;
+}
+
+.reply__btn {
+    cursor: pointer;
+}
+
+.reply__textarea {
+    resize: none;
+}
+
+
+.profile-form input::placeholder {
+    color: rgb(98, 98, 98);
+}
+
+.order__arrow_rotate {
+    transform: rotate(180deg);
+}
+
+.cart-form input::placeholder, .cart-form textarea::placeholder, .promocode__input::placeholder {
+    color: rgb(73, 73, 73);
+}

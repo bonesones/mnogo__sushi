@@ -10,7 +10,7 @@ import { Link } from "react-router-dom"
 import BackGround from "./BackGround"
 import ModalMenu from "./ModalMenu"
 
-export default function Header() {
+export default function Header({ setCategory }) {
 
     const categories = [["combo", "Комбо"], // пара ссылка - название
                         ["pizza", "Пицца"],
@@ -170,7 +170,7 @@ export default function Header() {
                                     </clipPath>
                                 </defs>
                             </svg>
-                                <a href="#" className="ml-2">Личный кабинет</a>
+                                <Link to="/profile" className="ml-2">Личный кабинет</Link>
                         </li>
                     </ul>
                 </div>
@@ -183,31 +183,31 @@ export default function Header() {
                         <img src={Logo} width={150} height={150} alt="Логотип" />
                     </Link>
                     <nav className="w-7/12 ml-10 hidden md:block">
-                        <ul className="flex justify-between font-medium">
+                        <ul className="flex justify-start gap-16 font-medium">
                             <li className="relative">
                                 <button onClick={() => setIsNavModalMenuActive(prev => !prev)} className="flex items-center gap-2">
                                     Меню
                                     <img className={(isNavModalMenuActive ? "arrow-rotate " : "") + "transition-transform"} src="/ArrowNav.svg" width="16" />
                                 </button>
-                                <ModalMenu active={isNavModalMenuActive} />
+                                <ModalMenu active={isNavModalMenuActive} setCategory={setCategory} />
                             </li>
                             <li>
-                                <Link to="/">
+                                <Link to="/delivery">
                                     Доставка
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/">
+                                <Link to="/contacts">
                                     Контакты
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/">
+                                <Link to="/promo">
                                     Акции
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/">
+                                <Link to="/help">
                                     Помощь
                                 </Link>
                             </li>
@@ -217,13 +217,13 @@ export default function Header() {
                         <img src={Cart} alt="Корзина" width="32px" />
                         <span className="cart-item__counter rounded-full absolute top-0 right-0 px-1">0</span>
                     </button>
-                    <button type="button" className="hidden lg:flex shopping__card relative ml-auto items-center gap-2">
+                    <Link to="/cart" className="hidden lg:flex shopping__card relative ml-auto items-center gap-2">
                         <div className="relative">
                             <img src="/cart_desktop.png" alt="Корзина" width="42px" />
                             <span className="cart-item__counter rounded-full absolute top-0 right-0 px-1">0</span>
                         </div>
                         <span>Корзина</span>
-                    </button> 
+                    </Link> 
                 </div>
             </div>
         </header>

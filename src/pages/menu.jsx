@@ -13,6 +13,7 @@ import Extras from "../assets/category-images/extras.png"
 import ProductsList from "../components/ProductsList"
 import { useEffect, useState } from "react"
 import ProductDetails from "../components/ProductDetails"
+import Slider from "../components/Slider"
 
 
 export default function Menu({ category, setCategory }) {
@@ -23,8 +24,9 @@ export default function Menu({ category, setCategory }) {
 
     useEffect(() => {
         if(!isFirstRender) {
-            document.querySelector('.category-list__btn_active')?.classList?.remove('category-list__btn_active')
-            document.querySelector(`[data-id='${category}'`).classList.add('category-list__btn_active')
+            const products =  document.querySelector('.category-list')
+            products.querySelector('.category-list__btn_active')?.classList?.remove('category-list__btn_active')
+            products.querySelector(`[data-id='${category}'`).classList.add('category-list__btn_active')
         } else {
             setIsFirstRender(false)
         }
@@ -37,6 +39,7 @@ export default function Menu({ category, setCategory }) {
 
     return (
         <> 
+            <Slider />
             <div className="category-list wrapper py-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 justify-items-center gap-y-5 md:gap-y-7 font-medium mx-auto lg:text-lg mt-6"
                  onClick={(e) => handleChangeCategory(e)}>
                 <button className="category-list__btn category-list__btn_active" data-id="combo">Наборы</button>
