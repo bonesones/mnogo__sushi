@@ -34,6 +34,9 @@ export default function Menu({ category, setCategory }) {
     }, [category])
 
     const handleChangeCategory = function (e) {
+        if(e.target.tagName != "BUTTON") {
+            return;
+        }
         setCategory(e.target.getAttribute('data-id'))
     }
 

@@ -9,6 +9,7 @@ import Phone from "./../assets/phone.png"
 import { Link } from "react-router-dom"
 import BackGround from "./BackGround"
 import ModalMenu from "./ModalMenu"
+import LogModal from "./LogModal"
 
 export default function Header({ setCategory }) {
 
@@ -43,7 +44,9 @@ export default function Header({ setCategory }) {
     const [isBurgerOpened, setIsBurgerOpened] = useState(false)
     const [isArrowTouched, setIsArrowTouched] = useState(false)
     const [isNavModalMenuActive, setIsNavModalMenuActive] = useState(false)
-
+    const [isLogin, setIsLogin] = useState(true)
+    const [isLogModalActive, setIsLogModalActive] = useState(false);
+    
     const handleOpenCloseArrowMenu = function() {
 
         if(!isArrowTouched) {
@@ -58,6 +61,12 @@ export default function Header({ setCategory }) {
 
             setIsArrowTouched(prev => !prev)
         }
+    }
+
+    const openLoginMenu = function() {
+        return (
+            1
+        )
     }
 
     const handleChangeNav = function() {
@@ -170,7 +179,9 @@ export default function Header({ setCategory }) {
                                     </clipPath>
                                 </defs>
                             </svg>
-                                <Link to="/profile" className="ml-2">Личный кабинет</Link>
+                                <button type='button' className="ml-2" onClick={() => setIsLogModalActive(true)}>Личный кабинет</button>
+                                {isLogModalActive && <LogModal isLogin={isLogin} setIsLogin={setIsLogin} /> }
+                                <BackGround active={isLogModalActive} onClick={() => setIsLogModalActive(false)} />
                         </li>
                     </ul>
                 </div>
@@ -185,11 +196,9 @@ export default function Header({ setCategory }) {
                     <nav className="w-7/12 ml-10 hidden md:block">
                         <ul className="flex justify-start gap-16 font-medium">
                             <li className="relative">
-                                <button onClick={() => setIsNavModalMenuActive(prev => !prev)} className="flex items-center gap-2">
+                                <Link to="/">
                                     Меню
-                                    <img className={(isNavModalMenuActive ? "arrow-rotate " : "") + "transition-transform"} src="/ArrowNav.svg" width="16" />
-                                </button>
-                                <ModalMenu active={isNavModalMenuActive} setCategory={setCategory} />
+                                </Link>
                             </li>
                             <li>
                                 <Link to="/delivery">

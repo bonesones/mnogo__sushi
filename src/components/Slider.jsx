@@ -16,14 +16,7 @@ export default function Slider() {
             </SwiperSlide>
             <SwiperSlide>
             <picture>
-                <source media='(min-width: 1100px)' srcSet='/slider/desktop_slider-1.png' />
-                <img className='w-full' src='/slider/tablet_slider-1.png' alt='Сет 60 штук' />
-              </picture>
-            </SwiperSlide>
-            <SwiperSlide>
-            <picture>
-                <source media='(min-width: 1100px)' srcSet='/slider/desktop_slider-1.png' />
-                <img className='w-full' src='/slider/tablet_slider-1.png' alt='Сет 60 штук' />
+                <img className='w-full' src='/slider/desktop_slider-2.png' alt='Сет 60 штук' />
               </picture>
             </SwiperSlide>
         </Swiper>
