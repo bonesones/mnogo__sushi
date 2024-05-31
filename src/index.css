@@ -29,7 +29,6 @@
 
 
 body {
-    background-color: #E9D5B0;
     font-family: "Montserrat";
 }
 
@@ -37,7 +36,7 @@ body {
     padding-left: 15px;
     padding-right: 15px;
 }
-    
+
 @media screen and (min-width: 768px) {
 
     .wrapper {
@@ -52,7 +51,7 @@ body {
         padding-left: 8rem;
         padding-right: 8rem;
     }
-    
+
 }
 
 
@@ -76,7 +75,7 @@ body {
 }
 
 .bg-main {
-    background-color: #E9D5B0;
+    background-color: white;
 }
 
 
@@ -84,10 +83,19 @@ body {
     font-family: "Montserrat";
     font-weight: 500;
     font-size: 18px;
+    top: 0;
+    left: 0;
+    transition: left .3s;
+
+}
+
+.modal-nav__arrow{
+    transition: transform .3s;
 }
 
 .modal-nav__arrow_rotated {
     transform: rotate(180deg);
+    transition: transform .3s;
 }
 
 .modal-nav__element-submenu {
@@ -97,11 +105,14 @@ body {
 }
 
 .modal-nav__element-submenu{
-    display: none;
+    height: 0;
+    overflow: hidden;
+    transition: height .3s;
 }
 
 .modal-nav__element-submenu_displayed {
-    display: block;
+    height: 350px;
+    transition: height .3s;
 }
 
 .header__contacts {
@@ -119,7 +130,13 @@ body {
 }
 
 .modal-nav_inactive {
-    display: none;
+    left: -16rem;
+}
+
+.product-details {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .product-card__sale {
@@ -141,22 +158,10 @@ body {
     color: white;
 }
 
-.product-details {
-    background-color: #E9D5B0;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
 
 .the-top-header {
     background-color: #F35E62;
     color: white;
-}
-
-.modal-menu {
-    background-color: #E9D5B0;
-    width: 540%;
 }
 
 .arrow-rotate {
@@ -184,7 +189,7 @@ footer {
 .image-vk:hover {
     fill: #F35E62;
 }
- 
+
 .reply__input::placeholder {
     color: black;
 }
@@ -219,10 +224,13 @@ footer {
     color: rgb(73, 73, 73);
 }
 
-.profile-modal {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+@media screen and (max-width: 768px) {
+
+    .profile-modal {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 }
 
 .profile-modal-form input::placeholder {

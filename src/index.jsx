@@ -5,7 +5,7 @@ import './index.css'
 import { BrowserRouter, HashRouter, ScrollRestoration } from 'react-router-dom'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <HashRouter>
+    <BrowserRouter>
         <App />
-    </HashRouter>
+    </BrowserRouter>
 )
