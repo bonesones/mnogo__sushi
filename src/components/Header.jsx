@@ -8,7 +8,6 @@ import Phone from "./../assets/phone.png";
 
 import { Link } from "react-router-dom";
 import BackGround from "./BackGround";
-import ModalMenu from "./ModalMenu";
 import LogModal from "./LogModal";
 
 export default function Header({ setCategory }) {
@@ -28,7 +27,9 @@ export default function Header({ setCategory }) {
   const categoriesList = categories.map(([link, title], key) => {
     return (
       <li className="mt-2.5" key={key}>
-        <a href={"/#" + link}>{title}</a>
+        <Link to={"/"} data-id={link} onClick={() => setCategory(link)}>
+          {title}
+        </Link>
       </li>
     );
   });
@@ -60,17 +61,13 @@ export default function Header({ setCategory }) {
     }
   };
 
-  const openLoginMenu = function () {
-    return 1;
-  };
-
   const handleChangeNav = function () {
     if (!isBurgerOpened) {
-      burgerMenu.current.classList.remove("modal-nav_inactive");
-
       if (isArrowTouched) {
         handleOpenCloseArrowMenu();
+        alert("worked");
       }
+      burgerMenu.current.classList.remove("modal-nav_inactive");
 
       document.body.className = "overflow-hidden";
 
@@ -83,6 +80,16 @@ export default function Header({ setCategory }) {
       setIsBurgerOpened((prev) => !prev);
     }
   };
+
+  const handleMenuClick = function (e) {
+    if (isArrowTouched && e.target.tagName === "A") {
+      handleOpenCloseArrowMenu();
+    }
+    if (e.target.tagName === "A") {
+      handleChangeNav();
+    }
+  };
+
   return (
     <>
       <header className="py-3.5 md:py-0">
@@ -97,7 +104,7 @@ export default function Header({ setCategory }) {
             width={156}
             alt="Логотип"
           />
-          <nav className="w-full mt-12">
+          <nav className="w-full mt-12" onClick={(e) => handleMenuClick(e)}>
             <ul className="flex flex-col items-center modal-nav pb-8 ">
               <li className="flex flex-col justify-between modal-nav__element w-9/12">
                 <button
@@ -119,21 +126,21 @@ export default function Header({ setCategory }) {
                   type="button"
                   onClick={handleOpenCloseArrowMenu}
                 ></button>
-                <ul
-                  className="modal-nav__element-submenu ml-2 mt-3"
-                  ref={arrowMenu}
-                >
+                <ul className="modal-nav__element-submenu ml-2" ref={arrowMenu}>
                   {categoriesList}
                 </ul>
               </li>
               <li className=" modal-nav__element w-9/12 mt-5">
-                <a href="#">Доставка</a>
+                <Link to="/delivery">Доставка</Link>
+              </li>
+              <li className=" modal-nav__element w-9/12 mt-5">
+                <Link to="/contacts">Контакты</Link>
               </li>
               <li className="modal-nav__element w-9/12 mt-5">
-                <a href="#">Акции</a>
+                <Link to="/promo">Акции</Link>
               </li>
               <li className="modal-nav__element w-9/12 mt-5">
-                <a href="#">Помощь</a>
+                <Link to="/help">Помощь</Link>
               </li>
               <li className="modal-nav__element w-9/12 mt-7">
                 <button type="button" onClick={() => setIsLogModalActive(true)}>

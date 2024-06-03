@@ -1,8 +1,10 @@
 export default function Delivery() {
   return (
     <div className="wrapper">
-      <h1 className="text-3xl font-bold mt-[5rem] mb-[4rem]">Доставка</h1>
-      <h2 className="text-xl font-semibold">
+      <h1 className="text-3xl font-bold mt-24 mb-[4rem] text-center sm:text-left">
+        Доставка
+      </h1>
+      <h2 className="text-md sm:text-xl font-semibold text-center sm:text-left">
         Минимальная сумма заказа - 500 рублей
       </h2>
       <iframe
@@ -10,7 +12,7 @@ export default function Delivery() {
         width="100%"
         height="484"
         frameBorder="0"
-        className="mt-[4rem]"
+        className="mt-[4rem] mb-10"
       ></iframe>
     </div>
   );

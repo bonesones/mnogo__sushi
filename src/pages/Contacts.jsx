@@ -8,22 +8,24 @@ export default function Contacts() {
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
 
-  const sliceInput = function (input, quantity) {
-    if (input.value.length >= quantity) {
-      input.value = input.value.slice(0, quantity);
-    }
-  };
-
   const handleMessageInput = function (e) {
-    if (e.target.value.length >= 300) {
-      if (literalsCounterRef.current) {
+    if (e.target.value.length >= 254) {
+      if (!literalsCounterRef.current.classList.contains("text-red-600")) {
+        literalsCounterRef.current.classList.add("text-red-600");
+      }
+    } else {
+      if (literalsCounterRef.current.classList.contains("text-red-600")) {
+        literalsCounterRef.current.classList.remove("text-red-600");
       }
     }
+    setMessageLength(e.target.value.length);
   };
 
   return (
     <>
-      <h1 className="font-semibold text-3xl mt-24 wrapper">Контакты</h1>
+      <h1 className="font-semibold text-3xl mt-24 wrapper text-center sm:text-left">
+        Контакты
+      </h1>
       <section className="contacts">
         <iframe
           className="mt-16 md:px-8 lg:px-32"
@@ -34,7 +36,9 @@ export default function Contacts() {
         ></iframe>
         <section className="contacts-data mt-16 flex flex-col w-full px-4 md:px-8 lg:px-32">
           <div className="">
-            <h2 className="font-semibold text-2xl">Обратная связь</h2>
+            <h2 className="font-semibold text-2xl text-center sm:text-left">
+              Обратная связь
+            </h2>
             <form
               method="post"
               className="flex flex-wrap flex-col mt-12 reply-form"
@@ -53,7 +57,7 @@ export default function Contacts() {
               />
               <div className="text-area-wrapper mt-12">
                 <textarea
-                  maxLength="30"
+                  maxLength="254"
                   className="reply__input reply__textarea pb-1 h-24 font-medium text-base w-full block bg-inherit border-b border-black"
                   placeholder="Ваше сообщение*"
                   onChange={(e) => handleMessageInput(e)}
@@ -62,30 +66,30 @@ export default function Contacts() {
                   className="text-sm ml-auto block text-end mt-2"
                   ref={literalsCounterRef}
                 >
-                  {messageLength}/300
+                  {messageLength}/254
                 </span>
               </div>
               <input
                 type="sumbit"
                 value="Отправить"
-                className="w-fit self-start product-card__cart-btn reply__btn text-center bg-inherit rounded-lg hover: font-medium hover:bg-second"
+                className="w-fit self-start product-card__cart-btn reply__btn text-center bg-inherit rounded-lg font-medium hover:bg-second mx-auto sm:mx-0"
               />
             </form>
           </div>
           <div className="mt-20">
-            <div>
+            <div className="flex flex-col items-center sm:items-start">
               <h2 className="text-2xl font-semibold mb-6">Адрес</h2>
               <span>г. Вологда, ул. Ветошкина 84Б</span>
             </div>
-            <div>
+            <div className="flex flex-col items-center sm:items-start">
               <h2 className="text-2xl font-semibold mt-8 mb-6">Время работы</h2>
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col items-center sm:items-start gap-4">
                 <span>Понедельник - Четверг: 12:00 - 22:00</span>
                 <span>Пятница, Суббота: 12:00 - 00:00</span>
                 <span>Воскресенье 12:00 - 22:00</span>
               </div>
             </div>
-            <div>
+            <div className="flex flex-col items-center sm:items-start mb-16">
               <h2 className="text-2xl font-semibold mt-8 mb-6">Телефоны</h2>
               <div className="flex flex-col gap-4">
                 <a href="tel:78172292022">+7 (8172) 29-20-22</a>
