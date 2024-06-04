@@ -12,12 +12,12 @@ export default function Login() {
         <input
           type="email"
           placeholder="Почта"
-          className="text-lg text-black bg-inherit px-5 py-1.5 border-2 border-[#A1947C] rounded-md pl-4 w-72"
+          className="text-lg text-black bg-inherit px-5 py-1.5 border-2 border-[#A1947C] rounded-md pl-4 w-full"
         />
         <input
           type="password"
           placeholder="Пароль"
-          className="mt-3 text-black text-lg bg-inherit px-5 py-1.5  border-2 border-[#A1947C] rounded-md pl-4 w-72"
+          className="mt-3 text-black text-lg bg-inherit px-5 py-1.5  border-2 border-[#A1947C] rounded-md pl-4 w-full"
         />
         <input
           type="submit"

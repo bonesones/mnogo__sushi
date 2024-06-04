@@ -65,7 +65,6 @@ export default function Header({ setCategory }) {
     if (!isBurgerOpened) {
       if (isArrowTouched) {
         handleOpenCloseArrowMenu();
-        alert("worked");
       }
       burgerMenu.current.classList.remove("modal-nav_inactive");
 
@@ -84,8 +83,8 @@ export default function Header({ setCategory }) {
   const handleMenuClick = function (e) {
     if (isArrowTouched && e.target.tagName === "A") {
       handleOpenCloseArrowMenu();
-    }
-    if (e.target.tagName === "A") {
+      handleChangeNav();
+    } else if (e.target.tagName === "A") {
       handleChangeNav();
     }
   };
@@ -176,8 +175,8 @@ export default function Header({ setCategory }) {
           </nav>
         </div>
         <div className="top-header flex justify-between items-center md:flex-col md:h-[213px]">
-          <div className="the-top-header wrapper hidden md:block w-full text-sm py-2">
-            <ul className="flex items-center text-sm">
+          <div className="the-top-header hidden md:flex md:justify-center w-full text-sm py-2">
+            <ul className="flex items-center wrapper text-sm w-full">
               <li className="header__contacts flex items-center w-fit">
                 <svg
                   width="24"
@@ -271,7 +270,7 @@ export default function Header({ setCategory }) {
               <img src={Logo} width={150} height={150} alt="Логотип" />
             </Link>
             <nav className="w-7/12 ml-10 hidden md:block">
-              <ul className="flex justify-start gap-16 font-medium">
+              <ul className="flex justify-start gap-16 md:gap-8 lg:gap-16 font-medium">
                 <li className="relative">
                   <Link to="/">Меню</Link>
                 </li>

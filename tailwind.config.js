@@ -1,25 +1,23 @@
-  /** @type {import('tailwindcss').Config} */
+/** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/*.jsx",
-    "./src/**/*.jsx"
-  ],
+  content: ["./index.html", "./src/*.jsx", "./src/**/*.jsx"],
   theme: {
     extend: {
+      screens: {
+        sp: "400px",
+      },
       height: {
-        '128': "32rem",
-        '140': "35rem",
-        '160': "40rem",
-        '168': "42rem"
+        128: "32rem",
+        140: "35rem",
+        160: "40rem",
+        168: "42rem",
       },
       width: {
-        '120': '30rem',
-        '152': '38rem',
-        '232': '58rem'
-      }
+        120: "30rem",
+        152: "38rem",
+        232: "58rem",
+      },
     },
   },
   plugins: [],
-}
-
+};

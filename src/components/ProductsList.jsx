@@ -8,7 +8,7 @@ export default function ProductsList({ category }) {
   return (
     <section
       id="products"
-      className="wrapper relative category-products grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 place-items-center mt-12 lg:mt-24 mb-12 gap-y-32"
+      className="wrapper mx-auto relative category-products grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 place-items-center mt-12 lg:mt-24 mb-12 gap-y-32"
     >
       {products ? (
         products.map((product, key) => {

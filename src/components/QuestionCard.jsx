@@ -4,7 +4,7 @@ export default function QuestionCard({ question, answer }) {
   const [quiestionOpened, setQuestionOpened] = useState(false);
 
   return (
-    <div className="w-full">
+    <div className="w-full max-w-5xl mx-auto">
       <button
         type="button"
         className="question-btn text-white text-xl w-full font-medium flex items-center justify-between bg-[#F35E62] px-6 py-2 rounded-md"

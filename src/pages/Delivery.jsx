@@ -1,10 +1,10 @@
 export default function Delivery() {
   return (
-    <div className="wrapper">
-      <h1 className="text-3xl font-bold mt-24 mb-[4rem] text-center sm:text-left">
+    <div className="wrapper mx-auto">
+      <h1 className="text-3xl font-bold mt-24 mb-[4rem] text-center md:text-left">
         Доставка
       </h1>
-      <h2 className="text-md sm:text-xl font-semibold text-center sm:text-left">
+      <h2 className="text-md sm:text-xl font-semibold text-center md:text-left">
         Минимальная сумма заказа - 500 рублей
       </h2>
       <iframe

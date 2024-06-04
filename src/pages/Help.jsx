@@ -2,14 +2,11 @@ import QuestionCard from "../components/QuestionCard";
 
 export default function Help() {
   return (
-    <>
-      <h1 className="font-semibold text-3xl mt-24 wrapper text-center sm:text-left">
+    <div className="help mx-auto wrapper">
+      <h1 className="font-semibold text-3xl mt-24 text-center md:text-left">
         Помощь
       </h1>
-      <section
-        className="wrapper mt-20 flex flex-col gap-6  items-center mx-auto"
-        onClick={(e) => handleOpenCloseQuestion(e)}
-      >
+      <section className="mt-20 flex flex-col gap-6 items-center mx-auto">
         <QuestionCard
           question="Как оформить заказ?"
           answer="Для оформления заказа необходимо выбрать товары и добавить их в корзину. Затем перейти в неё. При наличии промокода ввести его
@@ -29,6 +26,6 @@ export default function Help() {
           answer="Для того, чтобы воспользоваться промокодом, зайдите в корзину, в соотвествующее поле введите промокод и нажмите 'Применить'"
         />
       </section>
-    </>
+    </div>
   );
 }
