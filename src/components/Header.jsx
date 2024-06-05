@@ -8,7 +8,6 @@ import Phone from "./../assets/phone.png";
 
 import { Link } from "react-router-dom";
 import BackGround from "./BackGround";
-import LogModal from "./LogModal";
 
 export default function Header({ setCategory }) {
   const categories = [
@@ -41,9 +40,6 @@ export default function Header({ setCategory }) {
 
   const [isBurgerOpened, setIsBurgerOpened] = useState(false);
   const [isArrowTouched, setIsArrowTouched] = useState(false);
-  const [isNavModalMenuActive, setIsNavModalMenuActive] = useState(false);
-  const [isLogin, setIsLogin] = useState(true);
-  const [isLogModalActive, setIsLogModalActive] = useState(false);
 
   const handleOpenCloseArrowMenu = function () {
     if (!isArrowTouched) {
@@ -142,10 +138,19 @@ export default function Header({ setCategory }) {
                 <Link to="/help">Помощь</Link>
               </li>
               <li className="modal-nav__element w-9/12 mt-7">
-                <button type="button" onClick={() => setIsLogModalActive(true)}>
-                  Личный кабинет
-                </button>
+                {localStorage.getItem("token") ? (
+                  <Link to="/profile">Личный кабинет</Link>
+                ) : (
+                  <Link to="/login">Вход</Link>
+                )}
               </li>
+              {!localStorage.getItem("token") ? (
+                <li className="modal-nav__element w-9/12 mt-5">
+                  <Link to="/register">Регистрация</Link>
+                </li>
+              ) : (
+                ""
+              )}
               <li className="header__contacts flex items-center modal-nav__element w-9/12 mt-8">
                 <svg
                   width="24"
@@ -216,42 +221,40 @@ export default function Header({ setCategory }) {
                   +7 (8172) 29-20-22
                 </a>
               </li>
-              <li className="w-9/12 md:w-fit mt-7 md:mt-0 flex items-center md:ml-auto">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <g clipPath="url(#clip0_538_2177)">
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M12 12C9.3528 12 7.2 9.8472 7.2 7.2C7.2 4.5528 9.3528 2.4 12 2.4C14.6472 2.4 16.8 4.5528 16.8 7.2C16.8 9.8472 14.6472 12 12 12ZM16.5096 12.8076C18.1488 11.4888 19.2 9.468 19.2 7.2C19.2 3.2232 15.9768 0 12 0C8.0232 0 4.8 3.2232 4.8 7.2C4.8 9.468 5.85121 11.4888 7.49041 12.8076C3.09961 14.4576 0 18.534 0 24H2.4C2.4 18 6.7068 14.4 12 14.4C17.2932 14.4 21.6 18 21.6 24H24C24 18.534 20.9004 14.4576 16.5096 12.8076Z"
-                      fill="white"
-                    />
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_538_2177">
-                      <rect width="24" height="24" fill="white" />
-                    </clipPath>
-                  </defs>
-                </svg>
-                <button
-                  type="button"
-                  className="ml-2"
-                  onClick={() => setIsLogModalActive(true)}
-                >
-                  Личный кабинет
-                </button>
-                {isLogModalActive && (
-                  <LogModal isLogin={isLogin} setIsLogin={setIsLogin} />
+              <li className="w-9/12 md:w-fit mt-7 md:mt-0 flex gap-2 items-center md:ml-auto">
+                {localStorage.getItem("token") ? (
+                  <>
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g clipPath="url(#clip0_538_2177)">
+                        <path
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          d="M12 12C9.3528 12 7.2 9.8472 7.2 7.2C7.2 4.5528 9.3528 2.4 12 2.4C14.6472 2.4 16.8 4.5528 16.8 7.2C16.8 9.8472 14.6472 12 12 12ZM16.5096 12.8076C18.1488 11.4888 19.2 9.468 19.2 7.2C19.2 3.2232 15.9768 0 12 0C8.0232 0 4.8 3.2232 4.8 7.2C4.8 9.468 5.85121 11.4888 7.49041 12.8076C3.09961 14.4576 0 18.534 0 24H2.4C2.4 18 6.7068 14.4 12 14.4C17.2932 14.4 21.6 18 21.6 24H24C24 18.534 20.9004 14.4576 16.5096 12.8076Z"
+                          fill="white"
+                        />
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_538_2177">
+                          <rect width="24" height="24" fill="white" />
+                        </clipPath>
+                      </defs>
+                    </svg>
+                    <Link to="/profile">Личный кабинет</Link>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/login" className="mr-6">
+                      Вход
+                    </Link>
+                    <Link to="/register">Регистрация</Link>
+                  </>
                 )}
-                <BackGround
-                  active={isLogModalActive}
-                  onClick={() => setIsLogModalActive(false)}
-                />
               </li>
             </ul>
           </div>

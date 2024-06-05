@@ -1,6 +1,6 @@
 import "./index.css";
-import React, { useState } from "react";
-import { Routes, Route, ScrollRestoration } from "react-router-dom";
+import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import Menu from "./pages/menu";
 import MainPage from "./pages/mainPage";
 import Delivery from "./pages/Delivery";
@@ -11,6 +11,7 @@ import Profile from "./pages/Profile";
 import Cart from "./pages/Cart";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
+import RequireAuth from "./components/RequireAuth.jsx";
 
 function App() {
   const [category, setCategory] = useState("combo");
@@ -26,7 +27,14 @@ function App() {
         <Route path="contacts" element={<Contacts />} />
         <Route path="promo" element={<Promo />} />
         <Route path="help" element={<Help />} />
-        <Route path="profile" element={<Profile />} />
+        <Route
+          path="profile"
+          element={
+            <RequireAuth>
+              <Profile />
+            </RequireAuth>
+          }
+        />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="cart" element={<Cart />} />
