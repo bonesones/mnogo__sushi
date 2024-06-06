@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import InputMask from "react-input-mask";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -12,19 +12,24 @@ export default function Register() {
     formState: { errors },
   } = useForm();
 
+  const navigate = useNavigate();
+
   const onSubmit = async function (data) {
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/user/signup",
+      await axios.post(
+        "/api/user/signup",
         {
           email: data.email,
           phone: data.phone,
           password: data.password,
           submit_password: data.submit_password,
         },
+        {
+          withCredentials: true,
+        },
       );
-      console.log(response)
-      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("isAuthenticated", true);
+      navigate("/profile");
     } catch (e) {
       console.log(e);
     }

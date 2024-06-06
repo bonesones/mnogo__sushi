@@ -15,6 +15,7 @@ import ProductDetails from "../components/ProductDetails";
 import Slider from "../components/Slider";
 
 export default function Menu({ category, setCategory }) {
+  console.log("renders");
   const [isModalActive, setIsModalActive] = useState(false);
   const [isFirstRender, setIsFirstRender] = useState(true);
 

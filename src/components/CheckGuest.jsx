@@ -1,12 +1,10 @@
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import Loading from "./Loading.jsx";
+import axios from "axios";
+import Error_404 from "../pages/404.jsx";
 
-export default function RequireAuth({ children }) {
-  const location = useLocation();
+export default function CheckGuest({ children }) {
   const [renderResult, setRenderResult] = useState(<Loading />);
-
   useEffect(() => {
     const checkAuth = async () => {
       try {
@@ -17,12 +15,9 @@ export default function RequireAuth({ children }) {
             withCredentials: true,
           },
         );
-        setRenderResult(children);
+        setRenderResult(<Error_404 />);
       } catch (e) {
-        console.log(e);
-        setRenderResult(
-          <Navigate to="/login" replace state={{ path: location.pathname }} />,
-        );
+        setRenderResult(children);
       }
     };
     checkAuth();

@@ -4,7 +4,7 @@ export default function Footer() {
   const handleClick = function () {};
 
   return (
-    <footer className="hidden md:block border-t border-black py-10 mt-44">
+    <footer className="hidden md:block bottom-0 border-t border-black py-10 mt-44">
       <div className="grid grid-cols-2 wrapper mx-auto">
         <div>
           <span className="footer__title font-semibold text-xl">Меню</span>

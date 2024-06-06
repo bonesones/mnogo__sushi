@@ -2,7 +2,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useState } from "react";
-import useAuth from "../hooks/useAuth.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../store/userSlice.js";
 
 export default function Login() {
   const {
@@ -11,26 +12,20 @@ export default function Login() {
     formState: { errors },
   } = useForm();
 
-  const [loginError, setLoginError] = useState("");
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { state } = useLocation();
+  const error = useSelector((state) => state.error);
 
   const onSubmit = async function (data) {
     try {
-      await axios.post(
-        "http://localhost:3000/api/user/login",
-        {
-          email: data.email,
-          password: data.password,
-        },
-        {
-          withCredentials: true,
-        },
-          setLoginError('')
-      );
+      const response = await dispatch(loginUser(data));
+      if (response.error) {
+        throw new Error(response.error);
+      }
+      navigate(state?.path || "/");
     } catch (e) {
-      console.log(e);
-      console.log('wjould work')
-        setLoginError(e?.response?.data?.message);
+      console.log("error", e);
     }
   };
 
@@ -39,10 +34,11 @@ export default function Login() {
       <div className="text-center text-black font-semibold text-2xl mt-12">
         Вход
       </div>
+
       <form
         method="POST"
         onSubmit={handleSubmit(onSubmit)}
-        className="profile-modal-form flex flex-col items-center mt-12"
+        className="profile-modal-form flex flex-col gap-3 items-center mt-12"
       >
         <label htmlFor="email" className="self-start">
           Почта
@@ -81,13 +77,11 @@ export default function Login() {
             {errors.password.message}
           </span>
         )}
-        {
-          loginError && (
-              <span className="text-red-600 self-center">
-                {loginError}
-              </span>
-            )
-        }
+        {error && (
+          <span className="text-red-600 self-center">
+            {error?.response?.data?.message}
+          </span>
+        )}
         <input
           type="submit"
           value="Войти"

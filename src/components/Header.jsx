@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Burger from "./../assets/burger-menu.png";
 import Cart from "./../assets/shopping_cart.png";
 import Logo from "./../assets/logo.png";
@@ -10,6 +10,10 @@ import { Link } from "react-router-dom";
 import BackGround from "./BackGround";
 
 export default function Header({ setCategory }) {
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    Boolean(localStorage.getItem("isAuthenticated")),
+  );
+  console.log("isAuthenticated", isAuthenticated);
   const categories = [
     ["combo", "Комбо"], // пара ссылка - название
     ["pizza", "Пицца"],
@@ -32,6 +36,11 @@ export default function Header({ setCategory }) {
       </li>
     );
   });
+
+  useEffect(() => {
+    console.log("render header");
+    setIsAuthenticated(Boolean(localStorage.getItem("isAuthenticated")));
+  }, [isAuthenticated]);
 
   const arrowImage = useRef(null);
   const arrowMenu = useRef(null);
@@ -138,13 +147,13 @@ export default function Header({ setCategory }) {
                 <Link to="/help">Помощь</Link>
               </li>
               <li className="modal-nav__element w-9/12 mt-7">
-                {localStorage.getItem("token") ? (
+                {isAuthenticated === "true" ? (
                   <Link to="/profile">Личный кабинет</Link>
                 ) : (
                   <Link to="/login">Вход</Link>
                 )}
               </li>
-              {!localStorage.getItem("token") ? (
+              {isAuthenticated != "true" ? (
                 <li className="modal-nav__element w-9/12 mt-5">
                   <Link to="/register">Регистрация</Link>
                 </li>
@@ -222,7 +231,7 @@ export default function Header({ setCategory }) {
                 </a>
               </li>
               <li className="w-9/12 md:w-fit mt-7 md:mt-0 flex gap-2 items-center md:ml-auto">
-                {localStorage.getItem("token") ? (
+                {isAuthenticated ? (
                   <>
                     <svg
                       width="24"
@@ -300,6 +309,7 @@ export default function Header({ setCategory }) {
                 0
               </span>
             </button>
+
             <Link
               to="/cart"
               className="hidden lg:flex shopping__card relative ml-auto items-center gap-2"
