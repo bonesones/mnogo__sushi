@@ -27,14 +27,7 @@ function App() {
         <Route path="contacts" element={<Contacts />} />
         <Route path="promo" element={<Promo />} />
         <Route path="help" element={<Help />} />
-        <Route
-          path="profile"
-          element={
-            <RequireAuth>
-              <Profile />
-            </RequireAuth>
-          }
-        />
+        <Route path='profile' element={<Profile />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="cart" element={<Cart />} />

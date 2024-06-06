@@ -15,7 +15,7 @@ export default function Register() {
   const onSubmit = async function (data) {
     try {
       const response = await axios.post(
-        "http://192.168.1.120:3000/api/user/signup",
+        "http://localhost:3000/api/user/signup",
         {
           email: data.email,
           phone: data.phone,
@@ -23,6 +23,7 @@ export default function Register() {
           submit_password: data.submit_password,
         },
       );
+      console.log(response)
       localStorage.setItem("token", response.data.token);
     } catch (e) {
       console.log(e);

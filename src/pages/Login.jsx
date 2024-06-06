@@ -13,14 +13,11 @@ export default function Login() {
 
   const [loginError, setLoginError] = useState("");
 
-  const navigate = useNavigate();
-  const { login } = useAuth();
-  const { state } = useLocation();
 
   const onSubmit = async function (data) {
     try {
       await axios.post(
-        "http://192.168.1.120:3000/api/user/login",
+        "http://localhost:3000/api/user/login",
         {
           email: data.email,
           password: data.password,
@@ -28,12 +25,12 @@ export default function Login() {
         {
           withCredentials: true,
         },
-        login().then(() => {
-          navigate(state?.path || "/");
-        }),
+          setLoginError('')
       );
     } catch (e) {
       console.log(e);
+      console.log('wjould work')
+        setLoginError(e?.response?.data?.message);
     }
   };
 
@@ -84,6 +81,13 @@ export default function Login() {
             {errors.password.message}
           </span>
         )}
+        {
+          loginError && (
+              <span className="text-red-600 self-center">
+                {loginError}
+              </span>
+            )
+        }
         <input
           type="submit"
           value="Войти"
