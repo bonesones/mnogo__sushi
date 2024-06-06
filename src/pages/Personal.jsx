@@ -2,18 +2,6 @@ import { useEffect, useState } from "react";
 import Order from "../components/Order.jsx";
 
 export default function Profile() {
-  const [profileMode, setProfileMode] = useState("personal");
-
-  const clickHandler = function (e) {
-    if (e.target.tagName === "BUTTON") {
-      document
-        .querySelector(".data-switch-btn_active")
-        ?.classList?.remove("data-switch-btn_active");
-      e.target.classList.add("data-switch-btn_active");
-      setProfileMode(e.target.dataset.page);
-    }
-  };
-
   return (
     <div className="profile flex flex-col wrapper mx-auto">
       <div className="flex flex-col md:flex-row md:justify-between gap-5 mt-24 mb-[3rem] items-center mt-24">
