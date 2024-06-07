@@ -8,12 +8,12 @@ import Phone from "./../assets/phone.png";
 
 import { Link } from "react-router-dom";
 import BackGround from "./BackGround";
+import { useSelector } from "react-redux";
 
 export default function Header({ setCategory }) {
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    Boolean(localStorage.getItem("isAuthenticated")),
+  const isAuthenticated = useSelector(
+    (state) => state.userPersist.user.isAuthenticated,
   );
-  console.log("isAuthenticated", isAuthenticated);
   const categories = [
     ["combo", "Комбо"], // пара ссылка - название
     ["pizza", "Пицца"],
@@ -36,11 +36,6 @@ export default function Header({ setCategory }) {
       </li>
     );
   });
-
-  useEffect(() => {
-    console.log("render header");
-    setIsAuthenticated(Boolean(localStorage.getItem("isAuthenticated")));
-  }, [isAuthenticated]);
 
   const arrowImage = useRef(null);
   const arrowMenu = useRef(null);
@@ -147,18 +142,16 @@ export default function Header({ setCategory }) {
                 <Link to="/help">Помощь</Link>
               </li>
               <li className="modal-nav__element w-9/12 mt-7">
-                {isAuthenticated === "true" ? (
-                  <Link to="/profile">Личный кабинет</Link>
+                {isAuthenticated ? (
+                  <Link to="/profile/personal">Личный кабинет</Link>
                 ) : (
                   <Link to="/login">Вход</Link>
                 )}
               </li>
-              {isAuthenticated != "true" ? (
+              {!isAuthenticated && (
                 <li className="modal-nav__element w-9/12 mt-5">
                   <Link to="/register">Регистрация</Link>
                 </li>
-              ) : (
-                ""
               )}
               <li className="header__contacts flex items-center modal-nav__element w-9/12 mt-8">
                 <svg
@@ -254,7 +247,7 @@ export default function Header({ setCategory }) {
                         </clipPath>
                       </defs>
                     </svg>
-                    <Link to="/profile">Личный кабинет</Link>
+                    <Link to="/profile/personal">Личный кабинет</Link>
                   </>
                 ) : (
                   <>

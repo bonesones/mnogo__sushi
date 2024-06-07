@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Loading from "./Loading.jsx";
+import { setIsAuthorized } from "../store/userPersistSlice.js";
+import { useDispatch } from "react-redux";
 
 export default function CheckAuth({ children }) {
   const [renderResult, setRenderResult] = useState(<Loading />);
+  const dispatch = useDispatch();
   useEffect(() => {
     const checkAuth = async () => {
       try {
@@ -14,13 +17,10 @@ export default function CheckAuth({ children }) {
             withCredentials: true,
           },
         );
-        localStorage.setItem("isAuthenticated", true);
-        console.log("localstoraged edited");
-        console.log(localStorage.getItem("isAuthenticated"));
+        dispatch(setIsAuthorized(true));
         setRenderResult(children);
       } catch (e) {
-        console.log(e);
-        localStorage.clear();
+        dispatch(setIsAuthorized(false));
         setRenderResult(children);
       }
     };

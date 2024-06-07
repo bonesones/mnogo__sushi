@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../store/userSlice.js";
+import { loginUser } from "../store/userPersistSlice.js";
 
 export default function Login() {
   const {
@@ -15,17 +15,18 @@ export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { state } = useLocation();
-  const error = useSelector((state) => state.error);
+  const [error, setError] = useState("");
 
   const onSubmit = async function (data) {
     try {
       const response = await dispatch(loginUser(data));
       if (response.error) {
-        throw new Error(response.error);
+        throw new Error("Неверный логин или пароль");
       }
+      setError("");
       navigate(state?.path || "/");
     } catch (e) {
-      console.log("error", e);
+      setError(e.message);
     }
   };
 
@@ -77,11 +78,7 @@ export default function Login() {
             {errors.password.message}
           </span>
         )}
-        {error && (
-          <span className="text-red-600 self-center">
-            {error?.response?.data?.message}
-          </span>
-        )}
+        {error && <span className="text-red-600 self-center">{error}</span>}
         <input
           type="submit"
           value="Войти"

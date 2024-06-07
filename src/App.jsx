@@ -23,14 +23,7 @@ function App() {
 
   return (
     <Routes>
-      <Route
-        path="/"
-        element={
-          <CheckAuth>
-            <MainPage setCategory={setCategory} />
-          </CheckAuth>
-        }
-      >
+      <Route path="/" element={<MainPage setCategory={setCategory} />}>
         <Route path="*" element={<Error_404 />} />
         <Route
           index

@@ -2,7 +2,7 @@ import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { logoutUser } from "../store/userSlice.js";
+import { logoutUser } from "../store/userPersistSlice.js";
 
 const pageContext = createContext(null);
 
@@ -23,6 +23,18 @@ export default function ProfileOutlet() {
         throw new Error(response.error);
       }
       navigate("/login");
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const handleGet = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.get("/api/user/getuser", {
+        withCredentials: true,
+      });
+      console.log(response.data);
     } catch (e) {
       console.log(e);
     }

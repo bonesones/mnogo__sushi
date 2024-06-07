@@ -11,7 +11,6 @@ export default function Register() {
     getValues,
     formState: { errors },
   } = useForm();
-
   const navigate = useNavigate();
 
   const onSubmit = async function (data) {
@@ -28,7 +27,6 @@ export default function Register() {
           withCredentials: true,
         },
       );
-      localStorage.setItem("isAuthenticated", true);
       navigate("/profile");
     } catch (e) {
       console.log(e);
