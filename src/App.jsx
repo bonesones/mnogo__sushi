@@ -23,7 +23,9 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<MainPage setCategory={setCategory} />}>
+      <Route path="/" element={
+          <MainPage setCategory={setCategory} />
+      }>
         <Route path="*" element={<Error_404 />} />
         <Route
           index

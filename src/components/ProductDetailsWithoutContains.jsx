@@ -17,7 +17,7 @@ export default function ProductDetailsWithoutContains({
         <h2 className="product-details__name text-2xl w-7/12 font-semibold">
           {data.title}
         </h2>
-        <span>{data.weight + " гр."}</span>
+        <span>{data.parameter}</span>
       </div>
       <div className="flex flex-col lg:gap-8 items-center lg:mt-12">
         <div className="flex flex-col items-center lg:gap-8">

@@ -34,7 +34,6 @@ export default function ProfileOutlet() {
       const response = await axios.get("/api/user/getuser", {
         withCredentials: true,
       });
-      console.log(response.data);
     } catch (e) {
       console.log(e);
     }

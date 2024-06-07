@@ -13,71 +13,59 @@ import ProductsList from "../components/ProductsList";
 import { useEffect, useState } from "react";
 import ProductDetails from "../components/ProductDetails";
 import Slider from "../components/Slider";
+import axios from "axios";
 
-export default function Menu({ category, setCategory }) {
-  console.log("renders");
+export default function Menu() {
   const [isModalActive, setIsModalActive] = useState(false);
   const [isFirstRender, setIsFirstRender] = useState(true);
 
-  useEffect(() => {
-    const products = document.querySelector(".category-list");
-    products
-      .querySelector(".category-list__btn_active")
-      ?.classList?.remove("category-list__btn_active");
-    products
-      .querySelector(`[data-id='${category}'`)
-      .classList.add("category-list__btn_active");
-  }, [category]);
+  const [categories, setCategories] = useState([])
+  const [products, setProducts] = useState([])
+  const [category, setCategory] = useState(1)
 
-  const handleChangeCategory = function (e) {
-    if (e.target.tagName != "BUTTON") {
-      return;
+  useEffect(() => {
+    const getAllCategories = async function () {
+      try {
+        const response = await axios.get("/api/category/getall");
+        const data = response.data
+        setCategories(data)
+      } catch (e) {
+        console.log(e)
+      }
     }
-    setCategory(e.target.getAttribute("data-id"));
-  };
+
+    const getAllProducts = async function () {
+      try {
+        const response = await axios.get("/api/products/getAll")
+        const data = response.data
+        setProducts(data)
+      } catch(e) {
+        console.log(e)
+      }
+    }
+    getAllCategories()
+  }, [])
+
 
   return (
     <>
       <Slider />
       <div
         className="category-list wrapper py-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 justify-items-center gap-y-5 md:gap-y-7 font-medium mx-auto lg:text-lg mt-6"
-        onClick={(e) => handleChangeCategory(e)}
       >
-        <button
-          className="category-list__btn category-list__btn_active"
-          data-id="combo"
-        >
-          Наборы
-        </button>
-        <button className="category-list__btn" data-id="pizza">
-          Пицца
-        </button>
-        <button className="category-list__btn" data-id="sushipizza">
-          Сушипицца
-        </button>
-        <button className="category-list__btn" data-id="cream_rolls">
-          Сливочные роллы
-        </button>
-        <button className="category-list__btn" data-id="maki">
-          Маки
-        </button>
-        <button className="category-list__btn" data-id="cold_rolls">
-          Холодные роллы
-        </button>
-        <button className="category-list__btn" data-id="baked_rolls">
-          Запеченные роллы
-        </button>
-        <button className="category-list__btn" data-id="warm_rolls">
-          Теплые роллы
-        </button>
-        <button className="category-list__btn" data-id="snacks">
-          Закуски
-        </button>
-        <button className="category-list__btn" data-id="additional">
-          Дополнительно
-        </button>
+        {categories && categories.map(({id, name}) => {
+          return (
+              <button
+                  className="category-list__btn"
+                  key={id}
+                  onClick={() => setCategory(id)}
+              >
+                {name}
+              </button>
+          )
+        })}
+        <ProductsList category={category} />
       </div>
-      <ProductsList category={category} />
     </>
   );
 }

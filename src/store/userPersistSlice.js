@@ -40,6 +40,21 @@ export const logoutUser = createAsyncThunk(
   },
 );
 
+
+export const deleteUser = createAsyncThunk(
+    "userPersist/deleteUser",
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await axios.delete('/api/user/delete', {
+                withCredentials: true
+            });
+            return response
+        } catch(e) {
+            return rejectWithValue(e);
+        }
+    }
+)
+
 const userPersistSlice = createSlice({
   name: "userPersist",
   initialState: {

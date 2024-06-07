@@ -11,7 +11,6 @@ export default function RequireAuth({ children }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("auth");
     const checkAuth = async () => {
       try {
         await axios.post(

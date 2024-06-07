@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import InputMask from "react-input-mask";
-import { useForm } from "react-hook-form";
+import {set, useForm} from "react-hook-form";
 import axios from "axios";
 
 export default function Register() {
@@ -12,6 +12,8 @@ export default function Register() {
     formState: { errors },
   } = useForm();
   const navigate = useNavigate();
+
+  const [error, setError] = useState("");
 
   const onSubmit = async function (data) {
     try {
@@ -29,6 +31,7 @@ export default function Register() {
       );
       navigate("/profile");
     } catch (e) {
+      setError(e.response?.data?.message);
       console.log(e);
     }
   };
@@ -124,11 +127,13 @@ export default function Register() {
             {errors.submit_password.message}
           </span>
         )}
+        {error && <span className="text-red-600 self-center">{error}</span>}
         <input
           type="submit"
           value="Зарегистрироваться"
           className="border bg-[#F35E62] text-white w-fit py-1.5 px-10 rounded-md rounded-tl-md hover:cursor-pointer mt-12"
         />
+
       </form>
       <div className="flex flex-col gap-5 text-center mt-[2rem]">
         <Link to="/login">Зарегистрированы? Войти</Link>

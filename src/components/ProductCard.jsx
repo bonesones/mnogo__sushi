@@ -8,17 +8,17 @@ export default function ProductCard({
   image,
   description,
   price,
-  isSale,
-  sale,
-  contains,
-  weight,
-  isPriceVisible,
+  isSale = false,
+  sale = "",
+  contains = "",
+  parameter,
+  isPriceVisible = true,
 }) {
   const data = {
     title,
     description,
     image,
-    weight,
+    parameter,
     contains,
     price,
   };
@@ -45,7 +45,7 @@ export default function ProductCard({
           onClick={handleOpenCloseProductModal}
           className="product-card__image w-full mx-auto block relative"
         >
-          <img className="h-60 mx-auto block" src={image} />
+          <img className="h-60 mx-auto block" src={image} alt="" />
           {isSale && (
             <span className="product-card__sale absolute w-7/12 py-1 font-semibold text-white text-base pl-5 top-0 right-0">
               скидка {sale} ₽

@@ -2,6 +2,7 @@ import Header from "../components/Header";
 import Slider from "../components/Slider";
 import { Outlet } from "react-router-dom";
 import Footer from "../components/Footer";
+import CheckAuth from "../components/CheckAuth.jsx";
 
 export default function MainPage({ setCategory }) {
   const handleChangeCategory = function (e) {
@@ -17,7 +18,9 @@ export default function MainPage({ setCategory }) {
 
   return (
     <>
-      <Header setCategory={setCategory} />
+    <CheckAuth>
+        <Header setCategory={setCategory} />
+    </CheckAuth>
       <main className="mx-auto">
         <Outlet />
       </main>
