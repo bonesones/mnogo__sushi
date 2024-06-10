@@ -1,29 +1,29 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import {
+  decrementProduct,
+  incrementProduct,
+} from "../store/basketPersistSlice.js";
 
-export default function CartProduct() {
+export default function CartProduct({ product }) {
   const [quantity, setQuantity] = useState(1);
+  const dispatch = useDispatch();
 
   const handleDecrement = function () {
-    if (quantity === 0) {
-      return;
-    } else {
-      setQuantity((prev) => prev - 1);
-    }
+    dispatch(decrementProduct(product.id));
   };
 
   const handleIncrement = function () {
-    if (quantity === 10) {
-      return;
-    } else {
-      setQuantity((prev) => prev + 1);
-    }
+    dispatch(incrementProduct(product.id));
   };
 
   return (
     <div className="cart-items flex items-center justify-between w-full">
-      <p>МногоМяса</p>
+      <p>{product.name}</p>
       <div className="flex w-32 sm:w-fit flex-col sm:flex-row items-center gap-4">
-        <span className="font-semibold w-full text-center">600 Р</span>
+        <span className="font-semibold w-full text-center">
+          {product.price} Р
+        </span>
         <div className="rounded-2xl flex justify-between w-[110px] w-min-[108px] box-border">
           <button
             type="button"
@@ -33,7 +33,7 @@ export default function CartProduct() {
             -
           </button>
           <span className="bg-white text-black px-3 w-14 text-center">
-            {quantity}
+            {product.basket_product.quantity}
           </span>
           <button
             type="button"

@@ -3,7 +3,8 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../store/userPersistSlice.js";
+import { loginUser, logoutUser } from "../store/userPersistSlice.js";
+import { getBasket } from "../store/basketPersistSlice.js";
 
 export default function Login() {
   const {
@@ -24,7 +25,9 @@ export default function Login() {
         throw new Error("Неверный логин или пароль");
       }
       setError("");
-      navigate(state?.path || "/");
+      dispatch(getBasket()).then(() => {
+        navigate(state?.path || "/");
+      });
     } catch (e) {
       setError(e.message);
     }

@@ -9,30 +9,34 @@ import Phone from "./../assets/phone.png";
 import { Link } from "react-router-dom";
 import BackGround from "./BackGround";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 export default function Header({ setCategory }) {
   const isAuthenticated = useSelector(
     (state) => state.userPersist.user.isAuthenticated,
   );
-  const categories = [
-    ["combo", "Комбо"], // пара ссылка - название
-    ["pizza", "Пицца"],
-    ["sushipizza", "Сушипицца"],
-    ["cream_rolls", "Сливочные роллы"],
-    ["maki", "Маки"],
-    ["cold_rolls", "Холодные роллы"],
-    ["baked_rolls", "Запеченные роллы"],
-    ["warm_rolls", "Теплые роллы"],
-    ["snacks", "Закуски"],
-    ["additional", "Дополнительно"],
-  ];
+  const basketProducts = useSelector(
+    (state) => state.basketPersist.basket.products,
+  );
 
-  const categoriesList = categories.map(([link, title], key) => {
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    const getAllCategories = async function () {
+      try {
+        const response = await axios.get(`/api/category/getall/`);
+        const data = response.data;
+        setCategories(data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getAllCategories();
+  }, []);
+
+  const categoriesList = categories.map(({ id, name }) => {
     return (
-      <li className="mt-2.5" key={key}>
-        <Link to={"/"} data-id={link} onClick={() => setCategory(link)}>
-          {title}
-        </Link>
+      <li className="mt-2.5" key={name}>
+        <Link to={"/" + name}>{name}</Link>
       </li>
     );
   });
@@ -309,8 +313,8 @@ export default function Header({ setCategory }) {
             >
               <div className="relative">
                 <img src="/cart_desktop.png" alt="Корзина" width="42px" />
-                <span className="cart-item__counter rounded-full absolute top-0 right-0 px-1">
-                  0
+                <span className="cart-item__counter rounded-full absolute text-sm top-0 right-0 px-1.5">
+                  {basketProducts.length}
                 </span>
               </div>
               <span>Корзина</span>

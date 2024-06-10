@@ -40,20 +40,42 @@ export const logoutUser = createAsyncThunk(
   },
 );
 
+export const registerUser = createAsyncThunk(
+  "userPersist/registerUser",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        "/api/user/signup",
+        {
+          email: data.email,
+          phone: data.phone,
+          password: data.password,
+          submit_password: data.submit_password,
+        },
+        {
+          withCredentials: true,
+        },
+      );
+      return response;
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  },
+);
 
 export const deleteUser = createAsyncThunk(
-    "userPersist/deleteUser",
-    async (_, { rejectWithValue }) => {
-        try {
-            const response = await axios.delete('/api/user/delete', {
-                withCredentials: true
-            });
-            return response
-        } catch(e) {
-            return rejectWithValue(e);
-        }
+  "userPersist/deleteUser",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.delete("/api/user/delete", {
+        withCredentials: true,
+      });
+      return response;
+    } catch (e) {
+      return rejectWithValue(e);
     }
-)
+  },
+);
 
 const userPersistSlice = createSlice({
   name: "userPersist",
@@ -96,6 +118,21 @@ const userPersistSlice = createSlice({
         state.user.isAuthenticated = false;
       })
       .addCase(logoutUser.rejected, (state, action) => {
+        state.status = "rejected";
+        state.error = action.payload.response?.data?.message;
+      });
+
+    builder
+      .addCase(registerUser.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(registerUser.fulfilled, (state) => {
+        state.status = "resolved";
+        state.error = null;
+        state.user.isAuthenticated = true;
+      })
+      .addCase(registerUser.rejected, (state, action) => {
         state.status = "rejected";
         state.error = action.payload.response?.data?.message;
       });

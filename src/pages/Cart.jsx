@@ -1,10 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CartProduct from "../components/CartProduct.jsx";
+import Select from "react-select";
+import { useSelector } from "react-redux";
 
 export default function Cart() {
   const [orderGetMethod, setOrderGetMethod] = useState("delivery");
   const [orderGetTimeMethod, setOrderGetTimeMethod] = useState("now");
   const [orderPayMethod, setOrderPayMethod] = useState("card");
+  const [availbaleDeliveryHours, setAvailbaleDeliveryHours] = useState([]);
+  const [availibaleDeliveryMinutes, setAvailbaleDeliveryMinutes] = useState([]);
+  const [deliveryHour, setDeliveryHour] = useState(
+    availbaleDeliveryHours[0]?.value,
+  );
+  const products = useSelector((state) => state.basketPersist.basket.products);
+
+  const [deliveryMinutes, setDeliveryMinutes] = useState(
+    availibaleDeliveryMinutes[0]?.value,
+  );
+
+  const isEmpty = function (array) {
+    return array.length === 0;
+  };
 
   const handleChangeOrderGetMethod = function (value) {
     setOrderGetMethod(value);
@@ -18,6 +34,74 @@ export default function Cart() {
     setOrderPayMethod(value);
   };
 
+  useEffect(() => {
+    let counter = 0;
+    for (
+      let i = new Date(Date.now() + 1000 * 60 * 60 * 1.5).getHours();
+      i < 24;
+      i++
+    ) {
+      if (counter === 0) {
+        setDeliveryHour(i);
+        ++counter;
+      }
+      setAvailbaleDeliveryHours((prev) => [
+        ...prev,
+        {
+          value: i,
+          label: i,
+        },
+      ]);
+    }
+    console.log(products);
+  }, []);
+
+  const handleChangeDeliveryHour = function (e) {
+    setAvailbaleDeliveryMinutes([]);
+    setDeliveryHour(e.value);
+  };
+
+  const handleChangeDeliveryMinutes = function (e) {
+    setDeliveryMinutes(e.value);
+  };
+
+  useEffect(() => {
+    if (
+      isEmpty(availibaleDeliveryMinutes) &&
+      !isEmpty(availbaleDeliveryHours)
+    ) {
+      if (deliveryHour != availbaleDeliveryHours[0].value) {
+        for (let i = 0; i < 60; i++) {
+          setAvailbaleDeliveryMinutes((prev) => [
+            ...prev,
+            {
+              value: i,
+              label: i < 10 ? `0${i}` : i,
+            },
+          ]);
+        }
+      } else {
+        for (
+          let i = new Date(Date.now() + 1000 * 60 * 60 * 1.5).getMinutes();
+          i < 60;
+          i++
+        ) {
+          setAvailbaleDeliveryMinutes((prev) => [
+            ...prev,
+            {
+              value: i,
+              label: i < 10 ? `0${i}` : i,
+            },
+          ]);
+        }
+      }
+    } else {
+      if (deliveryMinutes < availibaleDeliveryMinutes[0]?.value) {
+        setDeliveryMinutes(availibaleDeliveryMinutes[0]?.value);
+      }
+    }
+  }, [deliveryHour, availbaleDeliveryHours, availibaleDeliveryMinutes]);
+
   return (
     <div className="wrapper mx-auto mb-28">
       <h1 className="font-semibold text-3xl mt-24 text-center md:text-left">
@@ -25,8 +109,10 @@ export default function Cart() {
       </h1>
       <div className="mt-20 flex flex-col items-center">
         <div className="font-medium text-2xl flex flex-col gap-20 w-full">
-          <CartProduct />
-          <CartProduct />
+          {products &&
+            products.map((product) => {
+              return <CartProduct product={product} id={product.id} />;
+            })}
         </div>
         <div className="flex flex-col w-full mt-24">
           <h2 className="font-semibold text-2xl text-center md:text-left">
@@ -125,18 +211,38 @@ export default function Cart() {
                   </button>
                 </div>
                 {orderGetTimeMethod === "to-time" && (
-                  <div className="flex h-10 items-center gap-2 mt-16">
-                    <select className="bg-inherit border-2 border-[#A1947C] rounded-md py-2.5 px-6">
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                    </select>
+                  <div className="flex h-10 items-center mt-16">
+                    <Select
+                      options={availbaleDeliveryHours}
+                      className="bg-inherit rounded-md py-2.5 px-2"
+                      defaultValue={availbaleDeliveryHours[0]}
+                      onChange={(e) => handleChangeDeliveryHour(e)}
+                      menuPortalTarget={document.body}
+                      styles={{
+                        menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+                      }}
+                    />
                     :
-                    <select className="bg-inherit border-2 border-[#A1947C] rounded-md py-2.5 px-6">
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                    </select>
+                    <Select
+                      className="bg-inherit rounded-md py-2.5 px-2"
+                      options={availibaleDeliveryMinutes}
+                      defaultValue={availibaleDeliveryMinutes[0]}
+                      menuPortalTarget={document.body}
+                      value={{
+                        value:
+                          deliveryMinutes ??
+                          availibaleDeliveryMinutes[0]?.value,
+                        label:
+                          deliveryMinutes < 10
+                            ? `0${deliveryMinutes}`
+                            : deliveryMinutes ??
+                              availibaleDeliveryMinutes[0]?.label,
+                      }}
+                      styles={{
+                        menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+                      }}
+                      onChange={(e) => handleChangeDeliveryMinutes(e)}
+                    />
                   </div>
                 )}
               </div>

@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import InputMask from "react-input-mask";
-import {set, useForm} from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { getBasket } from "../store/basketPersistSlice.js";
+import { registerUser } from "../store/userPersistSlice.js";
 
 export default function Register() {
   const {
@@ -14,22 +17,14 @@ export default function Register() {
   const navigate = useNavigate();
 
   const [error, setError] = useState("");
+  const dispatch = useDispatch();
 
   const onSubmit = async function (data) {
     try {
-      await axios.post(
-        "/api/user/signup",
-        {
-          email: data.email,
-          phone: data.phone,
-          password: data.password,
-          submit_password: data.submit_password,
-        },
-        {
-          withCredentials: true,
-        },
-      );
-      navigate("/profile");
+      await dispatch(registerUser(data));
+      dispatch(getBasket()).then(() => {
+        navigate("/profile");
+      });
     } catch (e) {
       setError(e.response?.data?.message);
       console.log(e);
@@ -133,7 +128,6 @@ export default function Register() {
           value="Зарегистрироваться"
           className="border bg-[#F35E62] text-white w-fit py-1.5 px-10 rounded-md rounded-tl-md hover:cursor-pointer mt-12"
         />
-
       </form>
       <div className="flex flex-col gap-5 text-center mt-[2rem]">
         <Link to="/login">Зарегистрированы? Войти</Link>

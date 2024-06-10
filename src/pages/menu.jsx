@@ -1,46 +1,41 @@
-
 import ProductsList from "../components/ProductsList";
 import { useEffect, useState } from "react";
 import ProductDetails from "../components/ProductDetails";
 import Slider from "../components/Slider";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategories, setActive } from "../store/categoriesSlice.js";
 
-export default function Menu({ }) {
-  const [categories, setCategories] = useState([])
-  const [products, setProducts] = useState([])
-  const [category, setCategory] = useState(1)
+export default function Menu() {
+  const [category, setCategory] = useState(1);
+  const dispatch = useDispatch();
+  const categories = useSelector((state) => state.categories.categories);
 
   useEffect(() => {
-    const getAllCategories = async function () {
-      try {
-        const response = await axios.get(`/api/category/getall/`);
-        const data = response.data
-        setCategories(data)
-      } catch (e) {
-        console.log(e)
-      }
-    }
-    getAllCategories()
-  }, [])
+    dispatch(getCategories());
+  }, []);
 
+  const handleChangeCategory = function (id) {
+    dispatch(setActive(id));
+    setCategory(id);
+  };
 
   return (
     <>
       <Slider />
-      <div
-        className="category-list wrapper py-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 justify-items-center gap-y-5 md:gap-y-7 font-medium mx-auto lg:text-lg mt-6"
-      >
-        {categories && categories.map(({id, name}) => {
-          return (
+      <div className="category-list wrapper py-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 justify-items-center gap-y-5 md:gap-y-7 font-medium mx-auto lg:text-lg mt-6">
+        {categories &&
+          categories.map(({ id, name }) => {
+            return (
               <button
-                  className="category-list__btn"
-                  key={id}
-                  onClick={() => setCategory(id)}
+                className={}
+                key={id}
+                onClick={() => setCategory(id)}
               >
                 {name}
               </button>
-          )
-        })}
+            );
+          })}
       </div>
       <ProductsList category={category} />
     </>
