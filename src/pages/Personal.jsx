@@ -164,6 +164,7 @@ export default function Personal() {
                           },
                         })}
                         defaultValue={user.email}
+                        autoComplete="email"
                         className="bg-inherit border-2 border-[#A1947C] rounded-md pl-4 w-full md:w-96 lg:w-72 h-10"
                         placeholder="example@email.com"
                     />
@@ -211,6 +212,7 @@ export default function Personal() {
                         })}
                         type="password"
                         name="password_submit"
+                        autoComplete="new-password"
                         placeholder="******"
                         className="bg-inherit border-2 border-[#A1947C] rounded-md pl-4 w-full md:w-96 lg:w-72 h-10"
                     />

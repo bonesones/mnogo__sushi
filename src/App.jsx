@@ -2,7 +2,7 @@ import "./index.css";
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Menu from "./pages/menu";
-import MainPage from "./pages/mainPage";
+import MainPage from "./layouts/MainPage.jsx";
 import Delivery from "./pages/Delivery";
 import Contacts from "./pages/Contacts";
 import Promo from "./pages/Promo";
@@ -12,14 +12,14 @@ import Cart from "./pages/Cart";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import RequireAuth from "./components/RequireAuth.jsx";
-import ProfileOutlet from "./pages/ProfileOutlet.jsx";
+import Profile from "./layouts/Profile.jsx";
 import Orders from "./pages/Orders.jsx";
 import Error_404 from "./pages/404.jsx";
 import CheckAuth from "./components/CheckAuth.jsx";
 import CheckGuest from "./components/CheckGuest.jsx";
 
 function App() {
-  const [category, setCategory] = useState("combo");
+    const [category, setCategory] = useState("")
 
   return (
     <Routes>
@@ -39,7 +39,7 @@ function App() {
           path="profile"
           element={
             <RequireAuth>
-              <ProfileOutlet />
+              <Profile />
             </RequireAuth>
           }
         >

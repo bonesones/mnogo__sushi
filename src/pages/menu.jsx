@@ -1,24 +1,11 @@
-import ProductCard from "../components/ProductCard";
-import Combo from "../assets/category-images/Combo4.png";
-import Meat from "../assets/category-images/Meat.png";
-import SushiPizza from "../assets/category-images/sushipizza.png";
-import CreamRolls from "../assets/category-images/cream_rolls.png";
-import Maki from "../assets/category-images/maki.png";
-import ColdRolls from "../assets/category-images/cold_rolls.png";
-import BakedRolls from "../assets/category-images/baked_rolls.png";
-import HotRolls from "../assets/category-images/hot_rolls.png";
-import Snacks from "../assets/category-images/snacks.png";
-import Extras from "../assets/category-images/extras.png";
+
 import ProductsList from "../components/ProductsList";
 import { useEffect, useState } from "react";
 import ProductDetails from "../components/ProductDetails";
 import Slider from "../components/Slider";
 import axios from "axios";
 
-export default function Menu() {
-  const [isModalActive, setIsModalActive] = useState(false);
-  const [isFirstRender, setIsFirstRender] = useState(true);
-
+export default function Menu({ }) {
   const [categories, setCategories] = useState([])
   const [products, setProducts] = useState([])
   const [category, setCategory] = useState(1)
@@ -26,20 +13,10 @@ export default function Menu() {
   useEffect(() => {
     const getAllCategories = async function () {
       try {
-        const response = await axios.get("/api/category/getall");
+        const response = await axios.get(`/api/category/getall/`);
         const data = response.data
         setCategories(data)
       } catch (e) {
-        console.log(e)
-      }
-    }
-
-    const getAllProducts = async function () {
-      try {
-        const response = await axios.get("/api/products/getAll")
-        const data = response.data
-        setProducts(data)
-      } catch(e) {
         console.log(e)
       }
     }
@@ -64,8 +41,8 @@ export default function Menu() {
               </button>
           )
         })}
-        <ProductsList category={category} />
       </div>
+      <ProductsList category={category} />
     </>
   );
 }

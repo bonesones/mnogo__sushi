@@ -8,11 +8,10 @@ export default function ProductsList({ category }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    console.log(category);
     const getProducts = async function () {
       const response = await axios.get(`/api/product/getall/categoryId/${category}`)
       const data = response.data
-      console.log(data)
+      data.sort(({ id: prevId }, { id: nextId }) => nextId - prevId)
       setProducts(data)
     }
     getProducts()
@@ -27,13 +26,9 @@ export default function ProductsList({ category }) {
         products.map((product) => {
           return (
             <ProductCard
-              title={product.name}
-              image={"http://192.168.0.6:3000/" + product.image}
-              description={product.description}
-              price={product.price}
-              parameter={product.parameter}
-              key={product.id}
+              product={product}
               isPriceVisible={true}
+              key={product.id}
             />
           );
         })

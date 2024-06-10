@@ -1,6 +1,6 @@
 import ProductDetailsContainsCard from "./ProductDetailsContainsCard";
 
-export default function ProductDetails({ active, data, handleChange }) {
+export default function ProductDetails({ active, product, handleChange }) {
   return (
     <article
       className={
@@ -13,37 +13,37 @@ export default function ProductDetails({ active, data, handleChange }) {
       </button>
       <div className="flex justify-between items-end mt-10">
         <h2 className="product-details__name text-2xl w-7/12 font-semibold">
-          {data.title}
+          {product.name}
         </h2>
-        <span>{data.weight + " гр."}</span>
+        <span>{product.parameter}</span>
       </div>
       <div className="flex flex-col lg:gap-8 items-center lg:mt-12">
-        <div className="flex flex-col  lg:flex-row items-center lg:gap-8">
+        <div className={(product.isCombo ? "lg:flex-row " : "") + "flex flex-col items-center gap-6 q lg:gap-8"}>
           <img
-            className="mt-8 lg:mt-0 h-fit sm:w-10/12 md:w-8/12 lg:w-full lg:h-96"
-            src={data.image}
+            className={(product.isCombo ? "lg:w-full " : "") + "mt-8 lg:mt-0 h-fit sm:w-10/12 md:w-8/12 lg:h-96"}
+            src={"http://192.168.1.156:3000/" + product.image}
           />
-          {data.contains && (
+          {product.isCombo && (
             <div className="flex flex-col items-center w-full lg:h-96">
               <div className="mx-auto mt-12 lg:mt-0 flex flex-col gap-8 overflow-y-auto h-full">
-                {data.contains.map(({ name, img, description }, key) => {
+                {product.Sibling.map(({ id, name, image, description }) => {
                   return (
                     <ProductDetailsContainsCard
                       title={name}
-                      image={img}
+                      image={"http://192.168.1.156:3000/" + image}
                       description={description}
-                      key={key}
+                      key={id}
                     />
                   );
                 })}
               </div>
             </div>
           )}
-          {!data.contains && <p>{data.description}</p>}
+          {!product.isCombo && <p>{product.description}</p>}
         </div>
         <div className="flex justify-between mt-12 w-full">
           <span className="product-card__price font-semibold text-2xl">
-            {data.price} ₽
+            {product.price} ₽
           </span>
           <button className="product-card__cart-btn rounded-lg px-7 font-medium hover:bg-second">
             В корзину

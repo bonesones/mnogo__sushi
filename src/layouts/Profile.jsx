@@ -6,7 +6,7 @@ import { logoutUser } from "../store/userPersistSlice.js";
 
 const pageContext = createContext(null);
 
-export default function ProfileOutlet() {
+export default function Profile() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
