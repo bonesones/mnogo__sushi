@@ -8,33 +8,32 @@ import Phone from "./../assets/phone.png";
 
 import { Link } from "react-router-dom";
 import BackGround from "./BackGround";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import {getCategories, setActive} from "../store/categoriesSlice.js";
+import { getCategories, setActive } from "../store/categoriesSlice.js";
 
 export default function Header({ setCategory }) {
   const isAuthenticated = useSelector(
     (state) => state.userPersist.user.isAuthenticated,
   );
+
   const basketProducts = useSelector(
     (state) => state.basketPersist.basket.products,
   );
-  const categories = useSelector(state => state.categories.categories)
+  const categories = useSelector((state) => state.categories.categories);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCategories());
   }, []);
 
-  useEffect(() => {
-    console.log(categories)
-  }, [categories])
-
   const categoriesList = categories.map(({ id, name }) => {
     return (
       <li className="mt-2.5" key={name}>
-        <Link to={"/"} onClick={() =>dispatch(setActive(id))}>{name}</Link>
+        <Link to={"/"} onClick={() => dispatch(setActive(id))}>
+          {name}
+        </Link>
       </li>
     );
   });
@@ -301,7 +300,7 @@ export default function Header({ setCategory }) {
             >
               <img src={Cart} alt="Корзина" width="32px" />
               <span className="cart-item__counter rounded-full absolute top-0 right-0 px-1">
-                {basketProducts.length}
+                {isAuthenticated && basketProducts.length}
               </span>
             </Link>
 
@@ -312,7 +311,7 @@ export default function Header({ setCategory }) {
               <div className="relative">
                 <img src="/cart_desktop.png" alt="Корзина" width="42px" />
                 <span className="cart-item__counter rounded-full absolute text-sm top-0 right-0 px-1.5">
-                  {basketProducts.length}
+                  {isAuthenticated && basketProducts.length}
                 </span>
               </div>
               <span>Корзина</span>

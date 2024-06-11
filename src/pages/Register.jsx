@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import InputMask from "react-input-mask";
 import { set, useForm } from "react-hook-form";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getBasket } from "../store/basketPersistSlice.js";
-import { registerUser } from "../store/userPersistSlice.js";
+import { clearError, registerUser } from "../store/userPersistSlice.js";
 
 export default function Register() {
   const {
@@ -21,13 +21,16 @@ export default function Register() {
 
   const onSubmit = async function (data) {
     try {
-      await dispatch(registerUser(data));
+      const response = await dispatch(registerUser(data));
+      if (response.error) {
+        throw new Error(response.payload?.response?.data?.message);
+      }
+      setError("");
       dispatch(getBasket()).then(() => {
-        navigate("/profile");
+        navigate("/profile/personal");
       });
     } catch (e) {
-      setError(e.response?.data?.message);
-      console.log(e);
+      setError(e.message);
     }
   };
 
@@ -122,7 +125,9 @@ export default function Register() {
             {errors.submit_password.message}
           </span>
         )}
-        {error && <span className="text-red-600 self-center">{error}</span>}
+        {error && (
+          <span className="text-red-600 self-center text-center">{error}</span>
+        )}
         <input
           type="submit"
           value="Зарегистрироваться"

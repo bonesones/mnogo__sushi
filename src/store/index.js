@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import userPersistReducer from "./userPersistSlice.js";
 import userPrivateReducer from "./userPrivateSlice.js";
 import categoriesReducer from "./categoriesSlice.js";
+import ordersReducer from "./userOrderSlice.js";
 import storage from "redux-persist/lib/storage";
 import {
   persistReducer,
@@ -31,6 +32,7 @@ const rootReducer = combineReducers({
   userPrivate: userPrivateReducer,
   basketPersist: basketPersistedReducer,
   categories: categoriesReducer,
+  orders: ordersReducer,
 });
 
 export const store = configureStore({

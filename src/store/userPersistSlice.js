@@ -56,7 +56,7 @@ export const registerUser = createAsyncThunk(
           withCredentials: true,
         },
       );
-      return response;
+      return response.data;
     } catch (e) {
       return rejectWithValue(e);
     }
@@ -70,7 +70,7 @@ export const deleteUser = createAsyncThunk(
       const response = await axios.delete("/api/user/delete", {
         withCredentials: true,
       });
-      return response;
+      return response.data;
     } catch (e) {
       return rejectWithValue(e);
     }
@@ -89,6 +89,9 @@ const userPersistSlice = createSlice({
   reducers: {
     setIsAuthorized: (state, action) => {
       state.user.isAuthenticated = action.payload;
+    },
+    clearError: (state) => {
+      state.error = null;
     },
   },
   extraReducers: (builder) => {
@@ -139,6 +142,6 @@ const userPersistSlice = createSlice({
   },
 });
 
-export const { setIsAuthorized } = userPersistSlice.actions;
+export const { setIsAuthorized, clearError } = userPersistSlice.actions;
 
 export default userPersistSlice.reducer;

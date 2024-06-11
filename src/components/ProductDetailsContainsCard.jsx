@@ -18,7 +18,7 @@ export default function ProductDetailsContainsCard({
           <h3 className="text-center lg:text-start font-medium text-xl">
             {title}
           </h3>
-          <p className="product-card__description text-center lg:text-start mt-3 h-20 sm:h-24">
+          <p className="product-card__description text-center lg:text-start mt-3 h-20 sm:11 h-fit">
             {description}
           </p>
         </div>

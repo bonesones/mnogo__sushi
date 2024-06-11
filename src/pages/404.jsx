@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 export default function Error_404() {
   return (
-    <div className="mx-auto md:my-60 lg:my-14 absolute md:sticky w-10/12 sm:w-full flex flex-col items-center top-2/4 left-2/4 -translate-x-1/2 md:translate-x-0 -translate-y-1/2 md:translate-y-0">
+    <div className="mx-auto my-14 md:my-60 lg:my-14 absolute md:sticky w-10/12 sm:w-full flex flex-col items-center top-2/4 left-2/4 -translate-x-1/2 md:translate-x-0 -translate-y-1/2 md:translate-y-0">
       <img
         src="/panda_404.png"
         alt="Панда"

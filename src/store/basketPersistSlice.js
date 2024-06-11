@@ -88,7 +88,6 @@ const BasketPersistSlice = createSlice({
       .addCase(getBasket.fulfilled, (state, action) => {
         state.status = "resolved";
         state.error = null;
-        console.log("what");
         state.basket = {
           basketId: action.payload.id,
           products: action.payload.products,

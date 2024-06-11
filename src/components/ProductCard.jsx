@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
 import ProductDetails from "./ProductDetails";
 import BackGround from "./BackGround";
-import ProductDetailsWithoutContains from "./ProductDetailsWithoutContains";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { addProduct } from "../store/basketPersistSlice.js";
+import ProductDetailsCombo from "./ProductsDetailsCombo.jsx";
 
 export default function ProductCard({ product, isPriceVisible }) {
   const [isProductModalActive, setIsProductModalActive] = useState(false);
@@ -83,11 +83,19 @@ export default function ProductCard({ product, isPriceVisible }) {
           )}
         </div>
       </article>
-      <ProductDetails
-        product={product}
-        active={isProductModalActive}
-        handleChange={handleOpenCloseProductModal}
-      />
+      {product.isCombo ? (
+        <ProductDetailsCombo
+          product={product}
+          active={isProductModalActive}
+          handleChange={handleOpenCloseProductModal}
+        />
+      ) : (
+        <ProductDetails
+          product={product}
+          active={isProductModalActive}
+          handleChange={handleOpenCloseProductModal}
+        />
+      )}
     </>
   );
 }
