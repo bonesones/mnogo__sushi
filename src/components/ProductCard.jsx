@@ -15,7 +15,6 @@ export default function ProductCard({ product, isPriceVisible }) {
   const basketProducts = useSelector(
     (state) => state.basketPersist.basket.products,
   );
-  console.log(basketProducts);
 
   const handleOpenCloseProductModal = function () {
     setIsProductModalActive((prev) => !prev);

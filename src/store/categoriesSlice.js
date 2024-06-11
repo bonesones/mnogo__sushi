@@ -31,7 +31,7 @@ const CategoriesSlice = createSlice({
   reducers: {
     setActive: (state, action) => {
       state.categories = state.categories.map((category) => {
-        if (category.id !== action.payload.id) {
+        if (category.id !== action.payload) {
           return {
             ...category,
             isActive: false,
@@ -43,6 +43,7 @@ const CategoriesSlice = createSlice({
           };
         }
       });
+      console.log(state.categories);
     },
   },
   extraReducers: (builder) => {
@@ -61,6 +62,9 @@ const CategoriesSlice = createSlice({
             isActive: false,
           };
         });
+        if(!state.categories.some(({isActive}) => isActive === true)) {
+          state.categories[0].isActive = true
+        }
       })
       .addCase(getCategories.rejected, (state, action) => {
         state.status = "rejected";

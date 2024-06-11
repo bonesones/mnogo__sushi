@@ -31,7 +31,7 @@ export default function RequireAuth({ children }) {
       }
     };
     checkAuth();
-  }, []);
+  }, [location]);
 
   return renderResult;
 }

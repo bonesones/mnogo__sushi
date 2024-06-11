@@ -8,8 +8,9 @@ import Phone from "./../assets/phone.png";
 
 import { Link } from "react-router-dom";
 import BackGround from "./BackGround";
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
+import {getCategories, setActive} from "../store/categoriesSlice.js";
 
 export default function Header({ setCategory }) {
   const isAuthenticated = useSelector(
@@ -18,25 +19,22 @@ export default function Header({ setCategory }) {
   const basketProducts = useSelector(
     (state) => state.basketPersist.basket.products,
   );
+  const categories = useSelector(state => state.categories.categories)
 
-  const [categories, setCategories] = useState([]);
+  const dispatch = useDispatch()
+
   useEffect(() => {
-    const getAllCategories = async function () {
-      try {
-        const response = await axios.get(`/api/category/getall/`);
-        const data = response.data;
-        setCategories(data);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    getAllCategories();
+    dispatch(getCategories());
   }, []);
+
+  useEffect(() => {
+    console.log(categories)
+  }, [categories])
 
   const categoriesList = categories.map(({ id, name }) => {
     return (
       <li className="mt-2.5" key={name}>
-        <Link to={"/" + name}>{name}</Link>
+        <Link to={"/"} onClick={() =>dispatch(setActive(id))}>{name}</Link>
       </li>
     );
   });
@@ -297,15 +295,15 @@ export default function Header({ setCategory }) {
                 </li>
               </ul>
             </nav>
-            <button
-              type="button"
+            <Link
+              to="/cart"
               className="lg:hidden shopping__card relative ml-auto"
             >
               <img src={Cart} alt="Корзина" width="32px" />
               <span className="cart-item__counter rounded-full absolute top-0 right-0 px-1">
-                0
+                {basketProducts.length}
               </span>
-            </button>
+            </Link>
 
             <Link
               to="/cart"

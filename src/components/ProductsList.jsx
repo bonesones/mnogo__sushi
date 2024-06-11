@@ -33,7 +33,7 @@ export default function ProductsList({ category }) {
           );
         })
       ) : (
-        <div className="text-center w-full text-xl font-medium absolute">
+        <div className="text-center w-full text-xl font-medium my-20 col-span-1 sm:col-span-2 lg:col-span-3 ">
           Извините, данной категории продуктов ещё нет
         </div>
       )}

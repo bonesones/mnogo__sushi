@@ -11,14 +11,21 @@ export default function Menu() {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.categories.categories);
 
+
   useEffect(() => {
     dispatch(getCategories());
   }, []);
 
   const handleChangeCategory = function (id) {
-    dispatch(setActive(id));
     setCategory(id);
+    dispatch(setActive(id));
   };
+
+  const isCategoryActive = function (id) {
+      const category = categories.find(category => category.id === id);
+      console.log(id, category.isActive)
+      return category.isActive
+  }
 
   return (
     <>
@@ -27,10 +34,9 @@ export default function Menu() {
         {categories &&
           categories.map(({ id, name }) => {
             return (
-              <button
-                className={}
+              <button className={(isCategoryActive(id) && "category-list__btn_active ") + 'category-list__btn'}
                 key={id}
-                onClick={() => setCategory(id)}
+                onClick={() => handleChangeCategory(id)}
               >
                 {name}
               </button>

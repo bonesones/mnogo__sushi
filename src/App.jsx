@@ -17,6 +17,7 @@ import Orders from "./pages/Orders.jsx";
 import Error_404 from "./pages/404.jsx";
 import CheckAuth from "./components/CheckAuth.jsx";
 import CheckGuest from "./components/CheckGuest.jsx";
+import Loading from "./components/Loading.jsx";
 
 function App() {
     const [category, setCategory] = useState("")
@@ -62,7 +63,11 @@ function App() {
             </CheckGuest>
           }
         />
-        <Route path="cart" element={<Cart />} />
+        <Route path="cart" element={
+            <RequireAuth>
+                <Cart />
+            </RequireAuth>
+        } />
       </Route>
     </Routes>
   );
