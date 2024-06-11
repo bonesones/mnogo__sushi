@@ -55,6 +55,7 @@ const userOrderSlice = createSlice({
         state.status = "resolved";
         state.error = null;
         state.orders = action.payload;
+        state.orders.sort(({ id: prevId }, {id: nextId}) => nextId - prevId)
       })
       .addCase(getUserOrders.rejected, (state, action) => {
         state.status = "rejected";
@@ -69,7 +70,7 @@ const userOrderSlice = createSlice({
       .addCase(createOrder.fulfilled, (state, action) => {
         state.status = "resolved";
         state.error = null;
-        state.orders.push(action.payload);
+        state.orders.unshift(action.payload);
       })
       .addCase(createOrder.rejected, (state, action) => {
         state.status = "rejected";

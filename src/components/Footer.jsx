@@ -1,64 +1,32 @@
 import { Link } from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {setActive} from "../store/categoriesSlice.js";
+import {useState} from "react";
 
 export default function Footer() {
-  const handleClick = function () {};
+  const handleClick = function (id) {
+    dispatch(setActive(id));
+    window.scrollTo(0, 0)
+  };
+  const categories = useSelector((state) => state.categories.categories);
+  const [loaded, setLoaded] = useState(false);
 
+  const dispatch = useDispatch();
   return (
     <footer className="hidden md:block bottom-0 border-t border-black py-10 mt-44">
       <div className="grid grid-cols-2 wrapper mx-auto">
         <div>
           <span className="footer__title font-semibold text-xl">Меню</span>
           <ul className="grid grid-cols-2 mt-10 gap-y-3 font-medium opacity-70">
-            <li>
-              <button type="button" data-id="combo">
-                Наборы
-              </button>
-            </li>
-            <li>
-              <button type="button" data-id="pizza">
-                Пицца
-              </button>
-            </li>
-            <li>
-              <button type="button" data-id="sushipizza">
-                Сушипицца
-              </button>
-            </li>
-            <li>
-              <button type="button" data-id="cream_rolls">
-                Сливочные роллы
-              </button>
-            </li>
-            <li>
-              <button type="button" data-id="maki">
-                Маки
-              </button>
-            </li>
-            <li>
-              <button type="button" data-id="cold_rolls">
-                Холодные роллы
-              </button>
-            </li>
-            <li>
-              <button type="button" data-id="baked_rolls">
-                Запеченные
-              </button>
-            </li>
-            <li>
-              <button type="button" data-id="warm_rolls">
-                Теплые роллы
-              </button>
-            </li>
-            <li>
-              <button type="button" data-id="snacks">
-                Закуски
-              </button>
-            </li>
-            <li>
-              <button type="button" data-id="additional">
-                Дополнительно
-              </button>
-            </li>
+            {
+              categories.map(({id, name}) => (
+                  <li>
+                    <Link to="/" onClick={() => handleClick(id)} key={id}>
+                      {name}
+                    </Link>
+                  </li>
+              ))
+            }
           </ul>
         </div>
         <div className="flex flex-col justify-between justify-self-end lg:justify-self-start">

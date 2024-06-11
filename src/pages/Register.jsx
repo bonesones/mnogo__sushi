@@ -19,6 +19,8 @@ export default function Register() {
   const [error, setError] = useState("");
   const dispatch = useDispatch();
 
+  const user = useSelector(state => state.userPrivate.user)
+
   const onSubmit = async function (data) {
     try {
       const response = await dispatch(registerUser(data));

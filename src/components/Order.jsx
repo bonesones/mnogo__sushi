@@ -26,7 +26,7 @@ export default function Order({ order }) {
         <div className="grid grid-cols-[1fr,2fr] md:hidden">
           <span>Дата заказа</span>
           <span className="text-lg font-medium">
-            {new Date(order.createdAt).toLocaleDateString()}
+            {new Date(order.createdAt).toLocaleDateString("ru")}
           </span>
           <span>Адрес</span>
           <span className="text-lg">
@@ -57,7 +57,7 @@ export default function Order({ order }) {
           <span>Сумма</span>
           <span>Номер заказа</span>
           <span className="text-lg font-medium">
-            {new Date(order.createdAt).toLocaleDateString()}
+            {new Date(order.createdAt).toLocaleDateString("ru")}
           </span>
           <span className="text-lg font-medium">
             {order.is_delivery ? order.street_house : "Ветошкина 85Б"}
@@ -82,7 +82,7 @@ export default function Order({ order }) {
         <div
           className={
             (orderOpened
-              ? "flex flex-col bg-gray-50  rounded-md p-4 "
+              ? "flex flex-col bg-gray-200  rounded-md p-4 "
               : "hidden ") + "popup-order mt-6 mb-10"
           }
         >

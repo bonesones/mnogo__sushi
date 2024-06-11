@@ -353,6 +353,7 @@ export default function Cart() {
                     <div className="flex justify-center flex-col items-center md:items-start">
                       <div className="relative">
                         <button
+                            type="button"
                           onClick={() => handleChangeTimeMethod("now")}
                           className={
                             (orderGetTimeMethod === "now"
@@ -364,6 +365,7 @@ export default function Cart() {
                           Сейчас
                         </button>
                         <button
+                            type="button"
                           onClick={() => handleChangeTimeMethod("to-time")}
                           className={
                             (orderGetTimeMethod === "to-time"

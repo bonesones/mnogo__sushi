@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { getCategories, setActive } from "../store/categoriesSlice.js";
 
-export default function Header({ setCategory }) {
+export default function Header() {
   const isAuthenticated = useSelector(
     (state) => state.userPersist.user.isAuthenticated,
   );
@@ -24,9 +24,6 @@ export default function Header({ setCategory }) {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getCategories());
-  }, []);
 
   const categoriesList = categories.map(({ id, name }) => {
     return (

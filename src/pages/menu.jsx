@@ -13,8 +13,17 @@ export default function Menu() {
 
 
   useEffect(() => {
-    dispatch(getCategories());
+      if(categories.length <= 1){
+          dispatch(getCategories());
+      }
   }, []);
+
+  useEffect(() => {
+      if(categories.length > 1){
+          const category = categories.find(({ isActive }) => isActive === true)
+          setCategory(category.id);
+      }
+  }, [categories])
 
   const handleChangeCategory = function (id) {
     setCategory(id);
@@ -23,7 +32,6 @@ export default function Menu() {
 
   const isCategoryActive = function (id) {
       const category = categories.find(category => category.id === id);
-      console.log(id, category.isActive)
       return category.isActive
   }
 
@@ -31,7 +39,7 @@ export default function Menu() {
     <>
       <Slider />
       <div className="category-list wrapper py-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 justify-items-center gap-y-5 md:gap-y-7 font-medium mx-auto lg:text-lg mt-6">
-        {categories &&
+        {categories.length > 1 &&
           categories.map(({ id, name }) => {
             return (
               <button className={(isCategoryActive(id) && "category-list__btn_active ") + 'category-list__btn'}
@@ -43,7 +51,7 @@ export default function Menu() {
             );
           })}
       </div>
-      <ProductsList category={category} />
+        {categories.length > 1 && <ProductsList category={category} />}
     </>
   );
 }

@@ -25,7 +25,7 @@ export const updateUserInfo = createAsyncThunk(
           email: data.email,
           phone: data.phone,
           password: data.password,
-          name: data.name,
+          name: data.name.trim(),
           birthday: data.birthday,
         },
         {
