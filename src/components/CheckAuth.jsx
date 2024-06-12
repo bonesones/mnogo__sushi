@@ -5,7 +5,8 @@ import { setIsAuthorized } from "../store/userPersistSlice.js";
 import { useDispatch } from "react-redux";
 
 export default function CheckAuth({ children }) {
-  const [renderResult, setRenderResult] = useState(<Loading />);
+  const [renderResult, setRenderResult] = useState(null);
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   useEffect(() => {
     const checkAuth = async () => {
@@ -18,14 +19,17 @@ export default function CheckAuth({ children }) {
           },
         );
         dispatch(setIsAuthorized(true));
+        setLoading(false);
         setRenderResult(children);
       } catch (e) {
         dispatch(setIsAuthorized(false));
+        setLoading(false)
         setRenderResult(children);
       }
     };
     checkAuth();
   }, []);
 
-  return renderResult;
+  if(loading) return null
+  return renderResult
 }

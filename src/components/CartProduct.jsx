@@ -22,7 +22,7 @@ export default function CartProduct({ product }) {
       <p>{product.name}</p>
       <div className="flex w-32 sm:w-fit flex-col sm:flex-row items-center gap-4">
         <span className="font-semibold w-full text-center">
-          {product.price} Р
+          {product.price * product.quantity} Р
         </span>
         <div className="rounded-2xl flex justify-between w-[110px] w-min-[108px] box-border">
           <button
@@ -33,7 +33,7 @@ export default function CartProduct({ product }) {
             -
           </button>
           <span className="bg-white text-black px-3 w-14 text-center">
-            {product.basket_product.quantity}
+            {product.quantity}
           </span>
           <button
             type="button"

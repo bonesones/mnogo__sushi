@@ -50,11 +50,15 @@ export default function Orders() {
                       paginate={paginate}
                       currentPage={currentPage}
                   />
-                  <div className="flex justify-center gap-12 mb-12">
-                    <button type="button" className="text-xl" onClick={prevPage} disabled={currentPage === 1}>Назад
-                    </button>
-                    <button type="button" className="text-xl" onClick={nextPage} disabled={currentPage === 2}>Далее</button>
-                  </div>
+                  {currentOrder.length > 0 && (
+                      <div className="flex justify-center gap-12 mb-12">
+                        <button type="button" className="text-xl" onClick={prevPage} disabled={currentPage === 1}>Назад
+                        </button>
+                        <button type="button" className="text-xl" onClick={nextPage}
+                                disabled={currentPage === 2}>Далее
+                        </button>
+                      </div>
+                  )}
                 </div>
               </>
           )}

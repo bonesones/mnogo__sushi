@@ -1,17 +1,29 @@
 import { Link } from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {setActive} from "../store/categoriesSlice.js";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 export default function Footer() {
   const handleClick = function (id) {
     dispatch(setActive(id));
     window.scrollTo(0, 0)
   };
+
   const categories = useSelector((state) => state.categories.categories);
-  const [loaded, setLoaded] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if(categories.length > 1) {
+      setLoading(false)
+    }
+  }, [categories])
 
   const dispatch = useDispatch();
+
+  if(loading) {
+    return null
+  }
+
   return (
     <footer className="hidden md:block bottom-0 border-t border-black py-10 mt-44">
       <div className="grid grid-cols-2 wrapper mx-auto">
@@ -20,8 +32,8 @@ export default function Footer() {
           <ul className="grid grid-cols-2 mt-10 gap-y-3 font-medium opacity-70">
             {
               categories.map(({id, name}) => (
-                  <li>
-                    <Link to="/" onClick={() => handleClick(id)} key={id}>
+                  <li  key={id}>
+                    <Link to="/" onClick={() => handleClick(id)}>
                       {name}
                     </Link>
                   </li>

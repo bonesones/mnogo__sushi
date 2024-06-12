@@ -61,13 +61,13 @@ export default function ProductCard({ product, isPriceVisible }) {
             basketProducts.find(({ id }) => id === product.id) ? (
               <Link
                 to="/cart"
-                className="product-card__cart-btn rounded-lg px-7 font-medium hover:bg-second"
+                className="product-card__cart-btn bg-second text-white rounded-lg px-7 font-medium"
               >
                 Уже в корзине
               </Link>
             ) : (
               <button
-                className="product-card__cart-btn rounded-lg px-7 font-medium hover:bg-second"
+                className="product-card__cart-btn text-[#F35E62] rounded-lg px-7 font-medium hover:bg-second"
                 onClick={handleAddProductToCart}
               >
                 В корзину
@@ -76,7 +76,7 @@ export default function ProductCard({ product, isPriceVisible }) {
           ) : (
             <Link
               to="/login"
-              className="product-card__cart-btn rounded-lg px-7 font-medium hover:bg-second"
+              className="product-card__cart-btn text-[#F35E62] rounded-lg px-7 font-medium hover:bg-second"
             >
               В корзину
             </Link>

@@ -4,36 +4,47 @@ import "swiper/css";
 import { Pagination } from "swiper/modules";
 import Slide1 from "./../assets/bg-slide-1.png";
 import Combo7 from "./../assets/Combo7.png";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 export default function Slider() {
+  const [slides, setSlides] = useState([]);
+
+  useEffect(() => {
+    const fetchSlider = async() => {
+      try {
+        const response = await axios.get('/api/slider/getall')
+        setSlides(response.data);
+      } catch(e) {
+        console.log(e)
+      }
+    }
+    fetchSlider()
+  },[])
+
+  if(slides.length === 0) return null
+
   return (
     <Swiper
       pagination={window.innerWidth > 700 ? true : false}
       modules={[Pagination]}
       className="mySwiper w-full max-w-[1920px]"
     >
-      <SwiperSlide>
-        <picture>
-          <source
-            media="(min-width: 1100px)"
-            srcSet="/slider/desktop_slider-1.png"
-          />
-          <img
-            className="w-full"
-            src="/slider/tablet_slider-1.png"
-            alt="Сет 60 штук"
-          />
-        </picture>
-      </SwiperSlide>
-      <SwiperSlide>
-        <picture>
-          <img
-            className="w-full"
-            src="/slider/desktop_slider-2.png"
-            alt="Сет 60 штук"
-          />
-        </picture>
-      </SwiperSlide>
+      {slides.map((slide) => (
+          <SwiperSlide key={slide.id}>
+            <picture>
+              <source
+                  media="(min-width: 1100px)"
+                  srcSet={"http://192.168.1.156:3000/" + slide.desktop_image}
+              />
+              <img
+                  className="w-full"
+                  src={"http://192.168.1.156:3000/" + slide.tablet_phone_image}
+                  alt={slide.title}
+              />
+            </picture>
+          </SwiperSlide>
+      ))}
     </Swiper>
   );
 }

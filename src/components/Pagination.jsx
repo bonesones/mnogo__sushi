@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 
 export default function Pagination (props) {
     const pageNumbers = []
+    console.log(props.totalOrders)
     const [digitsToShow, setDigitsToShow] = useState([])
     for(let i = 1; i <= Math.ceil(props.totalOrders / props.ordersPerPage); i++) {
         pageNumbers.push(i)
@@ -13,14 +14,12 @@ export default function Pagination (props) {
         } else if(props.currentPage === 1) {
             setDigitsToShow([...pageNumbers.slice(0, 3)])
         } else if (props.currentPage === pageNumbers.length) {
-            console.log('this')
             setDigitsToShow([...pageNumbers.slice(pageNumbers.length - 3, pageNumbers.length )])
         } else {
             setDigitsToShow([...pageNumbers.slice(props.currentPage - 2, props.currentPage), ...pageNumbers.slice(props.currentPage, props.currentPage + 1)])
         }
     }, [props.currentPage]);
 
-    console.log(props.currentPage)
     return (
         <div className="flex justify-center">
             <ul className="pagination flex gap-10 flex">

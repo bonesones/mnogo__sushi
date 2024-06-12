@@ -8,6 +8,7 @@ export const getUserOrders = createAsyncThunk(
       const response = await axios.get(`/api/order/user/getall`, {
         withCredentials: true,
       });
+      console.log(response.data)
       const data = response.data;
       return data;
     } catch (e) {

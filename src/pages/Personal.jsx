@@ -5,7 +5,8 @@ import { useForm } from "react-hook-form";
 import InputMask from "react-input-mask";
 import BackGround from "../components/BackGround.jsx";
 import {deleteUser, logoutUser} from "../store/userPersistSlice.js";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
+import Loading from "../components/Loading.jsx";
 
 export default function Personal() {
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ export default function Personal() {
   const [success, setSuccess] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [isDeleteModalActive, setDeleteModalActive] = useState(false);
+  const location = useLocation()
 
   const navigate = useNavigate()
 
@@ -38,16 +40,21 @@ export default function Personal() {
   }, [isDeleteModalActive]);
 
   const onSubmit = async function (data) {
+    setLoaded(false)
     try {
       const response = await dispatch(updateUserInfo(data));
       if (!response.error) {
         setSuccess(true);
+        setLoaded(true)
         setTimeout(function () {
           setSuccess(false);
-        }, 5000)
+        }, 3000)
       }
     } catch (e) {
       console.log(e);
+      if(e.response && e.response.status === 500) {
+        navigate("/500", { replace:true, state: { path: location.pathname }});
+      }
     }
   };
 
@@ -81,7 +88,7 @@ export default function Personal() {
             onSubmit={handleSubmit(onSubmit)}
             method="PUT"
         >
-          {loaded && (
+          {loaded ? (
               <>
                 <div className="w-full flex flex-col md:flex-row md:justify-between gap-3 md:gap-4">
                   <label htmlFor="name" className=" inline-block">
@@ -225,9 +232,9 @@ export default function Personal() {
                 </div>
                 <div className="flex flex-col gap-6 col-span-full">
                   {success && (
-                      <span className="place-self-center text-green-500">
-                Данные сохранены
-              </span>
+                      <div className="fixed top-10 left-1/2 sm:text-lg -translate-x-1/2 bg-red-400 px-6 sm:px-10 w-fit rounded-md text-white py-5 sm:py-8">
+                        Данные сохранены!
+                      </div>
                   )}
                   <input
                       type="submit"
@@ -239,6 +246,8 @@ export default function Personal() {
                   </button>
                 </div>
               </>
+          ) : (
+              <Loading />
           )}
         </form>
       </>

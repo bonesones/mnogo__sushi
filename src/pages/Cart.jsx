@@ -86,7 +86,7 @@ export default function Cart() {
 
   useEffect(() => {
     const amount = products.reduce(
-      (acc, current) => acc + current.basket_product.quantity * current.price,
+      (acc, current) => acc + current.quantity * current.price,
       0,
     );
     if (isPromocodeUsed) {
@@ -190,7 +190,7 @@ export default function Cart() {
             ready_minutes:
               orderGetTimeMethod === "now"
                 ? new Date(Date.now() + 1000 * 60 * 60 * 1.5).getMinutes()
-                : deliveryHour,
+                : deliveryMinutes,
             amount: orderAmount,
             payment_method: orderPayMethod,
           }),
@@ -346,6 +346,7 @@ export default function Cart() {
                           required: true,
                         })}
                         type="text"
+                        defaultValue={user.name && user.name}
                         className="bg-inherit border-2 border-[#A1947C] rounded-md py-1.5 px-4 w-full"
                         placeholder="Имя получателя"
                       />
@@ -468,7 +469,7 @@ export default function Cart() {
                             return products.reduce(
                               (acc, current) =>
                                 acc +
-                                current.basket_product.quantity * current.price,
+                                current.quantity * current.price,
                               0,
                             );
                           });

@@ -9,6 +9,7 @@ export default function RequireAuth({ children }) {
   const location = useLocation();
   const [renderResult, setRenderResult] = useState(<Loading />);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -23,11 +24,14 @@ export default function RequireAuth({ children }) {
         dispatch(setIsAuthorized(true));
         setRenderResult(children);
       } catch (e) {
-        console.log(e);
-        dispatch(setIsAuthorized(false));
-        setRenderResult(
-          <Navigate to="/login" replace state={{ path: location.pathname }} />,
-        );
+        if(e.response && e.response.status === 500) {
+          <Navigate to="/500" replace state={{ path: location.pathname }} />
+        } else {
+          dispatch(setIsAuthorized(false));
+          setRenderResult(
+              <Navigate to="/login" replace state={{ path: location.pathname }} />,
+          );
+        }
       }
     };
     checkAuth();

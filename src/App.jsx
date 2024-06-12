@@ -1,7 +1,7 @@
 import "./index.css";
-import { useState } from "react";
-import { Routes, Route } from "react-router-dom";
-import Menu from "./pages/menu";
+import {useEffect, useState} from "react";
+import {Routes, Route, useNavigate, useLocation} from "react-router-dom";
+import Menu from "./pages/Menu.jsx";
 import MainPage from "./layouts/MainPage.jsx";
 import Delivery from "./pages/Delivery";
 import Contacts from "./pages/Contacts";
@@ -18,21 +18,46 @@ import Error_404 from "./pages/404.jsx";
 import CheckAuth from "./components/CheckAuth.jsx";
 import CheckGuest from "./components/CheckGuest.jsx";
 import Loading from "./components/Loading.jsx";
+import axios from "axios";
+import Error_500 from "./pages/500.jsx";
+import RequireAdminRole from "./components/RequireAdminRole.jsx";
+import AdminPage from "./layouts/AdminPage.jsx";
+import AdminOrders from "./pages/Admin/Orders.jsx";
+import ProductFrom from "./pages/Admin/ProductFrom.jsx";
+import Callbacks from "./pages/Admin/Callbacks.jsx";
+import Promotions from "./pages/Admin/Promotions.jsx";
+import Promocodes from "./pages/Admin/Promocodes.jsx";
+import Questions from "./pages/Admin/Questions.jsx";
 
 function App() {
-    const [category, setCategory] = useState("")
+    const navigate = useNavigate()
+    const location = useLocation()
 
+    useEffect(() => {
+        const fetchServer = async () =>  {
+            try {
+                await axios.get('/api')
+            } catch(e) {
+                if(e.response && e.response.status === 500) {
+                    navigate('/500', { replace: true, state: { path: location.pathname } })
+                }
+            }
+        }
+        fetchServer()
+    }, []);
 
   return (
     <Routes>
+        <Route path="500" element={<Error_500 />} />
       <Route path="/" element={
-          <MainPage setCategory={setCategory} />
+          <MainPage />
       }>
         <Route path="*" element={<Error_404 />} />
         <Route
           index
-          element={<Menu category={category} setCategory={setCategory} />}
+          element={<Menu />}
         />
+
         <Route path="delivery" element={<Delivery />} />
         <Route path="contacts" element={<Contacts />} />
         <Route path="promo" element={<Promo />} />
@@ -69,7 +94,19 @@ function App() {
                 <Cart />
             </RequireAuth>
         } />
-      </Route>
+          <Route path="admin" element={
+              <RequireAdminRole>
+                <AdminPage />
+              </RequireAdminRole>
+          }>
+              <Route path="orders" element={<AdminOrders />} />
+              <Route path="create_product" element={<ProductFrom />} />
+              <Route path="callbacks" element={<Callbacks />} />
+              <Route path="promotions" element={<Promotions />} />
+              <Route path="promocodes" element={<Promocodes />} />
+              <Route path="faq" element={<Questions />} />
+          </Route>
+        </Route>
     </Routes>
   );
 }

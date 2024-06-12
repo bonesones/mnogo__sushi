@@ -5,11 +5,13 @@ import Slider from "../components/Slider";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories, setActive } from "../store/categoriesSlice.js";
+import Loading from "../components/Loading.jsx";
 
 export default function Menu() {
   const [category, setCategory] = useState(1);
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.categories.categories);
+  const [loading, setLoading] = useState(true);
 
 
   useEffect(() => {
@@ -20,6 +22,7 @@ export default function Menu() {
 
   useEffect(() => {
       if(categories.length > 1){
+          setLoading(false);
           const category = categories.find(({ isActive }) => isActive === true)
           setCategory(category.id);
       }
@@ -33,6 +36,10 @@ export default function Menu() {
   const isCategoryActive = function (id) {
       const category = categories.find(category => category.id === id);
       return category.isActive
+  }
+
+  if(loading) {
+      return <Loading />
   }
 
   return (

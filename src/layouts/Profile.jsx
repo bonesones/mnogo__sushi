@@ -4,7 +4,6 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../store/userPersistSlice.js";
 
-const pageContext = createContext(null);
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -28,16 +27,6 @@ export default function Profile() {
     }
   };
 
-  const handleGet = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.get("/api/user/getuser", {
-        withCredentials: true,
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  };
 
   useEffect(() => {
     if (location.pathname === "/profile" || location.pathname === "/profile/") {

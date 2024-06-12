@@ -3,14 +3,13 @@ import Burger from "./../assets/burger-menu.png";
 import Cart from "./../assets/shopping_cart.png";
 import Logo from "./../assets/logo.png";
 import Arrow from "./../assets/modal-arrow.png";
-import Location from "./../assets/location.png";
 import Phone from "./../assets/phone.png";
 
 import { Link } from "react-router-dom";
 import BackGround from "./BackGround";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { getCategories, setActive } from "../store/categoriesSlice.js";
+import { setActive } from "../store/categoriesSlice.js";
 
 export default function Header() {
   const isAuthenticated = useSelector(
@@ -23,6 +22,28 @@ export default function Header() {
   const categories = useSelector((state) => state.categories.categories);
 
   const dispatch = useDispatch();
+
+  const [isAdmin, setIsAdmin] = useState(false)
+
+  useEffect(() => {
+    if(isAuthenticated) {
+      const fetchRole = async () => {
+        try {
+          const response = await axios.post('/api/user/getrole', {}, {
+            withCredentials: true
+          })
+          if (response.data.role === 'ADMIN') {
+            setIsAdmin(true)
+          }
+        } catch (e) {
+          console.log(e)
+        }
+      }
+      fetchRole()
+    } else {
+        setIsAdmin(false)
+      }
+  }, [isAuthenticated])
 
 
   const categoriesList = categories.map(({ id, name }) => {
@@ -139,6 +160,13 @@ export default function Header() {
               <li className="modal-nav__element w-9/12 mt-5">
                 <Link to="/help">Помощь</Link>
               </li>
+              {isAdmin && (
+                  <li className="modal-nav__element w-9/12 mt-5">
+                    <Link to="/admin">
+                      Панель администратора
+                    </Link>
+                  </li>
+              )}
               <li className="modal-nav__element w-9/12 mt-7">
                 {isAuthenticated ? (
                   <Link to="/profile/personal">Личный кабинет</Link>
@@ -176,6 +204,7 @@ export default function Header() {
                   +7 (8172) 29-20-22
                 </a>
               </li>
+
             </ul>
           </nav>
         </div>
@@ -221,6 +250,13 @@ export default function Header() {
                   +7 (8172) 29-20-22
                 </a>
               </li>
+              {isAdmin && (
+                  <li className="header__contacts flex items-center w-fit ml-8">
+                    <Link to="/admin">
+                      Панель администратора
+                    </Link>
+                  </li>
+              )}
               <li className="w-9/12 md:w-fit mt-7 md:mt-0 flex gap-2 items-center md:ml-auto">
                 {isAuthenticated ? (
                   <>

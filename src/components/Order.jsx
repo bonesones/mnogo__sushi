@@ -14,6 +14,7 @@ export default function Order({ order }) {
     (state) => state.basketPersist.basket.products,
   );
 
+
   const dispatch = useDispatch();
 
   const handleAddProductToCart = function (id) {
@@ -100,9 +101,9 @@ export default function Order({ order }) {
                 className="flex flex-col sp:flex-row gap-2 justify-between mt-6"
                 key={product.id}
               >
-                <span className="font-medium">{product.name}</span>
-                <div className="flex">
-                  <span className="mr-7 font-medium">{product.price} ₽</span>
+                <span className="font-medium">{product.name} <br/> {product.quantity} шт.</span>
+                <div className="flex items-center">
+                  <span className="mr-7 font-medium">{product.price * product.quantity} ₽</span>
                   {basketProducts &&
                   basketProducts.find(({ id }) => id === product.id) ? (
                     <Link
