@@ -3,12 +3,11 @@ import CartProduct from "../components/CartProduct.jsx";
 import Select from "react-select";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { addProduct, getBasket } from "../store/basketPersistSlice.js";
+import { getBasket } from "../store/basketPersistSlice.js";
 import { useForm } from "react-hook-form";
 import InputMask from "react-input-mask";
 import { getUserInfo } from "../store/userPrivateSlice.js";
 import { createOrder } from "../store/userOrderSlice.js";
-import { comment } from "postcss";
 import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
@@ -22,6 +21,7 @@ export default function Cart() {
   );
   const [promocodeInput, setPromocodeInput] = useState("");
   const [isPromocodeUsed, setPromocodeUsed] = useState(false);
+  const [promocodeId, setPromocodeId] = useState(null);
   const [promocodeError, setPromocodeError] = useState("");
   const [orderAmount, setOrderAmount] = useState(0);
 
@@ -68,6 +68,7 @@ export default function Cart() {
           setOrderAmount((prev) => prev - prev * (data.discount_amount / 100));
         }
         setPromocodeUsed(true);
+        setPromocodeId(data.id);
         setPromocodeError("");
       } else {
         setPromocodeError(
@@ -193,6 +194,7 @@ export default function Cart() {
                 : deliveryMinutes,
             amount: orderAmount,
             payment_method: orderPayMethod,
+            promocodeId: isPromocodeUsed ? promocodeId : null,
           }),
         );
       }
@@ -222,6 +224,7 @@ export default function Cart() {
                 : deliveryHour,
             amount: orderAmount,
             payment_method: orderPayMethod,
+            promocodeId: isPromocodeUsed ? promocodeId : null,
           }),
         );
       }
@@ -354,7 +357,7 @@ export default function Cart() {
                     <div className="flex justify-center flex-col items-center md:items-start">
                       <div className="relative">
                         <button
-                            type="button"
+                          type="button"
                           onClick={() => handleChangeTimeMethod("now")}
                           className={
                             (orderGetTimeMethod === "now"
@@ -366,7 +369,7 @@ export default function Cart() {
                           Сейчас
                         </button>
                         <button
-                            type="button"
+                          type="button"
                           onClick={() => handleChangeTimeMethod("to-time")}
                           className={
                             (orderGetTimeMethod === "to-time"
@@ -468,8 +471,7 @@ export default function Cart() {
                           setOrderAmount(() => {
                             return products.reduce(
                               (acc, current) =>
-                                acc +
-                                current.quantity * current.price,
+                                acc + current.quantity * current.price,
                               0,
                             );
                           });

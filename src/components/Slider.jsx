@@ -4,25 +4,25 @@ import "swiper/css";
 import { Pagination } from "swiper/modules";
 import Slide1 from "./../assets/bg-slide-1.png";
 import Combo7 from "./../assets/Combo7.png";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function Slider() {
   const [slides, setSlides] = useState([]);
 
   useEffect(() => {
-    const fetchSlider = async() => {
+    const fetchSlider = async () => {
       try {
-        const response = await axios.get('/api/slider/getall')
+        const response = await axios.get("/api/slider/getall");
         setSlides(response.data);
-      } catch(e) {
-        console.log(e)
+      } catch (e) {
+        console.log(e);
       }
-    }
-    fetchSlider()
-  },[])
+    };
+    fetchSlider();
+  }, []);
 
-  if(slides.length === 0) return null
+  if (slides.length === 0) return null;
 
   return (
     <Swiper
@@ -31,19 +31,19 @@ export default function Slider() {
       className="mySwiper w-full max-w-[1920px]"
     >
       {slides.map((slide) => (
-          <SwiperSlide key={slide.id}>
-            <picture>
-              <source
-                  media="(min-width: 1100px)"
-                  srcSet={"http://192.168.1.156:3000/" + slide.desktop_image}
-              />
-              <img
-                  className="w-full"
-                  src={"http://192.168.1.156:3000/" + slide.tablet_phone_image}
-                  alt={slide.title}
-              />
-            </picture>
-          </SwiperSlide>
+        <SwiperSlide key={slide.id}>
+          <picture>
+            <source
+              media="(min-width: 1100px)"
+              srcSet={"http://192.168.1.120:3000/" + slide.desktop_image}
+            />
+            <img
+              className="w-full"
+              src={"http://192.168.1.120:3000/" + slide.tablet_phone_image}
+              alt={slide.title}
+            />
+          </picture>
+        </SwiperSlide>
       ))}
     </Swiper>
   );

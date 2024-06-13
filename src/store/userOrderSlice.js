@@ -8,7 +8,6 @@ export const getUserOrders = createAsyncThunk(
       const response = await axios.get(`/api/order/user/getall`, {
         withCredentials: true,
       });
-      console.log(response.data)
       const data = response.data;
       return data;
     } catch (e) {
@@ -56,7 +55,7 @@ const userOrderSlice = createSlice({
         state.status = "resolved";
         state.error = null;
         state.orders = action.payload;
-        state.orders.sort(({ id: prevId }, {id: nextId}) => nextId - prevId)
+        state.orders.sort(({ id: prevId }, { id: nextId }) => nextId - prevId);
       })
       .addCase(getUserOrders.rejected, (state, action) => {
         state.status = "rejected";
