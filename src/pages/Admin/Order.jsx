@@ -76,7 +76,7 @@ export default function Order({ order }) {
   return (
     <div className="w-full">
       <div className="w-full flex-col border-t-2 pt-6">
-        <div className="grid grid-cols-[1fr,2fr] gap-y-2 gap-x-2 md:hidden">
+        <div className="grid grid-cols-[1fr,2fr] gap-y-2 gap-x-2 lg:hidden">
           <span className="mb-6 bg-[#F35E62] text-white py-0.5 px-1 rounded-sm text-center">
             Статус заказа
           </span>
@@ -190,7 +190,7 @@ export default function Order({ order }) {
             />
           </button>
         </div>
-        <div className="hidden md:grid grid-cols-[2fr,1fr,1fr,2fr,1fr,1fr,1fr,2fr] justify-items-center gap-x-4 gap-y-6">
+        <div className="hidden lg:grid grid-cols-[2fr,1fr,1fr,2fr,1fr,1fr,1fr,2fr] justify-items-center gap-x-4 gap-y-6">
           <span className="text-center bg-[#F35E62] text-white py-0.5 px-1 rounded-md text-base leading-10">
             Статус заказа
           </span>

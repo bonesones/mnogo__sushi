@@ -21,11 +21,16 @@ export default function AdminPage() {
         Панель администратора
       </h1>
       <nav className="flex justify-center mt-16">
-        <ul className="flex flex-col lg:flex-row gap-6">
+        <ul className="flex flex-col sm:flex-row flex-wrap gap-6">
           <AdminPageButton
             title={"Заказы"}
             link={"orders"}
             activePath={activePath}
+          />
+          <AdminPageButton
+              title={"Товары"}
+              link={"products"}
+              activePath={activePath}
           />
           <AdminPageButton
             title={"Создать товар"}

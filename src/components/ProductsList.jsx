@@ -12,7 +12,12 @@ export default function ProductsList({ category }) {
       const response = await axios.get(`/api/product/getall/categoryId/${category}`)
       const data = response.data
       data.sort(({ id: prevId }, { id: nextId }) => nextId - prevId)
-      setProducts(data)
+      setProducts(data.filter((product) => {
+        if(product.isDeleted || product.Sibling?.findIndex(product => product.isDeleted === true) != -1) {
+          return false
+        }
+        return true
+      }))
     }
     getProducts()
   }, [category])

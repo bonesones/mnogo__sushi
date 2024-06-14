@@ -28,6 +28,8 @@ import Callbacks from "./pages/Admin/Callbacks.jsx";
 import Promotions from "./pages/Admin/Promotions.jsx";
 import Promocodes from "./pages/Admin/Promocodes.jsx";
 import Questions from "./pages/Admin/Questions.jsx";
+import Products from "./pages/Admin/Products.jsx";
+import ProductEditFrom from "./pages/Admin/ProductEditFrom.jsx";
 
 function App() {
     const navigate = useNavigate()
@@ -100,6 +102,8 @@ function App() {
               </RequireAdminRole>
           }>
               <Route path="orders" element={<AdminOrders />} />
+              <Route path="products" element={<Products />} />
+              <Route path="product_edit/:productId" element={<ProductEditFrom />} />
               <Route path="create_product" element={<ProductFrom />} />
               <Route path="callbacks" element={<Callbacks />} />
               <Route path="promotions" element={<Promotions />} />

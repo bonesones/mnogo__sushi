@@ -37,7 +37,7 @@ export default function ProductCard({ product, isPriceVisible }) {
         >
           <img
             className="h-60 mx-auto block"
-            src={"http://192.168.1.120:3000/" + product.image}
+            src={"http://192.168.1.156:3000/" + product.image}
             alt=""
           />
           {product.isSale && (
