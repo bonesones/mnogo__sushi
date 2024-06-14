@@ -16,7 +16,7 @@ export default function AdminPage() {
   }, [location.pathname]);
 
   return (
-    <div className="wrapper">
+    <div className="wrapper mx-auto">
       <h1 className="font-semibold text-3xl mt-24 text-center md:text-left">
         Панель администратора
       </h1>
@@ -28,13 +28,13 @@ export default function AdminPage() {
             activePath={activePath}
           />
           <AdminPageButton
-              title={"Товары"}
-              link={"products"}
-              activePath={activePath}
+            title={"Категории"}
+            link={"categories"}
+            activePath={activePath}
           />
           <AdminPageButton
-            title={"Создать товар"}
-            link={"create_product"}
+            title={"Товары"}
+            link={"products"}
             activePath={activePath}
           />
           <AdminPageButton

@@ -35,11 +35,11 @@ export default function Slider() {
           <picture>
             <source
               media="(min-width: 1100px)"
-              srcSet={"http://192.168.1.156:3000/" + slide.desktop_image}
+              srcSet={"http://192.168.1.120:3000/" + slide.desktop_image}
             />
             <img
               className="w-full"
-              src={"http://192.168.1.156:3000/" + slide.tablet_phone_image}
+              src={"http://192.168.1.120:3000/" + slide.tablet_phone_image}
               alt={slide.title}
             />
           </picture>

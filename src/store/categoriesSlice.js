@@ -7,6 +7,7 @@ export const getCategories = createAsyncThunk(
     try {
       const response = await axios.get(`/api/category/getall/`);
       const data = response.data;
+      console.log(data);
       return data;
     } catch (e) {
       console.log(e);
@@ -62,8 +63,8 @@ const CategoriesSlice = createSlice({
             isActive: false,
           };
         });
-        if(!state.categories.some(({isActive}) => isActive === true)) {
-          state.categories[0].isActive = true
+        if (!state.categories.some(({ isActive }) => isActive === true)) {
+          state.categories[0].isActive = true;
         }
       })
       .addCase(getCategories.rejected, (state, action) => {

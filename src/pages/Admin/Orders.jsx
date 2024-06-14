@@ -2,6 +2,7 @@ import Order from "./Order.jsx";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Select from "react-select";
+import Loading from "../../components/Loading.jsx";
 
 export default function AdminOrders() {
   const [orders, setOrders] = useState([]);
@@ -43,8 +44,6 @@ export default function AdminOrders() {
     setFilteredOrders(orders);
   }, [orders]);
 
-  if (!loaded) return null;
-
   const options = [
     {
       label: "Все",
@@ -71,6 +70,8 @@ export default function AdminOrders() {
       value: "Отменен",
     },
   ];
+
+  if (!loaded) return <Loading />;
 
   return (
     <div className="mt-16 flex flex-col items-center">

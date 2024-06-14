@@ -5,8 +5,10 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../store/categoriesSlice.js";
 import axios from "axios";
+import Loading from "../../components/Loading.jsx";
+import { Link } from "react-router-dom";
 
-export default function ProductFrom() {
+export default function ProductForm() {
   const {
     register,
     handleSubmit,
@@ -134,10 +136,13 @@ export default function ProductFrom() {
     console.log(errors);
   }, [errors]);
 
-  if (!loaded) return null;
+  if (!loaded) return <Loading />;
 
   return (
     <div className="mt-16 mb-16 flex flex-col items-center">
+      <div className="w-full flex gap-4 mb-12 font-medium">
+        <Link to="/admin/products">Товары</Link>><span>Создать товар</span>
+      </div>
       <h2 className="text-2xl font-semibold">Создать товар</h2>
       {openModal && (
         <div className="fixed top-10 left-1/2 sm:text-lg -translate-x-1/2 bg-red-400 px-6 sm:px-10 w-fit rounded-md text-white py-5 sm:py-8">

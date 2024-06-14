@@ -1,6 +1,6 @@
 import "./index.css";
-import {useEffect, useState} from "react";
-import {Routes, Route, useNavigate, useLocation} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import Menu from "./pages/Menu.jsx";
 import MainPage from "./layouts/MainPage.jsx";
 import Delivery from "./pages/Delivery";
@@ -23,42 +23,41 @@ import Error_500 from "./pages/500.jsx";
 import RequireAdminRole from "./components/RequireAdminRole.jsx";
 import AdminPage from "./layouts/AdminPage.jsx";
 import AdminOrders from "./pages/Admin/Orders.jsx";
-import ProductFrom from "./pages/Admin/ProductFrom.jsx";
+import ProductForm from "./pages/Admin/ProductForm.jsx";
 import Callbacks from "./pages/Admin/Callbacks.jsx";
 import Promotions from "./pages/Admin/Promotions.jsx";
 import Promocodes from "./pages/Admin/Promocodes.jsx";
 import Questions from "./pages/Admin/Questions.jsx";
 import Products from "./pages/Admin/Products.jsx";
 import ProductEditFrom from "./pages/Admin/ProductEditFrom.jsx";
+import Categories from "./pages/Admin/Categories.jsx";
 
 function App() {
-    const navigate = useNavigate()
-    const location = useLocation()
+  const navigate = useNavigate();
+  const location = useLocation();
 
-    useEffect(() => {
-        const fetchServer = async () =>  {
-            try {
-                await axios.get('/api')
-            } catch(e) {
-                if(e.response && e.response.status === 500) {
-                    navigate('/500', { replace: true, state: { path: location.pathname } })
-                }
-            }
+  useEffect(() => {
+    const fetchServer = async () => {
+      try {
+        await axios.get("/api");
+      } catch (e) {
+        if (e.response && e.response.status === 500) {
+          navigate("/500", {
+            replace: true,
+            state: { path: location.pathname },
+          });
         }
-        fetchServer()
-    }, []);
+      }
+    };
+    fetchServer();
+  }, []);
 
   return (
     <Routes>
-        <Route path="500" element={<Error_500 />} />
-      <Route path="/" element={
-          <MainPage />
-      }>
+      <Route path="500" element={<Error_500 />} />
+      <Route path="/" element={<MainPage />}>
         <Route path="*" element={<Error_404 />} />
-        <Route
-          index
-          element={<Menu />}
-        />
+        <Route index element={<Menu />} />
 
         <Route path="delivery" element={<Delivery />} />
         <Route path="contacts" element={<Contacts />} />
@@ -91,26 +90,38 @@ function App() {
             </CheckGuest>
           }
         />
-        <Route path="cart" element={
+        <Route
+          path="cart"
+          element={
             <RequireAuth>
-                <Cart />
+              <Cart />
             </RequireAuth>
-        } />
-          <Route path="admin" element={
-              <RequireAdminRole>
-                <AdminPage />
-              </RequireAdminRole>
-          }>
-              <Route path="orders" element={<AdminOrders />} />
-              <Route path="products" element={<Products />} />
-              <Route path="product_edit/:productId" element={<ProductEditFrom />} />
-              <Route path="create_product" element={<ProductFrom />} />
-              <Route path="callbacks" element={<Callbacks />} />
-              <Route path="promotions" element={<Promotions />} />
-              <Route path="promocodes" element={<Promocodes />} />
-              <Route path="faq" element={<Questions />} />
+          }
+        />
+        <Route
+          path="admin"
+          element={
+            <RequireAdminRole>
+              <AdminPage />
+            </RequireAdminRole>
+          }
+        >
+          <Route path="orders" element={<AdminOrders />} />
+          <Route path="products">
+            <Route path="" element={<Products />} />
+            <Route path="create_product" element={<ProductForm />} />
+            <Route
+              path="product_edit/:productId"
+              element={<ProductEditFrom />}
+            />
           </Route>
+          <Route path="categories" element={<Categories />} />
+          <Route path="callbacks" element={<Callbacks />} />
+          <Route path="promotions" element={<Promotions />} />
+          <Route path="promocodes" element={<Promocodes />} />
+          <Route path="faq" element={<Questions />} />
         </Route>
+      </Route>
     </Routes>
   );
 }
