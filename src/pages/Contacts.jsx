@@ -146,7 +146,7 @@ export default function Contacts() {
                   <input
                       type="submit"
                       value="Отправить"
-                      className="w-fit px-10 py-1 self-start product-card__cart-btn reply__btn text-center bg-inherit rounded-lg font-medium hover:bg-second mx-auto sm:mx-0"
+                      className="w-fit px-10 py-1 self-start product-card__cart-btn text-red-500 reply__btn text-center bg-inherit rounded-lg font-medium hover:bg-second mx-auto sm:mx-0"
                   />
             </form>
           </div>

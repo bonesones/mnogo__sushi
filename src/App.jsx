@@ -22,15 +22,17 @@ import axios from "axios";
 import Error_500 from "./pages/500.jsx";
 import RequireAdminRole from "./components/RequireAdminRole.jsx";
 import AdminPage from "./layouts/AdminPage.jsx";
-import AdminOrders from "./pages/Admin/Orders.jsx";
-import ProductForm from "./pages/Admin/ProductForm.jsx";
-import Callbacks from "./pages/Admin/Callbacks.jsx";
-import Promotions from "./pages/Admin/Promotions.jsx";
+import AdminOrders from "./pages/Admin/orders/Orders.jsx";
+import ProductForm from "./pages/Admin/products/ProductForm.jsx";
+import Callbacks from "./pages/Admin/callbacks/Callbacks.jsx";
+import Promotions from "./pages/Admin/promotions/Promotions.jsx";
 import Promocodes from "./pages/Admin/Promocodes.jsx";
 import Questions from "./pages/Admin/Questions.jsx";
-import Products from "./pages/Admin/Products.jsx";
-import ProductEditFrom from "./pages/Admin/ProductEditFrom.jsx";
+import Products from "./pages/Admin/products/Products.jsx";
+import ProductEditFrom from "./pages/Admin/products/ProductEditFrom.jsx";
 import Categories from "./pages/Admin/Categories.jsx";
+import PromotionForm from "./pages/Admin/promotions/PromotionForm.jsx";
+import PromotionEditForm from "./pages/Admin/promotions/PromotionEditForm.jsx";
 
 function App() {
   const navigate = useNavigate();
@@ -117,7 +119,11 @@ function App() {
           </Route>
           <Route path="categories" element={<Categories />} />
           <Route path="callbacks" element={<Callbacks />} />
-          <Route path="promotions" element={<Promotions />} />
+          <Route path="promotions">
+            <Route path="" element={<Promotions />} />
+            <Route path="create_promotion" element={<PromotionForm />} />
+            <Route path="promotion_edit/:promotionId" element={<PromotionEditForm />} />
+          </Route>
           <Route path="promocodes" element={<Promocodes />} />
           <Route path="faq" element={<Questions />} />
         </Route>

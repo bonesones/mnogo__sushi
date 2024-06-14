@@ -3,8 +3,8 @@ import axios from "axios";
 import Select from "react-select";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategories } from "../../store/categoriesSlice.js";
-import Loading from "../../components/Loading.jsx";
+import { getCategories } from "../../../store/categoriesSlice.js";
+import Loading from "../../../components/Loading.jsx";
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -197,7 +197,7 @@ export default function Products() {
                   </button>
                 )}
                 <img
-                  src={"http://192.168.1.120:3000/" + product.image}
+                  src={"http://192.168.0.7:3000/" + product.image}
                   className="w-44"
                 />
                 <p className="text-xl font-semibold">{product.name}</p>

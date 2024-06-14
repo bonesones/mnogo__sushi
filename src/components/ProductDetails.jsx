@@ -37,7 +37,7 @@ export default function ProductDetails({ active, product, handleChange }) {
           <div className={"flex flex-col items-center gap-6 q lg:gap-8"}>
             <img
               className={"lg:w-96 mt-8 lg:mt-0 sm:w-fit"}
-              src={"http://192.168.1.120:3000/" + product.image}
+              src={"http://192.168.0.7:3000/" + product.image}
             />
             <p className="text-center">{product.description}</p>
           </div>
@@ -83,7 +83,7 @@ export default function ProductDetails({ active, product, handleChange }) {
       <div className="hidden lg:flex lg:gap-28">
         <img
           className={"lg:w-96 mt-8 lg:mt-0 sm:w-10/12 "}
-          src={"http://192.168.1.120:3000/" + product.image}
+          src={"http://192.168.0.7:3000/" + product.image}
           alt={product.name}
         />
         <div className="w-64">

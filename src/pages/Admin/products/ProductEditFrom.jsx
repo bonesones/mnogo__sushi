@@ -1,14 +1,14 @@
 import Select from "react-select";
-import Order from "./Order.jsx";
+import Order from "../orders/Order.jsx";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategories } from "../../store/categoriesSlice.js";
+import { getCategories } from "../../../store/categoriesSlice.js";
 import axios from "axios";
-import Loading from "../../components/Loading.jsx";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import Loading from "../../../components/Loading.jsx";
 
-export default function ProductForm() {
+export default function ProductEditFrom() {
   const {
     register,
     handleSubmit,
@@ -20,19 +20,53 @@ export default function ProductForm() {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.categories.categories);
   const [allProducts, setAllProducts] = useState([]);
+  const [product, setProduct] = useState(null);
   const [comboProducts, setComboProducts] = useState([]);
   const [showSaveBtn, setShowSaveBtn] = useState(false);
   const [productsOption, setProductsOption] = useState([]);
   const [comboError, setComboError] = useState("");
 
+  const { productId } = useParams();
+
+  const hasSubArray = function (master, sub) {
+    return sub.every(
+      (
+        (i) => (v) =>
+          (i = master.indexOf(v, i) + 1)
+      )(0),
+    );
+  };
+
   useEffect(() => {
     const fetchData = async () => {
-      await dispatch(getCategories());
-      const responseProducts = await axios.get(`/api/product/getall`);
-      const filteredProducts = responseProducts.data.filter(
-        ({ categoryId }) => categoryId != 1,
-      );
-      setAllProducts(filteredProducts);
+      try {
+        await dispatch(getCategories());
+        const responseProducts = await axios.get(`/api/product/getall`);
+        const product = await axios.get(`/api/product/getone/${productId}`);
+        setProduct(product.data);
+        product.data.Sibling?.forEach((product) => {
+          setComboProducts((prev) => [
+            ...prev,
+            {
+              value: product.id,
+              label: product.name,
+            },
+          ]);
+        });
+        const filteredProducts = responseProducts.data.filter(
+          ({ categoryId, id, Sibling }) => {
+            console.log(Sibling);
+            if (categoryId != 1 && id != product.data.id) {
+              return true;
+            }
+            console.log(id == product.data.id);
+            return false;
+          },
+        );
+        setAllProducts(filteredProducts);
+      } catch (e) {
+        console.log(e);
+      }
     };
     fetchData().finally(() => setLoaded(true));
   }, []);
@@ -45,15 +79,31 @@ export default function ProductForm() {
   });
 
   useEffect(() => {
-    setProductsOption(() => {
-      return allProducts.map((product) => {
-        return {
-          label: product.name,
-          value: product.id,
-        };
-      });
-    });
-  }, [allProducts]);
+    if (product) {
+      if (product.isCombo) {
+        const productSublingIds = product.Sibling?.map((sub) => sub.id);
+        setProductsOption(() => {
+          return allProducts
+            .filter((item) => !productSublingIds.includes(item.id))
+            .map((product) => {
+              return {
+                label: product.name,
+                value: product.id,
+              };
+            });
+        });
+      } else {
+        setProductsOption(() => {
+          return allProducts.map((product) => {
+            return {
+              label: product.name,
+              value: product.id,
+            };
+          });
+        });
+      }
+    }
+  }, [allProducts, product]);
 
   const [currentCategory, setCurrentCategory] = useState({});
   const [currentProduct, setCurrentProduct] = useState({});
@@ -74,8 +124,13 @@ export default function ProductForm() {
   };
 
   useEffect(() => {
-    setCurrentCategory(options[0]);
-  }, [categories]);
+    if (product) {
+      setCurrentCategory({
+        value: product.category.id,
+        label: product.category.name,
+      });
+    }
+  }, [product]);
 
   const onSubmit = async function (data) {
     if (currentCategory.value === 1 && comboProducts.length < 2) {
@@ -91,7 +146,9 @@ export default function ProductForm() {
       }
       formData.append(key, value);
     });
-    formData.append("image", data.image[0]);
+    if (data.image[0]) {
+      formData.append("image", data.image[0]);
+    }
     formData.append("categoryId", currentCategory.value);
 
     if (currentCategory.value === 1) {
@@ -103,7 +160,7 @@ export default function ProductForm() {
     }
 
     try {
-      await axios.post("/api/product/create", formData, {
+      await axios.put(`/api/product/update/${productId}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -141,12 +198,13 @@ export default function ProductForm() {
   return (
     <div className="mt-16 mb-16 flex flex-col items-center">
       <div className="w-full flex gap-4 mb-12 font-medium">
-        <Link to="/admin/products">Товары</Link>><span>Создать товар</span>
+        <Link to="/admin/products">Товары</Link>>
+        <span>Редактировать товар</span>
       </div>
-      <h2 className="text-2xl font-semibold">Создать товар</h2>
+      <h2 className="text-2xl font-semibold">Редактировать товар</h2>
       {openModal && (
         <div className="fixed top-10 left-1/2 sm:text-lg -translate-x-1/2 bg-red-400 px-6 sm:px-10 w-fit rounded-md text-white py-5 sm:py-8">
-          Товар создан!
+          Товар обновлен!
         </div>
       )}
       <form
@@ -158,33 +216,30 @@ export default function ProductForm() {
           Название товара
         </label>
         <input
-          {...register("name", {
-            required: true,
-          })}
+          {...register("name")}
           type="text"
           name="name"
+          defaultValue={product.name}
           className="text-lg text-black bg-inherit px-5 py-1.5 border-2 border-[#A1947C] rounded-md pl-4 w-full"
         />
         <label htmlFor="description" className="self-start">
           Описание товара
         </label>
         <textarea
-          {...register("description", {
-            required: true,
-          })}
+          {...register("description")}
           type="text"
           name="description"
+          defaultValue={product.description}
           className="text-black resize-none text-lg bg-inherit px-5 py-1.5 h-32 border-2 border-[#A1947C] rounded-md pl-4 w-full"
         />
         <label htmlFor="parameter" className="self-start">
           Свойство товара (вес или размер)
         </label>
         <input
-          {...register("parameter", {
-            required: true,
-          })}
+          {...register("parameter")}
           type="text"
           name="parameter"
+          defaultValue={product.parameter}
           className="text-lg text-black bg-inherit px-5 py-1.5 border-2 border-[#A1947C] rounded-md pl-4 w-full"
         />
         <label htmlFor="price" className="self-start">
@@ -194,10 +249,10 @@ export default function ProductForm() {
           <input
             {...register("price", {
               required: true,
-              validate: (value) =>
-                !isNaN(value) || "Изображение больше 1 Мбайта",
+              validate: (value) => !isNaN(value) || "Только число!",
             })}
             type="name"
+            defaultValue={product.price}
             name="price"
             className="text-lg text-black bg-inherit px-5 py-1.5 border-2 border-[#A1947C] rounded-md pl-4 w-full"
           />
@@ -253,9 +308,10 @@ export default function ProductForm() {
         </label>
         <input
           {...register("image", {
-            required: true,
-            validate: (value) =>
-              value[0].size < 1048576 || "Изображение больше 1Мбайта!",
+            validate: (value) => {
+              if (value === null) return true;
+              value[0]?.size < 1048576 || "Изображение больше 1Мбайта!";
+            },
           })}
           type="file"
           name="image"

@@ -37,7 +37,7 @@ export default function Promo() {
               promotions.length > 0 ? (
                   promotions.map((promotion) => (
                       <PromoCard
-                          img={"http://192.168.1.156:3000/" + promotion.image}
+                          img={"http://192.168.0.7:3000/" + promotion.image}
                           title={promotion.title}
                           description={promotion.description}
                           key={promotion.id}
