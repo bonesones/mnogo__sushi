@@ -24,15 +24,22 @@ export default function ProductForm() {
   const [showSaveBtn, setShowSaveBtn] = useState(false);
   const [productsOption, setProductsOption] = useState([]);
   const [comboError, setComboError] = useState("");
+  const [error, setError] = useState('')
 
   useEffect(() => {
     const fetchData = async () => {
       await dispatch(getCategories());
-      const responseProducts = await axios.get(`/api/product/getall`);
-      const filteredProducts = responseProducts.data.filter(
-        ({ categoryId }) => categoryId != 1,
-      );
-      setAllProducts(filteredProducts);
+      try {
+        const responseProducts = await axios.get(`/api/product/getall`);
+        const filteredProducts = responseProducts.data.filter(
+            ({ categoryId }) => categoryId != 1,
+        );
+        setAllProducts(filteredProducts);
+        setError('')
+      } catch(e) {
+        setError(e.response?.data?.message);
+        console.log(e)
+      }
     };
     fetchData().finally(() => setLoaded(true));
   }, []);
@@ -110,8 +117,10 @@ export default function ProductForm() {
         withCredentials: true,
       });
       setOpenModal(true);
+      setError('')
       setTimeout(() => setOpenModal(false), 2000);
     } catch (e) {
+      setError(e.response?.data?.message)
       console.log(e);
     }
   };
@@ -268,6 +277,7 @@ export default function ProductForm() {
             Проверьте правильность заполнения полей
           </span>
         )}
+        {error && <span className="text-red-600">{error}</span>}
         <input
           type="submit"
           value="Создать товар"

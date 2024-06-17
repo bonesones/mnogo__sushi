@@ -197,7 +197,7 @@ export default function Products() {
                   </button>
                 )}
                 <img
-                  src={"http://192.168.0.7:3000/" + product.image}
+                  src={"http://192.168.1.156:3000/" + product.image}
                   className="w-44"
                 />
                 <p className="text-xl font-semibold">{product.name}</p>

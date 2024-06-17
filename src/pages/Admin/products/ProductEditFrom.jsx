@@ -25,17 +25,9 @@ export default function ProductEditFrom() {
   const [showSaveBtn, setShowSaveBtn] = useState(false);
   const [productsOption, setProductsOption] = useState([]);
   const [comboError, setComboError] = useState("");
+  const [error, setError] = useState('')
 
   const { productId } = useParams();
-
-  const hasSubArray = function (master, sub) {
-    return sub.every(
-      (
-        (i) => (v) =>
-          (i = master.indexOf(v, i) + 1)
-      )(0),
-    );
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,6 +36,7 @@ export default function ProductEditFrom() {
         const responseProducts = await axios.get(`/api/product/getall`);
         const product = await axios.get(`/api/product/getone/${productId}`);
         setProduct(product.data);
+        setError('')
         product.data.Sibling?.forEach((product) => {
           setComboProducts((prev) => [
             ...prev,
@@ -65,6 +58,7 @@ export default function ProductEditFrom() {
         );
         setAllProducts(filteredProducts);
       } catch (e) {
+        setError(e.response?.data?.message)
         console.log(e);
       }
     };
@@ -167,8 +161,10 @@ export default function ProductEditFrom() {
         withCredentials: true,
       });
       setOpenModal(true);
+      setError('')
       setTimeout(() => setOpenModal(false), 2000);
     } catch (e) {
+      setError(e.response?.data?.message)
       console.log(e);
     }
   };
@@ -328,6 +324,7 @@ export default function ProductEditFrom() {
             Проверьте правильность заполнения полей
           </span>
         )}
+        {error && <span className="text-red-600">{error}</span>}
         <input
           type="submit"
           value="Создать товар"

@@ -13,6 +13,7 @@ export default function PromotionForm () {
     } = useForm();
 
     const [openModal, setOpenModal] = useState(false);
+    const [error, setError] = useState(null);
 
     const onSubmit = async function (data) {
         const formData = new FormData();
@@ -29,10 +30,12 @@ export default function PromotionForm () {
             })
             setOpenModal(true)
             reset(data)
+            setError("")
             setTimeout(() => {
                 setOpenModal(false);
             }, 2000)
         } catch (e) {
+            setError(e.response?.data?.message)
             console.log(e)
         }
     }
@@ -98,6 +101,7 @@ export default function PromotionForm () {
                     Проверьте правильность заполнения полей
                   </span>
                 )}
+                {errors && <span className="text-red-600">{error}</span>}
                 <input type="submit" value="Создать акцию" className="bg-second px-8 py-2 rounded-md text-white w-fit mx-auto mt-6" />
             </form>
         </div>

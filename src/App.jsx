@@ -26,13 +26,15 @@ import AdminOrders from "./pages/Admin/orders/Orders.jsx";
 import ProductForm from "./pages/Admin/products/ProductForm.jsx";
 import Callbacks from "./pages/Admin/callbacks/Callbacks.jsx";
 import Promotions from "./pages/Admin/promotions/Promotions.jsx";
-import Promocodes from "./pages/Admin/Promocodes.jsx";
-import Questions from "./pages/Admin/Questions.jsx";
+import Promocodes from "./pages/Admin/promocodes/Promocodes.jsx";
+import Questions from "./pages/Admin/questions/Questions.jsx";
 import Products from "./pages/Admin/products/Products.jsx";
 import ProductEditFrom from "./pages/Admin/products/ProductEditFrom.jsx";
 import Categories from "./pages/Admin/Categories.jsx";
 import PromotionForm from "./pages/Admin/promotions/PromotionForm.jsx";
 import PromotionEditForm from "./pages/Admin/promotions/PromotionEditForm.jsx";
+import PromocodeForm from "./pages/Admin/promocodes/PromocodeForm.jsx";
+import PromocodeEditForm from "./pages/Admin/promocodes/PromocodeEditForm.jsx";
 
 function App() {
   const navigate = useNavigate();
@@ -124,7 +126,11 @@ function App() {
             <Route path="create_promotion" element={<PromotionForm />} />
             <Route path="promotion_edit/:promotionId" element={<PromotionEditForm />} />
           </Route>
-          <Route path="promocodes" element={<Promocodes />} />
+          <Route path="promocodes">
+            <Route path="" element={<Promocodes />} />
+            <Route path="create_promocode" element={<PromocodeForm />} />
+            <Route path="promocode_edit/:promocodeId" element={<PromocodeEditForm />} />
+          </Route>
           <Route path="faq" element={<Questions />} />
         </Route>
       </Route>

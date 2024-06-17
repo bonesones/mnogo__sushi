@@ -8,6 +8,7 @@ export default function Categories() {
   const categories = useSelector((state) => state.categories.categories);
   const dispatch = useDispatch();
   const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState('')
 
   const [openModal, setOpenModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -38,10 +39,12 @@ export default function Categories() {
       );
       await dispatch(getCategories());
       setOpenCreateModal(true);
+      setError('')
       setTimeout(() => setOpenCreateModal(false), 2000);
       setNewCategoryInput("");
       setCategoryCreating(false);
     } catch (e) {
+      setError(e.response?.data?.message);
       console.log(e);
     }
   };
@@ -100,11 +103,13 @@ export default function Categories() {
           },
         );
         setOpenModal(true);
+        setError('');
         setTimeout(() => {
           setOpenModal(false);
         }, 2000);
         await dispatch(getCategories());
       } catch (e) {
+        setError(e.response?.data?.message);
         console.log(e);
       }
     };
@@ -211,6 +216,7 @@ export default function Categories() {
         Создать категорию
       </button>
       <div className="mt-12 flex flex-col gap-6 w-8/12">
+        {error && <span className="text-red-600">{error}</span>}
         {isCategoryCreating && (
           <div>
             <input
