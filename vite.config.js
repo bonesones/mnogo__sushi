@@ -11,7 +11,7 @@ export default defineConfig({
         target: "https://mnogo-sushi-server.vercel.app",
         changeOrigin: true,
         secure: false,
-        rewrite: (path) => path.replace(/^\/api/, "api"),
+        rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },
   },
