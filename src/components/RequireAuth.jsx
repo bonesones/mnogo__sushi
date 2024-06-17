@@ -4,6 +4,7 @@ import axios from "axios";
 import Loading from "./Loading.jsx";
 import { useDispatch } from "react-redux";
 import { setIsAuthorized } from "../store/userPersistSlice.js";
+import api from "../../public/services/api.js";
 
 export default function RequireAuth({ children }) {
   const location = useLocation();
@@ -14,7 +15,7 @@ export default function RequireAuth({ children }) {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        await axios.post(
+        await api.post(
           "/api/user/check",
           {},
           {
@@ -24,12 +25,16 @@ export default function RequireAuth({ children }) {
         dispatch(setIsAuthorized(true));
         setRenderResult(children);
       } catch (e) {
-        if(e.response && e.response.status === 500) {
-          <Navigate to="/500" replace state={{ path: location.pathname }} />
+        if (e.response && e.response.status === 500) {
+          <Navigate to="/500" replace state={{ path: location.pathname }} />;
         } else {
           dispatch(setIsAuthorized(false));
           setRenderResult(
-              <Navigate to="/login" replace state={{ path: location.pathname }} />,
+            <Navigate
+              to="/login"
+              replace
+              state={{ path: location.pathname }}
+            />,
           );
         }
       }
