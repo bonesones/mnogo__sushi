@@ -41,7 +41,7 @@ export default function Order({ order }) {
 
   const changeOrderStatus = async function () {
     try {
-      const response = await axios.put(
+      const response = await api.put(
         `/api/order/admin/update/${order.id}`,
         {
           status: orderStatus,

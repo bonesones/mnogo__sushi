@@ -13,7 +13,7 @@ export default function Questions() {
     document.title = "МногоСуши | Вопросы";
     const fetchFAQs = async () => {
       try {
-        const response = await axios.get("/api/question/getall");
+        const response = await api.get("/api/question/getall");
         setFAQs(response.data);
       } catch (e) {
         console.log(e);

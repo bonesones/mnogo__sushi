@@ -23,7 +23,7 @@ export default function Question({
   const handleSubmitDelete = async function (e) {
     e.preventDefault();
     try {
-      const response = await axios.delete(`/api/question/delete/${id}`, {
+      const response = await api.delete(`/api/question/delete/${id}`, {
         withCredentials: true,
       });
       setQuestions((prev) => [

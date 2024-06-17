@@ -17,7 +17,7 @@ export default function Slide({ slide, setOpenModal, setSlides }) {
   const handleSubmitDelete = async function (e) {
     e.preventDefault();
     try {
-      const response = await axios.delete(`/api/slider/delete/${slide.id}`, {
+      const response = await api.delete(`/api/slider/delete/${slide.id}`, {
         withCredentials: true,
       });
       setSlides((prev) => [...prev.filter(({ id }) => id !== slide.id)]);

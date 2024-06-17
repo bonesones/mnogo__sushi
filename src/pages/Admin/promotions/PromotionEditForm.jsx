@@ -21,7 +21,7 @@ export default function PromotionEditForm() {
     document.title = "МногоСуши | Редактирование акции";
     const fetchPromotion = async () => {
       try {
-        const response = await axios(`/api/promotion/getone/${promotionId}`);
+        const response = await api(`/api/promotion/getone/${promotionId}`);
         setPromotion(response.data);
       } catch (e) {
         console.log(e);
@@ -44,7 +44,7 @@ export default function PromotionEditForm() {
       formData.append("image", data.image[0]);
     }
     try {
-      await axios.put(`/api/promotion/update/${promotion.id}`, formData, {
+      await api.put(`/api/promotion/update/${promotion.id}`, formData, {
         withCredentials: true,
       });
       setOpenModal(true);

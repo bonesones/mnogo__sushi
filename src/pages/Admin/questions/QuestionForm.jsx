@@ -20,7 +20,7 @@ export default function QuestionForm() {
 
   const onSubmit = async function (data) {
     try {
-      await axios.post("/api/question/create", data, {
+      await api.post("/api/question/create", data, {
         withCredentials: true,
       });
       setOpenModal(true);

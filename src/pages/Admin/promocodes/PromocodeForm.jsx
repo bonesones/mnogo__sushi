@@ -26,7 +26,7 @@ export default function PromocodeForm() {
 
   const onSubmit = async function (data) {
     try {
-      const response = await axios.post(
+      const response = await api.post(
         "/api/promocode/create",
         {
           ...data,

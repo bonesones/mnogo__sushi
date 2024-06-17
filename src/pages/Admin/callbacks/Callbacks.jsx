@@ -18,7 +18,7 @@ export default function Callbacks() {
     document.title = "МногоСуши | Обратная связь";
     const fetchCallbacks = async () => {
       try {
-        const response = await axios.get("/api/callback/getall", {
+        const response = await api.get("/api/callback/getall", {
           withCredentials: true,
         });
         setCallbacks(response.data);

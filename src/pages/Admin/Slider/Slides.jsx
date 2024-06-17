@@ -13,7 +13,7 @@ export default function Slides() {
     document.title = "МногоСуши | Слайды";
     const fetchFAQs = async () => {
       try {
-        const response = await axios.get("/api/slider/getall");
+        const response = await api.get("/api/slider/getall");
         setSlides(response.data);
       } catch (e) {
         console.log(e);

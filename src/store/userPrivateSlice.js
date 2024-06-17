@@ -5,7 +5,7 @@ export const getUserInfo = createAsyncThunk(
   "userPrivate/getUserInfo",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get("/api/user/getuser", {
+      const response = await api.get("/api/user/getuser", {
         withCredentials: true,
       });
       return response.data?.user;
@@ -19,7 +19,7 @@ export const updateUserInfo = createAsyncThunk(
   "userPrivate/updateUserInfo",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.put(
+      const response = await api.put(
         "/api/user/update",
         {
           email: data.email,

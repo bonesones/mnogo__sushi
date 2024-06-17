@@ -21,7 +21,7 @@ export default function SlideEditForm() {
     document.title = "МногоСуши | Редактирование слайда";
     const fetchSlide = async () => {
       try {
-        const response = await axios.get(`/api/slider/getone/${slideId}`);
+        const response = await api.get(`/api/slider/getone/${slideId}`);
         setSlide(response.data);
       } catch (e) {
         setError(e.response?.data.message);
@@ -43,7 +43,7 @@ export default function SlideEditForm() {
     formData.append("title", data.title);
 
     try {
-      await axios.put(`/api/slider/update/${slideId}`, formData, {
+      await api.put(`/api/slider/update/${slideId}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

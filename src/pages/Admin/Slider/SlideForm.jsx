@@ -25,7 +25,7 @@ export default function SlideForm() {
     formData.append("title", data.title);
 
     try {
-      await axios.post("/api/slider/create", formData, {
+      await api.post("/api/slider/create", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

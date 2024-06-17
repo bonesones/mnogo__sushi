@@ -28,7 +28,7 @@ export default function PromocodeEditForm() {
     document.title = "МногоСуши | Редактирование промокода";
     const fetchPromocode = async () => {
       try {
-        const response = await axios.get(
+        const response = await api.get(
           `/api/promocode/getone/byid/${promocodeId}`,
         );
         setCurrentPromocode(response.data);
@@ -54,7 +54,7 @@ export default function PromocodeEditForm() {
 
   const onSubmit = async function (data) {
     try {
-      const response = await axios.put(
+      const response = await api.put(
         `/api/promocode/update/${promocodeId}`,
         {
           ...data,

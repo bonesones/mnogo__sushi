@@ -5,7 +5,7 @@ export const loginUser = createAsyncThunk(
   "userPersist/loginUser",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.post(
+      const response = await api.post(
         "/api/user/login",
         {
           email: data.email,
@@ -26,7 +26,7 @@ export const logoutUser = createAsyncThunk(
   "userPersist/logoutUser",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.post(
+      const response = await api.post(
         "/api/user/logout",
         {},
         {
@@ -44,7 +44,7 @@ export const registerUser = createAsyncThunk(
   "userPersist/registerUser",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.post(
+      const response = await api.post(
         "/api/user/signup",
         {
           email: data.email,
@@ -67,7 +67,7 @@ export const deleteUser = createAsyncThunk(
   "userPersist/deleteUser",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.delete("/api/user/delete", {
+      const response = await api.delete("/api/user/delete", {
         withCredentials: true,
       });
       return response.data;

@@ -28,7 +28,7 @@ export default function PromotionForm() {
     });
     formData.append("image", data.image[0]);
     try {
-      await axios.post("/api/promotion/create", formData, {
+      await api.post("/api/promotion/create", formData, {
         withCredentials: true,
       });
       setOpenModal(true);

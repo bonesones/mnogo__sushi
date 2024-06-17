@@ -14,7 +14,7 @@ export default function AdminOrders() {
     document.title = "МногоСуши | Заказы";
     const fetchOrders = async () => {
       try {
-        const response = await axios.get("/api/order/admin/getall", {
+        const response = await api.get("/api/order/admin/getall", {
           withCredentials: true,
         });
         setOrders(

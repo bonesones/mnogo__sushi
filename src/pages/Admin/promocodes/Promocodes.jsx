@@ -12,7 +12,7 @@ export default function Promocodes() {
   useEffect(() => {
     document.title = "МногоСуши | Промокоды";
     const fetchPromocodes = async () => {
-      const response = await axios.get("/api/promocode/getall", {
+      const response = await api.get("/api/promocode/getall", {
         withCredentials: true,
       });
       setPromocodes(response.data);
