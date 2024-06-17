@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Loading from "../../../components/Loading.jsx";
-import api from "../services/api.js";
+import api from "../../../services/api.js";
 
 export default function QuestionEditForm() {
   const {

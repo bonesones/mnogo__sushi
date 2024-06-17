@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Loading from "../../../components/Loading.jsx";
 import { Link } from "react-router-dom";
-import api from "../services/api.js";
+import api from "../../../services/api.js";
 import Promocode from "./Promocode.jsx";
 
 export default function Promocodes() {

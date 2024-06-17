@@ -7,7 +7,7 @@ import { getCategories } from "../../../store/categoriesSlice.js";
 import axios from "axios";
 import Loading from "../../../components/Loading.jsx";
 import { Link } from "react-router-dom";
-import api from "../services/api.js";
+import api from "../../../services/api.js";
 
 export default function ProductForm() {
   const {

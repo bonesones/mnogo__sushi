@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import api from "../services/api.js";
+import api from "../../../services/api.js";
 
 export default function PromotionForm() {
   const {

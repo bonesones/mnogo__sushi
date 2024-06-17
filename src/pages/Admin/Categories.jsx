@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../store/categoriesSlice.js";
 import Loading from "../../components/Loading.jsx";
 import axios from "axios";
-import api from "../services/api.js";
+import api from "../../services/api.js";
 
 export default function Categories() {
   const categories = useSelector((state) => state.categories.categories);

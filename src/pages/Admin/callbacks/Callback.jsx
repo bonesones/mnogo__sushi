@@ -1,7 +1,7 @@
 import Select from "react-select";
 import { useState } from "react";
 import axios from "axios";
-import api from "../services/api.js";
+import api from "../../../services/api.js";
 
 export default function Callback({ callback, options }) {
   const [currentOption, setCurrentOption] = useState({

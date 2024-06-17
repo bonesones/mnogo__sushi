@@ -5,7 +5,7 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import * as zlib from "node:zlib";
 import Loading from "../../../components/Loading.jsx";
-import api from "../services/api.js";
+import api from "../../../services/api.js";
 
 export default function PromocodeEditForm() {
   const {

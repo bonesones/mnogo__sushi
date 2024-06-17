@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import api from "../services/api.js";
+import api from "../../../services/api.js";
 
 export default function SlideForm() {
   const {
