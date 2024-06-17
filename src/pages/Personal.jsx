@@ -165,7 +165,7 @@ export default function Personal() {
                   type="date"
                   name="birthday"
                   placeholder="мм/дд/гггг"
-                  defaultValue={user.birthday}
+                  defaultValue={user.birthday ?? ""}
                   className="bg-inherit h-10 border-2 border-[#A1947C] rounded-md pl-4 w-full md:w-96 lg:w-72"
                 />
                 {errors.birthday && (

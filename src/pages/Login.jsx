@@ -28,7 +28,9 @@ export default function Login() {
         throw new Error("Неверный логин или пароль");
       }
       setError("");
-      dispatch(getBasket())
+      dispatch(getBasket()).then(() => {
+        navigate(state?.path || "/");
+      });
     } catch (e) {
       setError(e.message);
     }
