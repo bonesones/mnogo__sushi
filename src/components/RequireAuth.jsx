@@ -4,7 +4,7 @@ import axios from "axios";
 import Loading from "./Loading.jsx";
 import { useDispatch } from "react-redux";
 import { setIsAuthorized } from "../store/userPersistSlice.js";
-import api from "../../public/services/api.js";
+import api from "../services/api.js";
 
 export default function RequireAuth({ children }) {
   const location = useLocation();
