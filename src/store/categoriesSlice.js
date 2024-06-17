@@ -63,6 +63,9 @@ const CategoriesSlice = createSlice({
             isActive: false,
           };
         });
+        if (state.categories.length == 0) {
+          return;
+        }
         if (!state.categories.some(({ isActive }) => isActive === true)) {
           state.categories[0].isActive = true;
         }
