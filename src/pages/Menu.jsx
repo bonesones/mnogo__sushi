@@ -25,7 +25,8 @@ export default function Menu() {
   useEffect(() => {
     if (categories.length > 1) {
       const category = categories.find(({ isActive }) => isActive === true);
-      setCategory(category.id);
+      setCategory(category.id)
+      setLoading(false)
     }
   }, [categories]);
 
