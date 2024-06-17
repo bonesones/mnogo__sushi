@@ -35,6 +35,11 @@ import PromotionForm from "./pages/Admin/promotions/PromotionForm.jsx";
 import PromotionEditForm from "./pages/Admin/promotions/PromotionEditForm.jsx";
 import PromocodeForm from "./pages/Admin/promocodes/PromocodeForm.jsx";
 import PromocodeEditForm from "./pages/Admin/promocodes/PromocodeEditForm.jsx";
+import QuestionForm from "./pages/Admin/questions/QuestionForm.jsx";
+import QuestionEditForm from "./pages/Admin/questions/QuestionEditForm.jsx";
+import Slides from "./pages/Admin/Slider/Slides.jsx";
+import SlideForm from "./pages/Admin/Slider/SlideForm.jsx";
+import SlideEditForm from "./pages/Admin/Slider/SlideEditForm.jsx";
 
 function App() {
   const navigate = useNavigate();
@@ -124,14 +129,32 @@ function App() {
           <Route path="promotions">
             <Route path="" element={<Promotions />} />
             <Route path="create_promotion" element={<PromotionForm />} />
-            <Route path="promotion_edit/:promotionId" element={<PromotionEditForm />} />
+            <Route
+              path="promotion_edit/:promotionId"
+              element={<PromotionEditForm />}
+            />
           </Route>
           <Route path="promocodes">
             <Route path="" element={<Promocodes />} />
             <Route path="create_promocode" element={<PromocodeForm />} />
-            <Route path="promocode_edit/:promocodeId" element={<PromocodeEditForm />} />
+            <Route
+              path="promocode_edit/:promocodeId"
+              element={<PromocodeEditForm />}
+            />
           </Route>
-          <Route path="faq" element={<Questions />} />
+          <Route path="faq">
+            <Route path="" element={<Questions />} />
+            <Route path="create_question" element={<QuestionForm />} />
+            <Route
+              path="question_edit/:questionId"
+              element={<QuestionEditForm />}
+            />
+          </Route>
+          <Route path="slides">
+            <Route path="" element={<Slides />} />
+            <Route path="create_slide" element={<SlideForm />} />
+            <Route path="slide_edit/:slideId" element={<SlideEditForm />} />
+          </Route>
         </Route>
       </Route>
     </Routes>

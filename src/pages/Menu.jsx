@@ -13,20 +13,20 @@ export default function Menu() {
   const categories = useSelector((state) => state.categories.categories);
   const [loading, setLoading] = useState(true);
 
-
   useEffect(() => {
-      if(categories.length <= 1){
-          dispatch(getCategories());
-      }
+    document.title = "МногоСуши | Меню";
+    if (categories.length <= 1) {
+      dispatch(getCategories());
+    }
   }, []);
 
   useEffect(() => {
-      if(categories.length > 1){
-          setLoading(false);
-          const category = categories.find(({ isActive }) => isActive === true)
-          setCategory(category.id);
-      }
-  }, [categories])
+    if (categories.length > 1) {
+      setLoading(false);
+      const category = categories.find(({ isActive }) => isActive === true);
+      setCategory(category.id);
+    }
+  }, [categories]);
 
   const handleChangeCategory = function (id) {
     setCategory(id);
@@ -34,12 +34,12 @@ export default function Menu() {
   };
 
   const isCategoryActive = function (id) {
-      const category = categories.find(category => category.id === id);
-      return category.isActive
-  }
+    const category = categories.find((category) => category.id === id);
+    return category.isActive;
+  };
 
-  if(loading) {
-      return <Loading />
+  if (loading) {
+    return <Loading />;
   }
 
   return (
@@ -49,7 +49,11 @@ export default function Menu() {
         {categories.length > 1 &&
           categories.map(({ id, name }) => {
             return (
-              <button className={(isCategoryActive(id) && "category-list__btn_active ") + 'category-list__btn'}
+              <button
+                className={
+                  (isCategoryActive(id) && "category-list__btn_active ") +
+                  "category-list__btn"
+                }
                 key={id}
                 onClick={() => handleChangeCategory(id)}
               >
@@ -58,7 +62,7 @@ export default function Menu() {
             );
           })}
       </div>
-        {categories.length > 1 && <ProductsList category={category} />}
+      {categories.length > 1 && <ProductsList category={category} />}
     </>
   );
 }

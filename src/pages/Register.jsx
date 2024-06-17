@@ -19,8 +19,6 @@ export default function Register() {
   const [error, setError] = useState("");
   const dispatch = useDispatch();
 
-  const user = useSelector(state => state.userPrivate.user)
-
   const onSubmit = async function (data) {
     try {
       const response = await dispatch(registerUser(data));
@@ -35,6 +33,10 @@ export default function Register() {
       setError(e.message);
     }
   };
+
+  useEffect(() => {
+    document.title = "МногоСуши | Регистрация";
+  }, []);
 
   return (
     <div className="profile-modal login block flex-col absolute md:static items-center rounded-xl w-80 md:mx-auto bg-main pb-4">

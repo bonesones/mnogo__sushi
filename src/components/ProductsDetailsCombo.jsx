@@ -36,7 +36,7 @@ export default function ProductDetailsCombo({ active, product, handleChange }) {
                   return (
                     <ProductDetailsContainsCard
                       title={name}
-                      image={"http://192.168.1.156:3000/" + image}
+                      image={import.meta.env.VITE_API_URL + image}
                       description={description}
                       key={id}
                     />
@@ -80,7 +80,7 @@ export default function ProductDetailsCombo({ active, product, handleChange }) {
         </div>
         <img
           className={"mt-8 lg:mt-0 w-[40rem] col-span-4"}
-          src={"http://192.168.1.156:3000/" + product.image}
+          src={import.meta.env.VITE_API_URL + product.image}
         />
         <div className="col-span-4 ml-10 max-w[430px]">
           <div className="flex flex-col gap-8 items-start lg:mt-12">
@@ -93,7 +93,7 @@ export default function ProductDetailsCombo({ active, product, handleChange }) {
                     return (
                       <ProductDetailsContainsCard
                         title={name}
-                        image={"http://192.168.1.156:3000/" + image}
+                        image={import.meta.env.VITE_API_URL + image}
                         description={description}
                         key={id}
                       />

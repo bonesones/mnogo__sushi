@@ -11,6 +11,7 @@ export default function AdminOrders() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
+    document.title = "МногоСуши | Заказы";
     const fetchOrders = async () => {
       try {
         const response = await axios.get("/api/order/admin/getall", {

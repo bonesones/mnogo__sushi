@@ -1,7 +1,5 @@
 import ProductCard from "./ProductCard";
-import data from "../data/products.json";
-import BackGround from "./BackGround";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function ProductsList({ category }) {
@@ -9,18 +7,27 @@ export default function ProductsList({ category }) {
 
   useEffect(() => {
     const getProducts = async function () {
-      const response = await axios.get(`/api/product/getall/categoryId/${category}`)
-      const data = response.data
-      data.sort(({ id: prevId }, { id: nextId }) => nextId - prevId)
-      setProducts(data.filter((product) => {
-        if(product.isDeleted || product.Sibling?.findIndex(product => product.isDeleted === true) != -1) {
-          return false
-        }
-        return true
-      }))
-    }
-    getProducts()
-  }, [category])
+      const response = await axios.get(
+        `/api/product/getall/categoryId/${category}`,
+      );
+      const data = response.data;
+      data.sort(({ id: prevId }, { id: nextId }) => nextId - prevId);
+      setProducts(
+        data.filter((product) => {
+          if (
+            product.isDeleted ||
+            product.Sibling?.findIndex(
+              (product) => product.isDeleted === true,
+            ) != -1
+          ) {
+            return false;
+          }
+          return true;
+        }),
+      );
+    };
+    getProducts();
+  }, [category]);
 
   return (
     <section

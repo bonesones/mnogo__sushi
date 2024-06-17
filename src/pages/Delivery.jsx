@@ -1,4 +1,10 @@
+import { useEffect } from "react";
+
 export default function Delivery() {
+  useEffect(() => {
+    document.title = "МногоСуши | Доставка";
+  }, []);
+
   return (
     <div className="wrapper mx-auto">
       <h1 className="text-3xl font-bold mt-24 mb-[4rem] text-center md:text-left">

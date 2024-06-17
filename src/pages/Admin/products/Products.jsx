@@ -24,6 +24,7 @@ export default function Products() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    document.title = "МногоСуши | Товары";
     const fetchProducts = async () => {
       try {
         const response = await axios.get("/api/product/getall");
@@ -197,7 +198,7 @@ export default function Products() {
                   </button>
                 )}
                 <img
-                  src={"http://192.168.1.156:3000/" + product.image}
+                  src={import.meta.env.VITE_API_URL + product.image}
                   className="w-44"
                 />
                 <p className="text-xl font-semibold">{product.name}</p>

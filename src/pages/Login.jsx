@@ -1,9 +1,8 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import axios from "axios";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { loginUser, logoutUser } from "../store/userPersistSlice.js";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../store/userPersistSlice.js";
 import { getBasket } from "../store/basketPersistSlice.js";
 
 export default function Login() {
@@ -17,6 +16,10 @@ export default function Login() {
   const navigate = useNavigate();
   const { state } = useLocation();
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    document.title = "МногоСуши | Вход";
+  }, []);
 
   const onSubmit = async function (data) {
     try {

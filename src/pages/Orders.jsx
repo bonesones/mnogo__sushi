@@ -13,6 +13,7 @@ export default function Orders() {
   const [ordersPerPage] = useState(5);
 
   useEffect(() => {
+    document.title = "МногоСуши | История заказов";
     const fetchOrders = async () => {
       await dispatch(getUserOrders());
       await dispatch(getBasket());

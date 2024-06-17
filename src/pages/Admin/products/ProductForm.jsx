@@ -13,6 +13,7 @@ export default function ProductForm() {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const [loaded, setLoaded] = useState(false);
@@ -24,21 +25,22 @@ export default function ProductForm() {
   const [showSaveBtn, setShowSaveBtn] = useState(false);
   const [productsOption, setProductsOption] = useState([]);
   const [comboError, setComboError] = useState("");
-  const [error, setError] = useState('')
+  const [error, setError] = useState("");
 
   useEffect(() => {
+    document.title = "МногоСуши | Создание товара";
     const fetchData = async () => {
       await dispatch(getCategories());
       try {
         const responseProducts = await axios.get(`/api/product/getall`);
         const filteredProducts = responseProducts.data.filter(
-            ({ categoryId }) => categoryId != 1,
+          ({ categoryId }) => categoryId != 1,
         );
         setAllProducts(filteredProducts);
-        setError('')
-      } catch(e) {
+        setError("");
+      } catch (e) {
         setError(e.response?.data?.message);
-        console.log(e)
+        console.log(e);
       }
     };
     fetchData().finally(() => setLoaded(true));
@@ -116,11 +118,12 @@ export default function ProductForm() {
         },
         withCredentials: true,
       });
+      reset();
       setOpenModal(true);
-      setError('')
+      setError("");
       setTimeout(() => setOpenModal(false), 2000);
     } catch (e) {
-      setError(e.response?.data?.message)
+      setError(e.response?.data?.message);
       console.log(e);
     }
   };

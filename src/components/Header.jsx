@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Burger from "./../assets/burger-menu.png";
 import Cart from "./../assets/shopping_cart.png";
-import Logo from "./../assets/logo.png";
+import Logo from "../../public/logo.png";
 import Arrow from "./../assets/modal-arrow.png";
 import Phone from "./../assets/phone.png";
 
@@ -23,28 +23,31 @@ export default function Header() {
 
   const dispatch = useDispatch();
 
-  const [isAdmin, setIsAdmin] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
-    if(isAuthenticated) {
+    if (isAuthenticated) {
       const fetchRole = async () => {
         try {
-          const response = await axios.post('/api/user/getrole', {}, {
-            withCredentials: true
-          })
-          if (response.data.role === 'ADMIN') {
-            setIsAdmin(true)
+          const response = await axios.post(
+            "/api/user/getrole",
+            {},
+            {
+              withCredentials: true,
+            },
+          );
+          if (response.data.role === "ADMIN") {
+            setIsAdmin(true);
           }
         } catch (e) {
-          console.log(e)
+          console.log(e);
         }
-      }
-      fetchRole()
+      };
+      fetchRole();
     } else {
-        setIsAdmin(false)
-      }
-  }, [isAuthenticated])
-
+      setIsAdmin(false);
+    }
+  }, [isAuthenticated]);
 
   const categoriesList = categories.map(({ id, name }) => {
     return (
@@ -161,11 +164,9 @@ export default function Header() {
                 <Link to="/help">Помощь</Link>
               </li>
               {isAdmin && (
-                  <li className="modal-nav__element w-9/12 mt-5">
-                    <Link to="/admin">
-                      Панель администратора
-                    </Link>
-                  </li>
+                <li className="modal-nav__element w-9/12 mt-5">
+                  <Link to="/admin">Панель администратора</Link>
+                </li>
               )}
               <li className="modal-nav__element w-9/12 mt-7">
                 {isAuthenticated ? (
@@ -204,7 +205,6 @@ export default function Header() {
                   +7 (8172) 29-20-22
                 </a>
               </li>
-
             </ul>
           </nav>
         </div>
@@ -251,11 +251,9 @@ export default function Header() {
                 </a>
               </li>
               {isAdmin && (
-                  <li className="header__contacts flex items-center w-fit ml-8">
-                    <Link to="/admin">
-                      Панель администратора
-                    </Link>
-                  </li>
+                <li className="header__contacts flex items-center w-fit ml-8">
+                  <Link to="/admin">Панель администратора</Link>
+                </li>
               )}
               <li className="w-9/12 md:w-fit mt-7 md:mt-0 flex gap-2 items-center md:ml-auto">
                 {isAuthenticated ? (

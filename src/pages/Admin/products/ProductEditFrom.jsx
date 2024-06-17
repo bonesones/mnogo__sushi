@@ -25,18 +25,19 @@ export default function ProductEditFrom() {
   const [showSaveBtn, setShowSaveBtn] = useState(false);
   const [productsOption, setProductsOption] = useState([]);
   const [comboError, setComboError] = useState("");
-  const [error, setError] = useState('')
+  const [error, setError] = useState("");
 
   const { productId } = useParams();
 
   useEffect(() => {
+    document.title = "МногоСуши | Редактирование товара";
     const fetchData = async () => {
       try {
         await dispatch(getCategories());
         const responseProducts = await axios.get(`/api/product/getall`);
         const product = await axios.get(`/api/product/getone/${productId}`);
         setProduct(product.data);
-        setError('')
+        setError("");
         product.data.Sibling?.forEach((product) => {
           setComboProducts((prev) => [
             ...prev,
@@ -58,7 +59,7 @@ export default function ProductEditFrom() {
         );
         setAllProducts(filteredProducts);
       } catch (e) {
-        setError(e.response?.data?.message)
+        setError(e.response?.data?.message);
         console.log(e);
       }
     };
@@ -161,10 +162,10 @@ export default function ProductEditFrom() {
         withCredentials: true,
       });
       setOpenModal(true);
-      setError('')
+      setError("");
       setTimeout(() => setOpenModal(false), 2000);
     } catch (e) {
-      setError(e.response?.data?.message)
+      setError(e.response?.data?.message);
       console.log(e);
     }
   };
@@ -305,8 +306,8 @@ export default function ProductEditFrom() {
         <input
           {...register("image", {
             validate: (value) => {
-              if (value === null) return true;
-              value[0]?.size < 1048576 || "Изображение больше 1Мбайта!";
+              if (value[0] == null) return true;
+              return value[0]?.size < 1048576 || "Изображение больше 1Мбайта!";
             },
           })}
           type="file"

@@ -57,6 +57,11 @@ export default function AdminPage() {
             link={"faq"}
             activePath={activePath}
           />
+          <AdminPageButton
+            title={"Слайдер"}
+            link={"slides"}
+            activePath={activePath}
+          />
         </ul>
       </nav>
       <Outlet />

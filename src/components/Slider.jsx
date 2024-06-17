@@ -28,18 +28,19 @@ export default function Slider() {
     <Swiper
       pagination={window.innerWidth > 700 ? true : false}
       modules={[Pagination]}
-      className="mySwiper w-full max-w-[1920px]"
+      className="mySwiper w-full max-w-[1920px] max-h-[500px]"
     >
       {slides.map((slide) => (
         <SwiperSlide key={slide.id}>
           <picture>
             <source
               media="(min-width: 1100px)"
-              srcSet={"http://192.168.1.156:3000/" + slide.desktop_image}
+              className="max-h-[500px]"
+              srcSet={import.meta.env.VITE_API_URL + slide.desktop_image}
             />
             <img
-              className="w-full"
-              src={"http://192.168.1.156:3000/" + slide.tablet_phone_image}
+              className="w-full max-h-[500px]"
+              src={import.meta.env.VITE_API_URL + slide.tablet_phone_image}
               alt={slide.title}
             />
           </picture>
