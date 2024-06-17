@@ -165,7 +165,7 @@ export default function Products() {
           {currentProducts.length > 0 &&
             currentProducts.map((product) => (
               <div
-                className="flex flex-col items-center relative w-full gap-4"
+                className="flex flex-col items-center relative w-72 gap-4"
                 key={product.id}
               >
                 <Link to={`/admin/products/product_edit/${product.id}`}>
@@ -200,11 +200,11 @@ export default function Products() {
                 )}
                 <img
                   src={product.image}
-                  className="w-32"
+                  className="w-44"
                 />
                 <p className="text-xl font-semibold">{product.name}</p>
                 <p>{product.description}</p>
-                <p className="text-lg font-medium">{product.price} ₽</p>
+                <p className="text-lg font-medium self-start">{product.price} ₽</p>
                 {product.isDeleted && (
                   <p className={"bg-red-600 px-2 py-0.5 text-white"}>
                     Товар удален
