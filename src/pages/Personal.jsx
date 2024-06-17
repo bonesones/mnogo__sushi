@@ -153,10 +153,13 @@ export default function Personal() {
                 <input
                   {...register("birthday", {
                     validate: {
-                      isTwelveAtLeast: (date) =>
-                        new Date().getFullYear() -
-                          new Date(date).getFullYear() >=
-                          12 || "Вам должно быть не меньше 12",
+                      isTwelveAtLeast: (date) => {
+                        if(date == null) {
+                          return true
+                        } else {
+                          return new Date().getFullYear() - new Date(date).getFullYear() >= 12 || "Вам должно быть не меньше 12",
+                        }
+                      }
                     },
                   })}
                   type="date"
