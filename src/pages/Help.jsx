@@ -11,7 +11,7 @@ export default function Help() {
     document.title = "МногоСуши | Помощь";
     const fetchQuestions = async () => {
       try {
-        const response = await axios.get("/api/question/getall");
+        const response = await api.get("/api/question/getall");
         if (response.error) {
           throw new Error(response.payload.response.status);
         }

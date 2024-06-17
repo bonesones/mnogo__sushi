@@ -57,9 +57,7 @@ export default function Cart() {
 
   const handleUsePromocode = async function () {
     try {
-      const response = await axios.get(
-        `/api/promocode/getone/${promocodeInput}`,
-      );
+      const response = await api.get(`/api/promocode/getone/${promocodeInput}`);
       const data = response.data;
       if (orderAmount >= data.min_amount) {
         if (data.discount_type === "fix") {

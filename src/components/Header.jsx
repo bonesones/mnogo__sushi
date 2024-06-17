@@ -29,7 +29,7 @@ export default function Header() {
     if (isAuthenticated) {
       const fetchRole = async () => {
         try {
-          const response = await axios.post(
+          const response = await api.post(
             "/api/user/getrole",
             {},
             {

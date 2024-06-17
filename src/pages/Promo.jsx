@@ -11,7 +11,7 @@ export default function Promo() {
     document.title = "МногоСуши | Акции";
     const fetchPromotions = async () => {
       try {
-        const response = await axios.get("/api/promotion/getall");
+        const response = await api.get("/api/promotion/getall");
         if (response.error) {
           throw new Error(response.payload.response.status);
         }

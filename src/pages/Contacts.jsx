@@ -1,17 +1,16 @@
-import {useEffect, useRef, useState} from "react";
-import {useForm} from "react-hook-form";
+import { useEffect, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
 import InputMask from "react-input-mask";
-import {useDispatch, useSelector} from "react-redux";
-import {getUserInfo} from "../store/userPrivateSlice.js";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserInfo } from "../store/userPrivateSlice.js";
 import axios from "axios";
 import Loading from "../components/Loading.jsx";
 
 export default function Contacts() {
   const literalsCounterRef = useRef(null);
   const [messageLength, setMessageLength] = useState(0);
-  const [loaded, setLoaded] = useState(false)
-  const [openModal, setOpenModal] = useState(false)
-
+  const [loaded, setLoaded] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   const {
     register,
@@ -20,24 +19,26 @@ export default function Contacts() {
     formState: { errors },
   } = useForm();
 
-  const dispatch = useDispatch()
-  const user = useSelector(state => state.userPrivate.user.personal)
-  const isAuthenticated = useSelector(state => state.userPersist.user.isAuthenticated);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.userPrivate.user.personal);
+  const isAuthenticated = useSelector(
+    (state) => state.userPersist.user.isAuthenticated,
+  );
   useEffect(() => {
     const tryGetUser = async () => {
       try {
-        const response = await dispatch(getUserInfo())
-        if(response.error) {
+        const response = await dispatch(getUserInfo());
+        if (response.error) {
           throw new Error(response.payload.response.status);
         }
-        setLoaded(true)
-      } catch(e) {
-        if(e !== 500) {
-          setLoaded(true)
+        setLoaded(true);
+      } catch (e) {
+        if (e !== 500) {
+          setLoaded(true);
         }
       }
-    }
-    tryGetUser()
+    };
+    tryGetUser();
   }, []);
 
   const handleMessageInput = function (e) {
@@ -53,25 +54,24 @@ export default function Contacts() {
     setMessageLength(e.target.value.length);
   };
 
-  const onSubmit = async function(data) {
+  const onSubmit = async function (data) {
     try {
-      await axios.post('/api/callback/create', {
+      await api.post("/api/callback/create", {
         name: data.name.trim(),
         phone: data.phone,
-        message: data.message.trim()
-      })
-      setOpenModal(true)
-      resetField("message")
+        message: data.message.trim(),
+      });
+      setOpenModal(true);
+      resetField("message");
       setTimeout(() => {
-        setOpenModal(false)
-      }, 2500)
-    } catch(e) {
-      console.log(e)
+        setOpenModal(false);
+      }, 2500);
+    } catch (e) {
+      console.log(e);
     }
-  }
+  };
 
-
-  if(!loaded) return <Loading />
+  if (!loaded) return <Loading />;
 
   return (
     <div className="wrapper mx-auto">
@@ -96,58 +96,63 @@ export default function Contacts() {
               onSubmit={handleSubmit(onSubmit)}
               className="flex flex-wrap mt-8 flex-col gap-12 reply-form"
             >
-                  <input
-                      {...register("name", {
-                        required: true
-                      })}
-                      type="text"
-                      className="reply__input pb-1 font-medium text-black bg-inherit border-b border-black"
-                      placeholder="Имя*"
-                      defaultValue={(isAuthenticated && user.name) || ""}
-                  />
-                  <InputMask
-                      {...register("phone", {
-                        required: "Телефон не указан",
-                        pattern: {
-                          value: /^\+7\(\d{3}\)-\d{3}-\d{2}-\d{2}$/,
-                          message: "Неверный формат телефона",
-                        },
-                      })}
-                      defaultValue={isAuthenticated && user.phone}
-                      mask="+7(999)-999-99-99"
-                      type="tel"
-                      name="phone"
-                      alwaysShowMask={isAuthenticated}
-                      className="reply__input pb-1 font-medium bg-inherit border-b border-black"
-                  />
-                  <div className="text-area-wrapper">
-              <textarea
-                  {...register('message', {
+              <input
+                {...register("name", {
+                  required: true,
+                })}
+                type="text"
+                className="reply__input pb-1 font-medium text-black bg-inherit border-b border-black"
+                placeholder="Имя*"
+                defaultValue={(isAuthenticated && user.name) || ""}
+              />
+              <InputMask
+                {...register("phone", {
+                  required: "Телефон не указан",
+                  pattern: {
+                    value: /^\+7\(\d{3}\)-\d{3}-\d{2}-\d{2}$/,
+                    message: "Неверный формат телефона",
+                  },
+                })}
+                defaultValue={isAuthenticated && user.phone}
+                mask="+7(999)-999-99-99"
+                type="tel"
+                name="phone"
+                alwaysShowMask={isAuthenticated}
+                className="reply__input pb-1 font-medium bg-inherit border-b border-black"
+              />
+              <div className="text-area-wrapper">
+                <textarea
+                  {...register("message", {
                     required: true,
-                    maxLength: 254
+                    maxLength: 254,
                   })}
                   maxLength="254"
                   className="reply__input reply__textarea pb-1 h-24 font-medium text-base w-full block bg-inherit border-b border-black"
                   placeholder="Ваше сообщение*"
                   onChange={(e) => handleMessageInput(e)}
+                />
+                <span
+                  className="text-sm ml-auto block text-end mt-2"
+                  ref={literalsCounterRef}
+                >
+                  {messageLength}/254
+                </span>
+              </div>
+              {Object.keys(errors).length > 0 && (
+                <span className="text-red-600 text-center">
+                  Не все поля заполнены
+                </span>
+              )}
+              {openModal && (
+                <div className="fixed top-10 left-1/2 sm:text-lg -translate-x-1/2 bg-red-400 px-6 sm:px-10 w-fit rounded-md text-white py-5 sm:py-8">
+                  Форма отправлена!
+                </div>
+              )}
+              <input
+                type="submit"
+                value="Отправить"
+                className="w-fit px-10 py-1 self-start product-card__cart-btn text-red-500 reply__btn text-center bg-inherit rounded-lg font-medium hover:bg-second mx-auto sm:mx-0"
               />
-                    <span
-                        className="text-sm ml-auto block text-end mt-2"
-                        ref={literalsCounterRef}
-                    >
-                {messageLength}/254
-              </span>
-                  </div>
-                  {Object.keys(errors).length > 0 && <span className="text-red-600 text-center">Не все поля заполнены</span>}
-                  {openModal &&
-                      (<div className="fixed top-10 left-1/2 sm:text-lg -translate-x-1/2 bg-red-400 px-6 sm:px-10 w-fit rounded-md text-white py-5 sm:py-8">
-                        Форма отправлена!
-                      </div>)}
-                  <input
-                      type="submit"
-                      value="Отправить"
-                      className="w-fit px-10 py-1 self-start product-card__cart-btn text-red-500 reply__btn text-center bg-inherit rounded-lg font-medium hover:bg-second mx-auto sm:mx-0"
-                  />
             </form>
           </div>
           <div className="mt-20 md:mt-0 mb-16 md:mb-0">

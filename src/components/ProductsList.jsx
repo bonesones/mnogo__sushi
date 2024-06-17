@@ -7,7 +7,7 @@ export default function ProductsList({ category }) {
 
   useEffect(() => {
     const getProducts = async function () {
-      const response = await axios.get(
+      const response = await api.get(
         `/api/product/getall/categoryId/${category}`,
       );
       const data = response.data;
