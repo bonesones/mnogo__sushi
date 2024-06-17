@@ -12,7 +12,7 @@ export default function CheckAuth({ children }) {
     const checkAuth = async () => {
       try {
         await axios.post(
-          "https://mnogo-sushi-server.vercel.app/api/user/check",
+          "/api/user/check",
           {},
           {
             withCredentials: true,
