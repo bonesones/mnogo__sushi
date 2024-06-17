@@ -62,7 +62,9 @@ export default function Categories() {
   const handleSubmitDelete = async function (e) {
     e.preventDefault();
     try {
-      await api.delete(`/api/category/delete/${currentCategoryId}`);
+      await api.delete(`/api/category/delete/${currentCategoryId}`, {
+        withCredentials: true
+      });
       dispatch(getCategories());
       setOpenDeleteModal(true);
       setConfirmDeleteModal(false);
