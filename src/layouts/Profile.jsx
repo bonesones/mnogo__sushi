@@ -4,7 +4,6 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../store/userPersistSlice.js";
 
-
 export default function Profile() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -18,6 +17,7 @@ export default function Profile() {
     e.preventDefault();
     try {
       const response = await dispatch(logoutUser());
+      console.log(response);
       if (response.error) {
         throw new Error(response.error);
       }
@@ -26,7 +26,6 @@ export default function Profile() {
       console.log(e);
     }
   };
-
 
   useEffect(() => {
     if (location.pathname === "/profile" || location.pathname === "/profile/") {
