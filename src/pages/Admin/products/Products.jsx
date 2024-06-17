@@ -200,7 +200,7 @@ export default function Products() {
                 )}
                 <img
                   src={product.image}
-                  className="w-44"
+                  className="w-32"
                 />
                 <p className="text-xl font-semibold">{product.name}</p>
                 <p>{product.description}</p>
