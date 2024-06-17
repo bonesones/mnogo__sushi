@@ -199,7 +199,7 @@ export default function Products() {
                   </button>
                 )}
                 <img
-                  src={import.meta.env.VITE_API_URL + product.image}
+                  src={product.image}
                   className="w-44"
                 />
                 <p className="text-xl font-semibold">{product.name}</p>
