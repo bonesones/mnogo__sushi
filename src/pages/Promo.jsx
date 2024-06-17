@@ -39,7 +39,7 @@ export default function Promo() {
         {promotions.length > 0 ? (
           promotions.map((promotion) => (
             <PromoCard
-              img={import.meta.env.VITE_API_URL + promotion.image}
+              img={promotion.image}
               title={promotion.title}
               description={promotion.description}
               key={promotion.id}

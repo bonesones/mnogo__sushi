@@ -27,7 +27,7 @@ export default function ProductDetailsCombo({ active, product, handleChange }) {
           <div className="lg:flex-row flex flex-col items-center gap-6 q lg:gap-8">
             <img
               className={"lg:h-fit mt-8 lg:mt-0 sm:w-fit"}
-              src={"http://192.168.1.156" + ":3000/" + product.image}
+              src={product.image}
               alt={product.name}
             />
             <div className="flex flex-col items-center w-full lg:h-96">
@@ -80,7 +80,7 @@ export default function ProductDetailsCombo({ active, product, handleChange }) {
         </div>
         <img
           className={"mt-8 lg:mt-0 w-[40rem] col-span-4"}
-          src={import.meta.env.VITE_API_URL + product.image}
+          src={product.image}
         />
         <div className="col-span-4 ml-10 max-w[430px]">
           <div className="flex flex-col gap-8 items-start lg:mt-12">

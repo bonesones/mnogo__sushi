@@ -157,7 +157,7 @@ export default function Personal() {
                         if(date == null) {
                           return true
                         } else {
-                          return new Date().getFullYear() - new Date(date).getFullYear() >= 12 || "Вам должно быть не меньше 12",
+                          return new Date().getFullYear() - new Date(date).getFullYear() >= 12 || "Вам должно быть не меньше 12"
                         }
                       }
                     },

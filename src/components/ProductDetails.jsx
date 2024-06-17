@@ -37,7 +37,7 @@ export default function ProductDetails({ active, product, handleChange }) {
           <div className={"flex flex-col items-center gap-6 q lg:gap-8"}>
             <img
               className={"lg:w-96 mt-8 lg:mt-0 sm:w-fit"}
-              src={import.meta.env.VITE_API_URL + product.image}
+              src={product.image}
             />
             <p className="text-center">{product.description}</p>
           </div>
@@ -83,7 +83,7 @@ export default function ProductDetails({ active, product, handleChange }) {
       <div className="hidden lg:flex lg:gap-28">
         <img
           className={"lg:w-96 mt-8 lg:mt-0 sm:w-10/12 "}
-          src={import.meta.env.VITE_API_URL + product.image}
+          src={product.image}
           alt={product.name}
         />
         <div className="w-64">

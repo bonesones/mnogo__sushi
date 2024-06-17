@@ -37,7 +37,7 @@ export default function ProductCard({ product, isPriceVisible }) {
         >
           <img
             className="h-60 mx-auto block"
-            src={import.meta.env.VITE_API_URL + product.image}
+            src={product.image}
             alt=""
           />
           {product.isSale && (
