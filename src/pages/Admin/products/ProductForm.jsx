@@ -218,7 +218,7 @@ export default function ProductForm() {
           value={currentCategory}
           onChange={(e) => handleChangeCategory(e)}
         />
-        {currentCategory.value === 1 && (
+        {currentCategory.label === "Наборы" && (
           <>
             <p>Товары в комбо</p>
             {comboProducts.length > 0 ? (
