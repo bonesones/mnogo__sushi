@@ -6,6 +6,7 @@ import Slide1 from "./../assets/bg-slide-1.png";
 import Combo7 from "./../assets/Combo7.png";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import api from "../services/api.js";
 
 export default function Slider() {
   const [slides, setSlides] = useState([]);

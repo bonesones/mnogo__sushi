@@ -3,6 +3,7 @@ import Loading from "../../../components/Loading.jsx";
 import Promotion from "./Promotion.jsx";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import api from "../services/api.js";
 
 export default function Promotions() {
   const [promotions, setPromotions] = useState([]);

@@ -1,6 +1,7 @@
 import PromoCard from "../components/PromoCard";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import api from "../services/api.js";
 import Loading from "../components/Loading.jsx";
 
 export default function Promo() {

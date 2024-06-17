@@ -3,6 +3,7 @@ import axios from "axios";
 import Loading from "../../../components/Loading.jsx";
 import { Link } from "react-router-dom";
 import Slide from "./Slide.jsx";
+import api from "../services/api.js";
 
 export default function Slides() {
   const [slides, setSlides] = useState([]);

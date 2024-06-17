@@ -2,6 +2,7 @@ import Order from "./Order.jsx";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Select from "react-select";
+import api from "../services/api.js";
 import Loading from "../../../components/Loading.jsx";
 
 export default function AdminOrders() {

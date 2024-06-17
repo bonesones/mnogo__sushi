@@ -5,6 +5,7 @@ import Error_404 from "../pages/404.jsx";
 import { setIsAuthorized } from "../store/userPersistSlice.js";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
+import api from "../services/api.js";
 
 export default function CheckGuest({ children }) {
   const [renderResult, setRenderResult] = useState(<Loading />);
@@ -15,7 +16,7 @@ export default function CheckGuest({ children }) {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        await axios.post(
+        await api.post(
           "/api/user/check",
           {},
           {

@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Loading from "../../../components/Loading.jsx";
+import api from "../services/api.js";
 
 export default function PromotionEditForm() {
   const {

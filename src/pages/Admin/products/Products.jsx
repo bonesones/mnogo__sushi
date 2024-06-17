@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../../store/categoriesSlice.js";
 import Loading from "../../../components/Loading.jsx";
+import api from "../services/api.js";
 
 export default function Products() {
   const [products, setProducts] = useState([]);

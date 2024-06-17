@@ -9,6 +9,7 @@ import InputMask from "react-input-mask";
 import { getUserInfo } from "../store/userPrivateSlice.js";
 import { createOrder } from "../store/userOrderSlice.js";
 import { useNavigate } from "react-router-dom";
+import api from "../services/api.js";
 
 export default function Cart() {
   const [orderGetMethod, setOrderGetMethod] = useState("delivery");

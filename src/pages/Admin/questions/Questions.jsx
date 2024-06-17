@@ -3,6 +3,7 @@ import axios from "axios";
 import Loading from "../../../components/Loading.jsx";
 import Question from "./Question.jsx";
 import { Link } from "react-router-dom";
+import api from "../services/api.js";
 
 export default function Questions() {
   const [FAQs, setFAQs] = useState([]);

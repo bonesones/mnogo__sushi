@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import api from "../services/api.js";
 
 export default function Promocode({ promocode, setPromocodes, setOpenModal }) {
   const [openDeleteModal, setOpenDeleteModal] = useState(false);

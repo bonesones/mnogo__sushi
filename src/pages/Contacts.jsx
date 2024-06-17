@@ -4,6 +4,7 @@ import InputMask from "react-input-mask";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserInfo } from "../store/userPrivateSlice.js";
 import axios from "axios";
+import api from "../services/api.js";
 import Loading from "../components/Loading.jsx";
 
 export default function Contacts() {

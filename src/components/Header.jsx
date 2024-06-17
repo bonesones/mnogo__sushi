@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import BackGround from "./BackGround";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import api from "../services/api.js";
 import { setActive } from "../store/categoriesSlice.js";
 
 export default function Header() {

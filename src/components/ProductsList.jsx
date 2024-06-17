@@ -1,6 +1,7 @@
 import ProductCard from "./ProductCard";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import api from "../services/api.js";
 
 export default function ProductsList({ category }) {
   const [products, setProducts] = useState([]);
