@@ -7,7 +7,12 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/api": "https://mnogo-sushi-server.vercel.app",
+      "/api": {
+        target: "https://mnogo-sushi-server.vercel.app",
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api/, "api"),
+      },
     },
   },
 });
