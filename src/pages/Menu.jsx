@@ -18,12 +18,12 @@ export default function Menu() {
     document.title = "МногоСуши | Меню";
     if (categories.length <= 1) {
       dispatch(getCategories());
+      setLoading(false);
     }
   }, []);
 
   useEffect(() => {
     if (categories.length > 1) {
-      setLoading(false);
       const category = categories.find(({ isActive }) => isActive === true);
       setCategory(category.id);
     }
