@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import api from "../../../services/api.js";
 
 export default function PromotionForm() {
   const {
@@ -28,7 +29,7 @@ export default function PromotionForm() {
     });
     formData.append("image", data.image[0]);
     try {
-      await axios.post("/api/promotion/create", formData, {
+      await api.post("/api/promotion/create", formData, {
         withCredentials: true,
       });
       setOpenModal(true);

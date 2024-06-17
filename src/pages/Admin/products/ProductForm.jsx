@@ -7,6 +7,7 @@ import { getCategories } from "../../../store/categoriesSlice.js";
 import axios from "axios";
 import Loading from "../../../components/Loading.jsx";
 import { Link } from "react-router-dom";
+import api from "../../../services/api.js";
 
 export default function ProductForm() {
   const {
@@ -32,7 +33,7 @@ export default function ProductForm() {
     const fetchData = async () => {
       await dispatch(getCategories());
       try {
-        const responseProducts = await axios.get(`/api/product/getall`);
+        const responseProducts = await api.get(`/api/product/getall`);
         const filteredProducts = responseProducts.data.filter(
           ({ categoryId }) => categoryId != 1,
         );
@@ -112,7 +113,7 @@ export default function ProductForm() {
     }
 
     try {
-      await axios.post("/api/product/create", formData, {
+      await api.post("/api/product/create", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

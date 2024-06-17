@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Loading from "../../../components/Loading.jsx";
+import api from "../../../services/api.js";
 
 export default function QuestionEditForm() {
   const {
@@ -22,7 +23,7 @@ export default function QuestionEditForm() {
     document.title = "МногоСуши | Редактирование вопроса";
     const fetchQuestion = async () => {
       try {
-        const response = await axios.get(`/api/question/getone/${questionId}`);
+        const response = await api.get(`/api/question/getone/${questionId}`);
         setQuestion(response.data);
       } catch (e) {
         setError(e.response?.data?.message);
@@ -36,7 +37,7 @@ export default function QuestionEditForm() {
 
   const onSubmit = async function (data) {
     try {
-      await axios.put(`/api/question/update/${questionId}`, data, {
+      await api.put(`/api/question/update/${questionId}`, data, {
         withCredentials: true,
       });
       setOpenModal(true);

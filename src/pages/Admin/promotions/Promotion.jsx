@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import api from "../../../services/api.js";
 
 export default function Promotion({ promotion, setPromotions, setOpenModal }) {
   const [openDeleteSubmit, setOpenDeleteSubmit] = useState(false);
@@ -16,7 +17,7 @@ export default function Promotion({ promotion, setPromotions, setOpenModal }) {
   const handleSubmitDelete = async function (e) {
     e.preventDefault();
     try {
-      await axios.delete(`/api/promotion/delete/${promotion.id}`, {
+      await api.delete(`/api/promotion/delete/${promotion.id}`, {
         withCredentials: true,
       });
 

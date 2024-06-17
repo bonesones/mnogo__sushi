@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import api from "../../../services/api.js";
 
 export default function SlideForm() {
   const {
@@ -11,12 +12,19 @@ export default function SlideForm() {
     reset,
   } = useForm();
 
+  const [firstImage, setFirstImage] = useState()
+  const [secondImage, setSecondImage] = useState()
+
   const [openModal, setOpenModal] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     document.title = "МногоСуши | Создание слайда";
   }, []);
+
+  useEffect(() => {
+    console.log(secondImage)
+  }, [setSecondImage]);
 
   const onSubmit = async function (data) {
     const formData = new FormData();
@@ -25,7 +33,7 @@ export default function SlideForm() {
     formData.append("title", data.title);
 
     try {
-      await axios.post("/api/slider/create", formData, {
+      await api.post("/api/slider/create", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

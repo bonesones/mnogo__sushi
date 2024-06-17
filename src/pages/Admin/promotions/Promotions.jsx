@@ -3,6 +3,7 @@ import Loading from "../../../components/Loading.jsx";
 import Promotion from "./Promotion.jsx";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import api from "../../../services/api.js";
 
 export default function Promotions() {
   const [promotions, setPromotions] = useState([]);
@@ -13,7 +14,7 @@ export default function Promotions() {
     document.title = "МногоСуши | Акции";
     const fetchPromotions = async () => {
       try {
-        const response = await axios.get("/api/promotion/getall");
+        const response = await api.get("/api/promotion/getall");
         setPromotions(response.data);
       } catch (e) {
         console.log(e);

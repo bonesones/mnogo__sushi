@@ -3,6 +3,7 @@ import axios from "axios";
 import Loading from "./Loading.jsx";
 import { setIsAuthorized } from "../store/userPersistSlice.js";
 import { useDispatch } from "react-redux";
+import api from "../services/api.js";
 
 export default function CheckAuth({ children }) {
   const [renderResult, setRenderResult] = useState(null);
@@ -11,7 +12,7 @@ export default function CheckAuth({ children }) {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        await axios.post(
+        await api.post(
           "/api/user/check",
           {},
           {
@@ -23,13 +24,13 @@ export default function CheckAuth({ children }) {
         setRenderResult(children);
       } catch (e) {
         dispatch(setIsAuthorized(false));
-        setLoading(false)
+        setLoading(false);
         setRenderResult(children);
       }
     };
     checkAuth();
   }, []);
 
-  if(loading) return null
-  return renderResult
+  if (loading) return null;
+  return renderResult;
 }

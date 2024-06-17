@@ -3,6 +3,7 @@ import Select from "react-select";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import api from "../../../services/api.js";
 
 export default function PromocodeForm() {
   const {
@@ -26,7 +27,7 @@ export default function PromocodeForm() {
 
   const onSubmit = async function (data) {
     try {
-      const response = await axios.post(
+      const response = await api.post(
         "/api/promocode/create",
         {
           ...data,

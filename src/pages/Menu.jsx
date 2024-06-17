@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import ProductDetails from "../components/ProductDetails";
 import Slider from "../components/Slider";
 import axios from "axios";
+import api from "../services/api.js";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories, setActive } from "../store/categoriesSlice.js";
 import Loading from "../components/Loading.jsx";
@@ -17,12 +18,12 @@ export default function Menu() {
     document.title = "МногоСуши | Меню";
     if (categories.length <= 1) {
       dispatch(getCategories());
+      setLoading(false);
     }
   }, []);
 
   useEffect(() => {
     if (categories.length > 1) {
-      setLoading(false);
       const category = categories.find(({ isActive }) => isActive === true);
       setCategory(category.id);
     }

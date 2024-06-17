@@ -5,6 +5,7 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import * as zlib from "node:zlib";
 import Loading from "../../../components/Loading.jsx";
+import api from "../../../services/api.js";
 
 export default function PromocodeEditForm() {
   const {
@@ -28,7 +29,7 @@ export default function PromocodeEditForm() {
     document.title = "МногоСуши | Редактирование промокода";
     const fetchPromocode = async () => {
       try {
-        const response = await axios.get(
+        const response = await api.get(
           `/api/promocode/getone/byid/${promocodeId}`,
         );
         setCurrentPromocode(response.data);
@@ -54,7 +55,7 @@ export default function PromocodeEditForm() {
 
   const onSubmit = async function (data) {
     try {
-      const response = await axios.put(
+      const response = await api.put(
         `/api/promocode/update/${promocodeId}`,
         {
           ...data,

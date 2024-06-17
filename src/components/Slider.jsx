@@ -6,6 +6,7 @@ import Slide1 from "./../assets/bg-slide-1.png";
 import Combo7 from "./../assets/Combo7.png";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import api from "../services/api.js";
 
 export default function Slider() {
   const [slides, setSlides] = useState([]);
@@ -13,7 +14,7 @@ export default function Slider() {
   useEffect(() => {
     const fetchSlider = async () => {
       try {
-        const response = await axios.get("/api/slider/getall");
+        const response = await api.get("/api/slider/getall");
         setSlides(response.data);
       } catch (e) {
         console.log(e);
@@ -36,11 +37,11 @@ export default function Slider() {
             <source
               media="(min-width: 1100px)"
               className="max-h-[500px]"
-              srcSet={import.meta.env.VITE_API_URL + slide.desktop_image}
+              srcSet={slide.desktop_image}
             />
             <img
               className="w-full max-h-[500px]"
-              src={import.meta.env.VITE_API_URL + slide.tablet_phone_image}
+              src={slide.tablet_phone_image}
               alt={slide.title}
             />
           </picture>

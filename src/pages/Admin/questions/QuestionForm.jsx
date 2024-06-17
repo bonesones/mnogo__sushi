@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import api from "../../../services/api.js";
 
 export default function QuestionForm() {
   const {
@@ -20,7 +21,7 @@ export default function QuestionForm() {
 
   const onSubmit = async function (data) {
     try {
-      await axios.post("/api/question/create", data, {
+      await api.post("/api/question/create", data, {
         withCredentials: true,
       });
       setOpenModal(true);

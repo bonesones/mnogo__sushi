@@ -2,6 +2,7 @@ import Order from "./Order.jsx";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Select from "react-select";
+import api from "../../../services/api.js";
 import Loading from "../../../components/Loading.jsx";
 
 export default function AdminOrders() {
@@ -14,7 +15,7 @@ export default function AdminOrders() {
     document.title = "МногоСуши | Заказы";
     const fetchOrders = async () => {
       try {
-        const response = await axios.get("/api/order/admin/getall", {
+        const response = await api.get("/api/order/admin/getall", {
           withCredentials: true,
         });
         setOrders(

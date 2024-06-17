@@ -9,6 +9,7 @@ import InputMask from "react-input-mask";
 import { getUserInfo } from "../store/userPrivateSlice.js";
 import { createOrder } from "../store/userOrderSlice.js";
 import { useNavigate } from "react-router-dom";
+import api from "../services/api.js";
 
 export default function Cart() {
   const [orderGetMethod, setOrderGetMethod] = useState("delivery");
@@ -57,9 +58,7 @@ export default function Cart() {
 
   const handleUsePromocode = async function () {
     try {
-      const response = await axios.get(
-        `/api/promocode/getone/${promocodeInput}`,
-      );
+      const response = await api.get(`/api/promocode/getone/${promocodeInput}`);
       const data = response.data;
       if (orderAmount >= data.min_amount) {
         if (data.discount_type === "fix") {

@@ -3,6 +3,7 @@ import axios from "axios";
 import Loading from "../../../components/Loading.jsx";
 import Question from "./Question.jsx";
 import { Link } from "react-router-dom";
+import api from "../../../services/api.js";
 
 export default function Questions() {
   const [FAQs, setFAQs] = useState([]);
@@ -13,7 +14,7 @@ export default function Questions() {
     document.title = "МногоСуши | Вопросы";
     const fetchFAQs = async () => {
       try {
-        const response = await axios.get("/api/question/getall");
+        const response = await api.get("/api/question/getall");
         setFAQs(response.data);
       } catch (e) {
         console.log(e);

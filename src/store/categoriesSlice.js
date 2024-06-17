@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import api from "../services/api.js";
 
 export const getCategories = createAsyncThunk(
   "categories/getCategories",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`/api/category/getall/`);
+      const response = await api.get(`/api/category/getall/`);
       const data = response.data;
       return data;
     } catch (e) {
@@ -62,6 +63,9 @@ const CategoriesSlice = createSlice({
             isActive: false,
           };
         });
+        if (state.categories.length == 0) {
+          return;
+        }
         if (!state.categories.some(({ isActive }) => isActive === true)) {
           state.categories[0].isActive = true;
         }

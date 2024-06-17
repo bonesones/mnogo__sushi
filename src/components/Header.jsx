@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import BackGround from "./BackGround";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import api from "../services/api.js";
 import { setActive } from "../store/categoriesSlice.js";
 
 export default function Header() {
@@ -29,7 +30,7 @@ export default function Header() {
     if (isAuthenticated) {
       const fetchRole = async () => {
         try {
-          const response = await axios.post(
+          const response = await api.post(
             "/api/user/getrole",
             {},
             {

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import api from "../../../services/api.js";
 
 export default function Slide({ slide, setOpenModal, setSlides }) {
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -17,7 +18,7 @@ export default function Slide({ slide, setOpenModal, setSlides }) {
   const handleSubmitDelete = async function (e) {
     e.preventDefault();
     try {
-      const response = await axios.delete(`/api/slider/delete/${slide.id}`, {
+      const response = await api.delete(`/api/slider/delete/${slide.id}`, {
         withCredentials: true,
       });
       setSlides((prev) => [...prev.filter(({ id }) => id !== slide.id)]);
@@ -53,12 +54,12 @@ export default function Slide({ slide, setOpenModal, setSlides }) {
       <picture>
         <source
           media="(min-width: 1100px)"
-          srcSet={import.meta.env.VITE_API_URL + slide.desktop_image}
+          srcSet={slide.desktop_image}
           className="max-h-[500px]"
         />
         <img
           className="w-full max-h-[500px]"
-          src={import.meta.env.VITE_API_URL + slide.tablet_phone_image}
+          src={slide.tablet_phone_image}
           alt={slide.title}
         />
       </picture>

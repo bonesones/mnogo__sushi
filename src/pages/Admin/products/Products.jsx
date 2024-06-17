@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../../store/categoriesSlice.js";
 import Loading from "../../../components/Loading.jsx";
+import api from "../../../services/api.js";
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -27,7 +28,7 @@ export default function Products() {
     document.title = "МногоСуши | Товары";
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("/api/product/getall");
+        const response = await api.get("/api/product/getall");
         setProducts(response.data);
         dispatch(getCategories());
       } catch (e) {
@@ -68,7 +69,7 @@ export default function Products() {
   const handleSubmitDeleteProduct = async function (e, id) {
     e.preventDefault();
     try {
-      await axios.put(
+      await api.put(
         `/api/product/delete/${id}`,
         {},
         {
@@ -77,7 +78,7 @@ export default function Products() {
       );
       setDeleteModalActive(false);
       setOpenModal(true);
-      const products = await axios.get("/api/product/getall");
+      const products = await api.get("/api/product/getall");
       setProducts(products.data);
       setTimeout(() => {
         setOpenModal(false);
@@ -89,7 +90,7 @@ export default function Products() {
 
   const handleRestoreProduct = async function (id) {
     try {
-      await axios.put(
+      await api.put(
         `/api/product/update/${id}`,
         {
           isDeleted: false,
@@ -99,7 +100,7 @@ export default function Products() {
         },
       );
       setOpenRestoreModal(true);
-      const products = await axios.get("/api/product/getall");
+      const products = await api.get("/api/product/getall");
       setProducts(products.data);
       setTimeout(() => {
         setOpenRestoreModal(false);

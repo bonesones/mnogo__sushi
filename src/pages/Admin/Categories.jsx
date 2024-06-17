@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../store/categoriesSlice.js";
 import Loading from "../../components/Loading.jsx";
 import axios from "axios";
+import api from "../../services/api.js";
 
 export default function Categories() {
   const categories = useSelector((state) => state.categories.categories);
   const dispatch = useDispatch();
   const [loaded, setLoaded] = useState(false);
-  const [error, setError] = useState('')
+  const [error, setError] = useState("");
 
   const [openModal, setOpenModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -28,7 +29,7 @@ export default function Categories() {
 
   const handleSubmitCreateCategory = async function () {
     try {
-      await axios.post(
+      await api.post(
         "/api/category/create",
         {
           name: newCategoryInput,
@@ -39,7 +40,7 @@ export default function Categories() {
       );
       await dispatch(getCategories());
       setOpenCreateModal(true);
-      setError('')
+      setError("");
       setTimeout(() => setOpenCreateModal(false), 2000);
       setNewCategoryInput("");
       setCategoryCreating(false);
@@ -61,7 +62,7 @@ export default function Categories() {
   const handleSubmitDelete = async function (e) {
     e.preventDefault();
     try {
-      await axios.delete(`/api/category/delete/${currentCategoryId}`);
+      await api.delete(`/api/category/delete/${currentCategoryId}`);
       dispatch(getCategories());
       setOpenDeleteModal(true);
       setConfirmDeleteModal(false);
@@ -93,7 +94,7 @@ export default function Categories() {
 
     const handleSave = async function () {
       try {
-        await axios.put(
+        await api.put(
           `/api/category/update/${category.id}`,
           {
             name: categoryInput,
@@ -103,7 +104,7 @@ export default function Categories() {
           },
         );
         setOpenModal(true);
-        setError('');
+        setError("");
         setTimeout(() => {
           setOpenModal(false);
         }, 2000);

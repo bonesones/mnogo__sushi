@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setActive } from "../store/categoriesSlice.js";
+import { getCategories, setActive } from "../store/categoriesSlice.js";
 import { useEffect, useState } from "react";
 
 export default function Footer() {
@@ -13,11 +13,9 @@ export default function Footer() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (categories.length > 1) {
-      setLoading(false);
-    }
-  }, [categories]);
-
+    dispatch(getCategories());
+    setLoading(false);
+  }, []);
   const dispatch = useDispatch();
 
   if (loading) {

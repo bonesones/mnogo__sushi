@@ -7,6 +7,7 @@ import { getCategories } from "../../../store/categoriesSlice.js";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import Loading from "../../../components/Loading.jsx";
+import api from "../../../services/api.js";
 
 export default function ProductEditFrom() {
   const {
@@ -34,8 +35,8 @@ export default function ProductEditFrom() {
     const fetchData = async () => {
       try {
         await dispatch(getCategories());
-        const responseProducts = await axios.get(`/api/product/getall`);
-        const product = await axios.get(`/api/product/getone/${productId}`);
+        const responseProducts = await api.get(`/api/product/getall`);
+        const product = await api.get(`/api/product/getone/${productId}`);
         setProduct(product.data);
         setError("");
         product.data.Sibling?.forEach((product) => {
@@ -155,7 +156,7 @@ export default function ProductEditFrom() {
     }
 
     try {
-      await axios.put(`/api/product/update/${productId}`, formData, {
+      await api.put(`/api/product/update/${productId}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

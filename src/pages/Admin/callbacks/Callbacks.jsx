@@ -3,6 +3,7 @@ import Loading from "../../../components/Loading.jsx";
 import axios from "axios";
 import Select from "react-select";
 import Callback from "./Callback.jsx";
+import api from "../../../services/api.js";
 
 export default function Callbacks() {
   const [callbacks, setCallbacks] = useState([]);
@@ -18,7 +19,7 @@ export default function Callbacks() {
     document.title = "МногоСуши | Обратная связь";
     const fetchCallbacks = async () => {
       try {
-        const response = await axios.get("/api/callback/getall", {
+        const response = await api.get("/api/callback/getall", {
           withCredentials: true,
         });
         setCallbacks(response.data);

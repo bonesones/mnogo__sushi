@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import api from "../services/api.js";
 
 export const getBasket = createAsyncThunk(
   "basket/getBasket",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.get("/api/basket/getone", {
+      const response = await api.get("/api/basket/getone", {
         withCredentials: true,
       });
       return response.data;
@@ -19,7 +20,7 @@ export const addProduct = createAsyncThunk(
   "basket/addProduct",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.put(
+      const response = await api.put(
         `/api/basket/product/${data}/append`,
         {},
         {
@@ -37,7 +38,7 @@ export const incrementProduct = createAsyncThunk(
   "basket/incrementProduct",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.put(
+      const response = await api.put(
         `/api/basket/product/${data}/increment`,
         {},
         {
@@ -55,7 +56,7 @@ export const decrementProduct = createAsyncThunk(
   "basket/decrementProduct",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.put(
+      const response = await api.put(
         `/api/basket/product/${data}/decrement`,
         {},
         {

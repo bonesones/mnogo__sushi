@@ -1,13 +1,14 @@
 import ProductCard from "./ProductCard";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import api from "../services/api.js";
 
 export default function ProductsList({ category }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const getProducts = async function () {
-      const response = await axios.get(
+      const response = await api.get(
         `/api/product/getall/categoryId/${category}`,
       );
       const data = response.data;

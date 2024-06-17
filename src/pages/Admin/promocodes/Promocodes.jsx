@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Loading from "../../../components/Loading.jsx";
 import { Link } from "react-router-dom";
+import api from "../../../services/api.js";
 import Promocode from "./Promocode.jsx";
 
 export default function Promocodes() {
@@ -12,7 +13,7 @@ export default function Promocodes() {
   useEffect(() => {
     document.title = "МногоСуши | Промокоды";
     const fetchPromocodes = async () => {
-      const response = await axios.get("/api/promocode/getall", {
+      const response = await api.get("/api/promocode/getall", {
         withCredentials: true,
       });
       setPromocodes(response.data);

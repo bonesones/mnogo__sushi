@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import api from "../../../services/api.js";
 import Select from "react-select";
 
 export default function Order({ order }) {
@@ -41,7 +42,7 @@ export default function Order({ order }) {
 
   const changeOrderStatus = async function () {
     try {
-      const response = await axios.put(
+      const response = await api.put(
         `/api/order/admin/update/${order.id}`,
         {
           status: orderStatus,

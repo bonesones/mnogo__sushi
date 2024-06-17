@@ -40,6 +40,7 @@ import QuestionEditForm from "./pages/Admin/questions/QuestionEditForm.jsx";
 import Slides from "./pages/Admin/Slider/Slides.jsx";
 import SlideForm from "./pages/Admin/Slider/SlideForm.jsx";
 import SlideEditForm from "./pages/Admin/Slider/SlideEditForm.jsx";
+import api from "./services/api.js";
 
 function App() {
   const navigate = useNavigate();
@@ -48,7 +49,7 @@ function App() {
   useEffect(() => {
     const fetchServer = async () => {
       try {
-        await axios.get("/api");
+        await api.get("/api");
       } catch (e) {
         if (e.response && e.response.status === 500) {
           navigate("/500", {
@@ -110,9 +111,9 @@ function App() {
         <Route
           path="admin"
           element={
-            <RequireAdminRole>
+          <RequireAdminRole>
               <AdminPage />
-            </RequireAdminRole>
+          </RequireAdminRole>
           }
         >
           <Route path="orders" element={<AdminOrders />} />
