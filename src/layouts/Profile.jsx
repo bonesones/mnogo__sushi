@@ -17,7 +17,6 @@ export default function Profile() {
     e.preventDefault();
     try {
       const response = await dispatch(logoutUser());
-      console.log(response);
       if (response.error) {
         throw new Error(response.error);
       }
