@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getBasket } from "../store/basketPersistSlice.js";
 import Pagination from "../components/Pagination.jsx";
-import api from "js-cookie";
+import api from "../services/api.js";
 
 export default function Orders() {
   const [orders, setOrders] = useState([]);
