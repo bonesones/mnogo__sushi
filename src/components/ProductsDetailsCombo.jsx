@@ -36,7 +36,7 @@ export default function ProductDetailsCombo({ active, product, handleChange }) {
                   return (
                     <ProductDetailsContainsCard
                       title={name}
-                      image={import.meta.env.VITE_API_URL + image}
+                      image={image}
                       description={description}
                       key={id}
                     />

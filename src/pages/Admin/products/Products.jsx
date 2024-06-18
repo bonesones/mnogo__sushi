@@ -203,7 +203,7 @@ export default function Products() {
                 <div className="w-full">
                   <img
                       src={product.image}
-                      className="h-60 mx-auto"
+                      className="h-60 mx-auto object-contain"
                       alt={""}
                   />
                 </div>

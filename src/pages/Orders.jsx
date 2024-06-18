@@ -19,6 +19,7 @@ export default function Orders() {
       await dispatch(getBasket());
     };
     fetchOrders().finally(() => {
+      console.log(orders)
       setLoaded(true);
     });
   }, []);

@@ -10,6 +10,7 @@ export const getUserOrders = createAsyncThunk(
         withCredentials: true,
       });
       const data = response.data;
+      console.log('orders in getOrders', response.data)
       return data;
     } catch (e) {
       console.log(e);
