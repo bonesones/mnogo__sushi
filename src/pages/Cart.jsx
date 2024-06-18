@@ -7,7 +7,6 @@ import { getBasket } from "../store/basketPersistSlice.js";
 import { useForm } from "react-hook-form";
 import InputMask from "react-input-mask";
 import { getUserInfo } from "../store/userPrivateSlice.js";
-import { createOrder } from "../store/userOrderSlice.js";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api.js";
 
@@ -169,33 +168,28 @@ export default function Cart() {
     }
   }, [deliveryHour, availbaleDeliveryHours, availibaleDeliveryMinutes]);
 
-  const onSubmit = function (data) {
+  const onSubmit = async function (data) {
     try {
       if (orderGetMethod === "delivery") {
-        dispatch(
-          createOrder({
-            is_delivery: true,
-            street_house: data.street_house,
-            room: data.room,
-            entrance: data.entrance,
-            floor: data.floor,
-            comment: data.comment || "",
-            phone: data.phone,
-            name: data.name,
-            in_time: orderGetTimeMethod !== "now",
-            ready_hour:
+        await api.post('/api/order/user/create', {
+          ...data,
+          is_delivery: true,
+          comment: data.comment || "",
+          in_time: orderGetTimeMethod !== "now",
+          ready_hour:
               orderGetTimeMethod === "now"
-                ? new Date(Date.now() + 1000 * 60 * 60 * 1.5).getHours()
-                : deliveryHour,
-            ready_minutes:
+                  ? new Date(Date.now() + 1000 * 60 * 60 * 1.5).getHours()
+                  : deliveryHour,
+          ready_minutes:
               orderGetTimeMethod === "now"
-                ? new Date(Date.now() + 1000 * 60 * 60 * 1.5).getMinutes()
-                : deliveryMinutes,
-            amount: orderAmount,
-            payment_method: orderPayMethod,
-            promocodeId: isPromocodeUsed ? promocodeId : null,
-          }),
-        );
+                  ? new Date(Date.now() + 1000 * 60 * 60 * 1.5).getMinutes()
+                  : deliveryMinutes,
+          amount: orderAmount,
+          payment_method: orderPayMethod,
+          promocodeId: isPromocodeUsed ? promocodeId : null,
+        }, {
+          withCredentials: true
+        })
       }
       dispatch(getBasket());
       navigate("/profile/orders");
@@ -204,28 +198,28 @@ export default function Cart() {
     }
   };
 
-  const onSelfDeliverySubmit = function () {
+  const onSelfDeliverySubmit = async function () {
     try {
       if (orderGetMethod !== "delivery") {
-        dispatch(
-          createOrder({
-            is_delivery: false,
-            name: user.name,
-            phone: user.phone,
-            in_time: orderGetTimeMethod !== "now",
-            ready_hour:
+        await api.post('/api/order/user/create', {
+          is_delivery: false,
+          name: user.name,
+          phone: user.phone,
+          in_time: orderGetTimeMethod !== "now",
+          ready_hour:
               orderGetTimeMethod === "now"
-                ? new Date(Date.now() + 1000 * 60 * 60 * 1.5).getHours()
-                : deliveryHour,
-            ready_minutes:
+                  ? new Date(Date.now() + 1000 * 60 * 60 * 1.5).getHours()
+                  : deliveryHour,
+          ready_minutes:
               orderGetTimeMethod === "now"
-                ? new Date(Date.now() + 1000 * 60 * 60 * 1.5).getMinutes()
-                : deliveryHour,
-            amount: orderAmount,
-            payment_method: orderPayMethod,
-            promocodeId: isPromocodeUsed ? promocodeId : null,
-          }),
-        );
+                  ? new Date(Date.now() + 1000 * 60 * 60 * 1.5).getMinutes()
+                  : deliveryHour,
+          amount: orderAmount,
+          payment_method: orderPayMethod,
+          promocodeId: isPromocodeUsed ? promocodeId : null,
+        }, {
+          withCredentials: true
+        })
       }
       dispatch(getBasket());
       navigate("/profile/orders");

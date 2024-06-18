@@ -1,12 +1,12 @@
 import Order from "../components/Order.jsx";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserOrders } from "../store/userOrderSlice.js";
 import { getBasket } from "../store/basketPersistSlice.js";
 import Pagination from "../components/Pagination.jsx";
+import api from "js-cookie";
 
 export default function Orders() {
-  const orders = useSelector((state) => state.orders.orders);
+  const [orders, setOrders] = useState([]);
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [loaded, setLoaded] = useState(false);
@@ -15,7 +15,10 @@ export default function Orders() {
   useEffect(() => {
     document.title = "МногоСуши | История заказов";
     const fetchOrders = async () => {
-      await dispatch(getUserOrders());
+      const response = await api.get("/api/order/user/getall", {
+        withCredentials: true,
+      })
+      setOrders(response.data)
       await dispatch(getBasket());
     };
     fetchOrders().finally(() => {
@@ -26,7 +29,9 @@ export default function Orders() {
 
   const lastOrderIndex = currentPage * ordersPerPage;
   const firstOrderIndex = lastOrderIndex - ordersPerPage;
+
   const currentOrder = orders.slice(firstOrderIndex, lastOrderIndex);
+
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const nextPage = () => setCurrentPage((prev) => prev + 1);
@@ -38,7 +43,8 @@ export default function Orders() {
         {loaded && (
           <>
             {currentOrder.length > 0 &&
-              currentOrder.map((order) => {
+              currentOrder.map((order, index) => {
+                if(order.id == currentOrder[index-1].id) return c
                 return <Order order={order} key={order.id} />;
               })}
             {currentOrder.length === 0 && (
