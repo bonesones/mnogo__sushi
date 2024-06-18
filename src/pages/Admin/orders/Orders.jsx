@@ -1,15 +1,21 @@
 import Order from "./Order.jsx";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import Select from "react-select";
 import api from "../../../services/api.js";
 import Loading from "../../../components/Loading.jsx";
+import Pagination from "../../../components/Pagination.jsx";
 
 export default function AdminOrders() {
   const [orders, setOrders] = useState([]);
   const [filterValue, setFilterValue] = useState("Все");
   const [filteredOrders, setFilteredOrders] = useState([]);
   const [loaded, setLoaded] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [ordersPerPage] = useState(6);
+  let lastOrderIndex = ordersPerPage * currentPage;
+  let firstOrderIndex = lastOrderIndex - ordersPerPage
+  const [currentOrders, setCurrentOrders] = useState([])
+
 
   useEffect(() => {
     document.title = "МногоСуши | Заказы";
@@ -18,11 +24,7 @@ export default function AdminOrders() {
         const response = await api.get("/api/order/admin/getall", {
           withCredentials: true,
         });
-        setOrders(
-          response.data.sort(
-            ({ id: prevId }, { id: nextId }) => nextId - prevId,
-          ),
-        );
+        setOrders(response.data);
       } catch (e) {
         console.log(e);
       }
@@ -41,6 +43,16 @@ export default function AdminOrders() {
       }
     });
   }, [filterValue]);
+
+  useEffect(() => {
+    lastOrderIndex = currentPage * ordersPerPage
+    firstOrderIndex = lastOrderIndex - ordersPerPage
+    setCurrentOrders([...filteredOrders.slice(firstOrderIndex, lastOrderIndex)])
+  }, [filteredOrders, currentPage])
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const nextPage = () => setCurrentPage((prev) => prev + 1);
+  const prevPage = () => setCurrentPage((prev) => prev - 1);
 
   useEffect(() => {
     setFilteredOrders(orders);
@@ -90,9 +102,42 @@ export default function AdminOrders() {
         />
       </div>
       <div className="orders mb-12 mt-4 w-full flex flex-col gap-6">
-        {filteredOrders.length > 0 &&
-          filteredOrders.map((order) => <Order key={order.id} order={order} />)}
+        {currentOrders.length > 0 && currentOrders.map((order) => <Order key={order.id} order={order}/>)}
+        {currentOrders.length > 0 && (
+            <div className="flex justify-center flex-col gap-6">
+              <Pagination
+                  ordersPerPage={ordersPerPage}
+                  totalOrders={filteredOrders.length}
+                  paginate={paginate}
+                  currentPage={currentPage}
+              />
+                <div className="flex justify-center gap-12 mb-12">
+                  <button
+                      type="button"
+                      className="text-xl"
+                      onClick={prevPage}
+                      disabled={currentPage === 1}
+                  >
+                    Назад
+                  </button>
+                  <button
+                      type="button"
+                      className="text-xl"
+                      onClick={nextPage}
+                      disabled={!currentOrders[lastOrderIndex - 1]}
+                  >
+                    Далее
+                  </button>
+                </div>
+            </div>
+        )}
+        {currentOrders.length === 0 && (
+            <h2 className="text-center text-3xl opacity-70">
+              Нет заказов
+            </h2>
+        )}
       </div>
     </div>
-  );
+  )
+      ;
 }

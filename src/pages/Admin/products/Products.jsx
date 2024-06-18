@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../../store/categoriesSlice.js";
 import Loading from "../../../components/Loading.jsx";
 import api from "../../../services/api.js";
+import Pagination from "../../../components/Pagination.jsx";
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -21,6 +22,11 @@ export default function Products() {
     value: "Все",
   });
   const [currentProducts, setCurrentProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(6);
+  let lastProductIndex = productsPerPage * currentPage;
+  let firstProductIndex = lastProductIndex - productsPerPage
+  const [currentPageProducts, setCurrentPageProducts] = useState([])
 
   const dispatch = useDispatch();
 
@@ -65,6 +71,22 @@ export default function Products() {
     setCurrentProductId(id);
     setDeleteModalActive(true);
   };
+
+  useEffect(() => {
+    lastProductIndex = currentPage * productsPerPage
+    firstProductIndex = lastProductIndex - productsPerPage
+    setCurrentPageProducts([...currentProducts.slice(firstProductIndex, lastProductIndex)])
+  }, [currentProducts, currentPage])
+
+  useEffect(() => {
+    console.log('products', currentPageProducts)
+    console.log('last index', lastProductIndex)
+    console.log('last elem', currentPageProducts[lastProductIndex - 1])
+  }, [currentPageProducts, lastProductIndex])
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const nextPage = () => setCurrentPage((prev) => prev + 1);
+  const prevPage = () => setCurrentPage((prev) => prev - 1);
 
   const handleSubmitDeleteProduct = async function (e, id) {
     e.preventDefault();
@@ -164,8 +186,8 @@ export default function Products() {
           </div>
         )}
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 justify-items-center gap-10 w-full">
-          {currentProducts.length > 0 &&
-            currentProducts.map((product) => (
+          {currentPageProducts.length > 0 &&
+            currentPageProducts.map((product) => (
               <div
                 className="flex flex-col items-center justify-between relative w-72 gap-4"
                 key={product.id}
@@ -223,6 +245,34 @@ export default function Products() {
                 )}
               </div>
             ))}
+          {currentProducts.length > 6 && (
+              <div className="flex justify-center sm:col-span-2 md:col-span-3 flex-col gap-6">
+                <Pagination
+                    ordersPerPage={productsPerPage}
+                    totalOrders={currentProducts.length}
+                    paginate={paginate}
+                    currentPage={currentPage}
+                />
+                <div className="flex justify-center gap-12 mb-12">
+                  <button
+                      type="button"
+                      className="text-xl"
+                      onClick={prevPage}
+                      disabled={currentPage === 1}
+                  >
+                    Назад
+                  </button>
+                  <button
+                      type="button"
+                      className="text-xl"
+                      onClick={nextPage}
+                      disabled={!currentPageProducts[lastProductIndex - 1]}
+                  >
+                    Далее
+                  </button>
+                </div>
+              </div>
+          )}
         </div>
       </div>
     </div>

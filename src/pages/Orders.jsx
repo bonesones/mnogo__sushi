@@ -1,6 +1,6 @@
 import Order from "../components/Order.jsx";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getBasket } from "../store/basketPersistSlice.js";
 import Pagination from "../components/Pagination.jsx";
 import api from "../services/api.js";
@@ -43,8 +43,8 @@ export default function Orders() {
         {loaded && (
           <>
             {currentOrder.length > 0 &&
-              currentOrder.map((order, index) => {
-                return <Order order={order} key={order.id} />;
+              currentOrder.map((order) => {
+                return (<Order order={order} key={order.id} />);
               })}
             {currentOrder.length === 0 && (
               <h2 className="text-center text-3xl opacity-70">
@@ -72,7 +72,7 @@ export default function Orders() {
                     type="button"
                     className="text-xl"
                     onClick={nextPage}
-                    disabled={currentPage === 2}
+                    disabled={!currentOrder[lastOrderIndex - 1]}
                   >
                     Далее
                   </button>
