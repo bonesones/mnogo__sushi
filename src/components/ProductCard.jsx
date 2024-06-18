@@ -36,7 +36,7 @@ export default function ProductCard({ product, isPriceVisible }) {
           className="product-card__image w-full mx-auto block relative"
         >
           <img
-            className="h-60 mx-auto block"
+            className="h-60 mx-auto block object-contain"
             src={product.image}
             alt=""
           />
@@ -46,10 +46,10 @@ export default function ProductCard({ product, isPriceVisible }) {
             </span>
           )}
         </button>
-        <h3 className="text-center font-medium text-2xl mt-3 h-[64px]">
+        <h3 className="text-center font-medium text-2xl">
           {product.name}
         </h3>
-        <p className="product-card__description mt-4 h-20 sm:h-24">
+        <p className="product-card__description h-20 sm:h-24">
           {product.description}
         </p>
         <div className="flex justify-between">

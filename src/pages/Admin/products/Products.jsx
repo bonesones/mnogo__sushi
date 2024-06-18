@@ -137,6 +137,7 @@ export default function Products() {
           <Select
             options={options}
             value={currentCategory}
+            className="w-[10rem]"
             onChange={(e) => setCurrentCategory(e)}
           />
         </div>
@@ -149,11 +150,12 @@ export default function Products() {
             >
               <input
                 type="submit"
-                className="bg-second text-white px-12 py-2 rounded-md"
+                className="bg-second text-white px-12 py-2 rounded-md cursor-pointer"
                 value="Да, удалить"
               />
               <button
-                type="button px-12 py-2"
+                type="button"
+                className="px-12 py-2 cursor-pointer"
                 onClick={() => setDeleteModalActive(false)}
               >
                 Нет, я передумал
@@ -161,11 +163,11 @@ export default function Products() {
             </form>
           </div>
         )}
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 justify-items-center gap-8 w-full">
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 justify-items-center gap-10 w-full">
           {currentProducts.length > 0 &&
             currentProducts.map((product) => (
               <div
-                className="flex flex-col items-center relative w-72 gap-4"
+                className="flex flex-col items-center justify-between relative w-72 gap-4"
                 key={product.id}
               >
                 <Link to={`/admin/products/product_edit/${product.id}`}>
@@ -198,10 +200,13 @@ export default function Products() {
                     />
                   </button>
                 )}
-                <img
-                  src={product.image}
-                  className="w-44"
-                />
+                <div className="w-full">
+                  <img
+                      src={product.image}
+                      className="h-60 mx-auto"
+                      alt={""}
+                  />
+                </div>
                 <p className="text-xl font-semibold">{product.name}</p>
                 <p>{product.description}</p>
                 <p className="text-lg font-medium self-start">{product.price} ₽</p>

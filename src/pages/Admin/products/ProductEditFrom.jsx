@@ -329,7 +329,7 @@ export default function ProductEditFrom() {
         {error && <span className="text-red-600">{error}</span>}
         <input
           type="submit"
-          value="Создать товар"
+          value="Сохранить товар"
           className="border bg-[#F35E62] text-white w-fit py-1.5 px-20 self-center rounded-md rounded-tl-md hover:cursor-pointer mt-12"
         />
       </form>

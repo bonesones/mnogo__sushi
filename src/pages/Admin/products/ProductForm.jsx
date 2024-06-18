@@ -88,7 +88,7 @@ export default function ProductForm() {
   }, [categories]);
 
   const onSubmit = async function (data) {
-    if (currentCategory.value === 1 && comboProducts.length < 2) {
+    if (currentCategory.label === "Наборы" && comboProducts.length < 2) {
       setComboError("В комбо не может быть меньше двух продуктов");
       return;
     } else {
@@ -104,7 +104,7 @@ export default function ProductForm() {
     formData.append("image", data.image[0]);
     formData.append("categoryId", currentCategory.value);
 
-    if (currentCategory.value === 1) {
+    if (currentCategory.label === "Наборы") {
       const products = [];
       comboProducts.forEach((product) => {
         products.push(product.value);

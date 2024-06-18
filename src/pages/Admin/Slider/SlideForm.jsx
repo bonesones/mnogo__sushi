@@ -124,7 +124,7 @@ export default function SlideForm() {
         {errors && <span className="text-red-600">{error}</span>}
         <input
           type="submit"
-          value="Создать вопрос - ответ"
+          value="Создать слайд"
           className="bg-second px-8 py-2 rounded-md text-white w-fit mx-auto mt-6"
         />
       </form>
