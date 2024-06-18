@@ -44,7 +44,6 @@ export default function Orders() {
           <>
             {currentOrder.length > 0 &&
               currentOrder.map((order, index) => {
-                if(order.id == currentOrder[index-1].id) return c
                 return <Order order={order} key={order.id} />;
               })}
             {currentOrder.length === 0 && (
