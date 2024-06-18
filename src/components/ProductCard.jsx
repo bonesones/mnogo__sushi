@@ -30,7 +30,7 @@ export default function ProductCard({ product, isPriceVisible }) {
         onClick={handleOpenCloseProductModal}
         active={isProductModalActive}
       />
-      <article className={"product-card w-[18rem]"}>
+      <article className={"product-card w-[18rem] flex flex-col justify-between h-[500px]"}>
         <button
           onClick={handleOpenCloseProductModal}
           className="product-card__image w-full mx-auto block relative"
@@ -46,7 +46,7 @@ export default function ProductCard({ product, isPriceVisible }) {
             </span>
           )}
         </button>
-        <h3 className="text-center font-medium text-2xl mt-3">
+        <h3 className="text-center font-medium text-2xl mt-3 h-[64px]">
           {product.name}
         </h3>
         <p className="product-card__description mt-4 h-20 sm:h-24">

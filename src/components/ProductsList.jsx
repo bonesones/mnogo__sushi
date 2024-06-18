@@ -2,9 +2,11 @@ import ProductCard from "./ProductCard";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import api from "../services/api.js";
+import Loading from "./Loading.jsx";
 
 export default function ProductsList({ category }) {
   const [products, setProducts] = useState([]);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     const getProducts = async function () {
@@ -27,8 +29,12 @@ export default function ProductsList({ category }) {
         }),
       );
     };
-    getProducts();
+    getProducts().finally(() => {
+      setLoaded(true)
+    });
   }, [category]);
+
+  if(!loaded) return <Loading />
 
   return (
     <section

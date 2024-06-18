@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../store/userPersistSlice.js";
 import { getBasket } from "../store/basketPersistSlice.js";
+import Loading from "../components/Loading.jsx";
 
 export default function Login() {
   const {
@@ -16,6 +17,7 @@ export default function Login() {
   const navigate = useNavigate();
   const { state } = useLocation();
   const [error, setError] = useState("");
+  const [loaded, setLoaded] = useState(true);
 
   useEffect(() => {
     document.title = "МногоСуши | Вход";
@@ -23,18 +25,23 @@ export default function Login() {
 
   const onSubmit = async function (data) {
     try {
+      setLoaded(false)
       const response = await dispatch(loginUser(data));
       if (response.error) {
         throw new Error("Неверный логин или пароль");
       }
       setError("");
+      setLoaded(true)
       dispatch(getBasket()).then(() => {
         navigate(state?.path || "/");
       });
     } catch (e) {
+      setLoaded(true)
       setError(e.message);
     }
   };
+
+  if(!loaded) return <Loading />
 
   return (
     <div className="profile-modal login block flex-col absolute md:static items-center rounded-xl w-80 md:mx-auto bg-main pb-4">
