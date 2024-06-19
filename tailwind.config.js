@@ -5,6 +5,7 @@ export default {
     extend: {
       screens: {
         sp: "400px",
+        splus: "430px"
       },
       height: {
         128: "32rem",

@@ -1,11 +1,22 @@
 import ProductDetailsContainsCard from "./ProductDetailsContainsCard";
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { Link } from "react-router-dom";
+import {addProduct} from "../store/basketPersistSlice.js";
 
 export default function ProductDetailsCombo({ active, product, handleChange }) {
   const isAuthenticated = useSelector(
     (state) => state.userPersist.user.isAuthenticated,
   );
+
+  const basketProducts = useSelector(
+      (state) => state.basketPersist.basket.products,
+  );
+  const dispatch = useDispatch();
+
+  const handleAddProductToCart = function () {
+    dispatch(addProduct(product.id));
+  };
+
   return (
     <article
       className={
@@ -47,7 +58,7 @@ export default function ProductDetailsCombo({ active, product, handleChange }) {
           </div>
           <div className="flex justify-between mt-12 w-full">
             <span className="product-card__price font-semibold text-2xl">
-              {product.price} ₽
+              {product.price.toLocaleString("ru-RU")} ₽
             </span>
             {isAuthenticated ? (
               <button className="product-card__cart-btn rounded-lg px-7 font-medium hover:bg-second">
@@ -93,7 +104,7 @@ export default function ProductDetailsCombo({ active, product, handleChange }) {
                     return (
                       <ProductDetailsContainsCard
                         title={name}
-                        image={import.meta.env.VITE_API_URL + image}
+                        image={image}
                         description={description}
                         key={id}
                       />
@@ -106,19 +117,32 @@ export default function ProductDetailsCombo({ active, product, handleChange }) {
         </div>
         <div className="flex col-span-8 justify-end gap-6 mt-12 w-full">
           <span className="product-card__price font-semibold text-2xl">
-            {product.price} ₽
+            {product.price.toLocaleString("ru-RU")} ₽
           </span>
           {isAuthenticated ? (
-            <button className="product-card__cart-btn rounded-lg px-7 font-medium hover:bg-second">
-              В корзину
-            </button>
+              basketProducts &&
+              basketProducts.find(({ id }) => id === product.id) ? (
+                  <Link
+                      to="/cart"
+                      className="product-card__cart-btn bg-second text-white rounded-lg px-7 font-medium"
+                  >
+                    Уже в корзине
+                  </Link>
+              ) : (
+                  <button
+                      className="product-card__cart-btn text-[#F35E62] rounded-lg px-7 font-medium hover:bg-second"
+                      onClick={handleAddProductToCart}
+                  >
+                    В корзину
+                  </button>
+              )
           ) : (
-            <Link
-              to="/login"
-              className="product-card__cart-btn rounded-lg px-7 font-medium hover:bg-second"
-            >
-              В корзину
-            </Link>
+              <Link
+                  to="/login"
+                  className="product-card__cart-btn text-[#F35E62] rounded-lg px-7 font-medium hover:bg-second"
+              >
+                В корзину
+              </Link>
           )}
         </div>
       </div>

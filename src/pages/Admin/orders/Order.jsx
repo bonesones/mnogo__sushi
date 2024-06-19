@@ -128,7 +128,7 @@ export default function Order({ order }) {
               : "Самовывоз"}
           </span>
           <span>Сумма</span>
-          <span className="text-lg font-medium">{order.amount} ₽</span>
+          <span className="text-lg font-medium">{order.amount.toLocaleString("ru-RU")} ₽</span>
           <span>Оплата</span>
           <span className="text-lg font-medium">
             {order.payment_method === "card" ? "Картой" : "Наличными"}
@@ -239,7 +239,7 @@ export default function Order({ order }) {
                 order.room
               : "Самовывоз"}
           </span>
-          <span className="text-lg font-medium">{order.amount} ₽</span>
+          <span className="text-lg font-medium">{order.amount.toLocaleString("ru-RU")} ₽</span>
           <span className="text-lg font-medium">{order.id}</span>
           <span className="text-lg font-medium">
             {order.name || "Не указано"}
@@ -313,15 +313,15 @@ export default function Order({ order }) {
                 {product.name} {product.quantity} шт.
               </span>
               <div className="flex items-center">
-                <span className="mr-7 font-medium">
+                <span className="mr-7 font-medium w-max">
                   {order.promocode && Object.keys(order.promocode).length > 0
                     ? order.promocode.discount_type === "fix"
-                      ? product.quantity * product.price -
-                        order.promocode.discount_amount / order.items.length
-                      : product.quantity *
+                      ? (product.quantity * product.price -
+                        order.promocode.discount_amount / order.items.length).toLocaleString("ru-RU")
+                      : Math.ceil(product.quantity *
                         product.price *
-                        (1 - order.promocode.discount_amount / 100)
-                    : product.price * product.quantity}{" "}
+                        (1 - order.promocode.discount_amount / 100)).toLocaleString("ru-RU")
+                    : (product.price * product.quantity).toLocaleString("ru-RU")}{" "}
                   ₽
                 </span>
               </div>

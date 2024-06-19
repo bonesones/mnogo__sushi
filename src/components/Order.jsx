@@ -62,7 +62,7 @@ export default function Order({ order }) {
           <span className="text-lg font-medium">
             {order.is_delivery ? order.street_house : "Ветошкина 85Б"}
           </span>
-          <span className="text-lg font-medium">{order.amount} ₽</span>
+          <span className="text-lg font-medium">{Math.ceil(order.amount)} ₽</span>
           <span className="text-lg font-medium">{order.id}</span>
           <button
             type="button"
@@ -100,7 +100,7 @@ export default function Order({ order }) {
                 className="flex flex-col sp:flex-row gap-2 justify-between mt-6"
                 key={product.id}
               >
-                <span className="font-medium">
+                <span className="font-medium w-[8rem] splus:w-[10rem] sm:w-[17rem] break-words">
                   {product.name} <br /> {product.quantity} шт.
                 </span>
                 <div className="flex items-center">
@@ -109,9 +109,9 @@ export default function Order({ order }) {
                       ? order.promocode.discount_type === "fix"
                         ? product.quantity * product.price -
                           order.promocode.discount_amount / order.items.length
-                        : product.quantity *
+                        : Math.ceil(product.quantity *
                           product.price *
-                          (1 - order.promocode.discount_amount / 100)
+                          (1 - order.promocode.discount_amount / 100))
                       : product.price * product.quantity}{" "}
                     ₽
                   </span>

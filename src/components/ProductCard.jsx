@@ -54,7 +54,7 @@ export default function ProductCard({ product, isPriceVisible }) {
         </p>
         <div className="flex justify-between">
           <span className="product-card__price font-semibold text-2xl">
-            {product.price} ₽
+            {product.toLocaleString("ru-RU")} ₽
           </span>
           {isAuthenticated ? (
             basketProducts &&

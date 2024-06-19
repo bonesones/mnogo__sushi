@@ -43,7 +43,7 @@ export default function ProductDetails({ active, product, handleChange }) {
           </div>
           <div className="flex justify-between mt-12 w-full">
             <span className="product-card__price font-semibold text-2xl">
-              {product.price} ₽
+              {product.price.toLocaleString("ru-RU")} ₽
             </span>
             {isAuthenticated ? (
               basketProducts &&
@@ -97,7 +97,7 @@ export default function ProductDetails({ active, product, handleChange }) {
             <p className="text-left">{product.description}</p>
             <div className="flex justify-between mt-12 w-full">
               <span className="product-card__price font-semibold text-2xl">
-                {product.price} ₽
+                {product.price.toLocaleString("ru-RU")} ₽
               </span>
               {isAuthenticated ? (
                 basketProducts &&
