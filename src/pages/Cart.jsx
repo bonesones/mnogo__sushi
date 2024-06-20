@@ -295,12 +295,13 @@ if(!loaded) return <Loading />
                       })}
                       type="text"
                       className="w-full bg-inherit border-2 border-[#A1947C] rounded-md py-1.5 px-4"
-                      placeholder="Улица, дом"
+                      placeholder="Населенный пункт (если не Вологда), дом, улица"
                     />
                     <fieldset className="flex justify-between gap-6 flex-wrap">
                       <input
                         {...register("room", {
                           required: true,
+                          validate: (value) => !isNaN(value)
                         })}
                         type="text"
                         className="bg-inherit border-2 border-[#A1947C] w-full md:w-1/4 rounded-md py-1.5 px-4"
@@ -309,6 +310,7 @@ if(!loaded) return <Loading />
                       <input
                         {...register("entrance", {
                           required: true,
+                          validate: (value) => !isNaN(value)
                         })}
                         type="text"
                         className="bg-inherit border-2 border-[#A1947C] rounded-md py-1.5 px-4 w-2/5 md:w-1/4"
@@ -317,6 +319,7 @@ if(!loaded) return <Loading />
                       <input
                         {...register("floor", {
                           required: true,
+                          validate: (value) => !isNaN(value)
                         })}
                         type="text"
                         className="bg-inherit border-2 border-[#A1947C] rounded-md py-1.5 px-4 w-2/5 md:w-1/4"
