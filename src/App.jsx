@@ -41,6 +41,9 @@ import Slides from "./pages/Admin/Slider/Slides.jsx";
 import SlideForm from "./pages/Admin/Slider/SlideForm.jsx";
 import SlideEditForm from "./pages/Admin/Slider/SlideEditForm.jsx";
 import api from "./services/api.js";
+import Users from "./pages/Admin/users/Users.jsx";
+import UserEditForm from "./pages/Admin/users/UserEditForm.jsx";
+import UserForm from "./pages/Admin/users/UserForm.jsx";
 
 function App() {
   const navigate = useNavigate();
@@ -155,6 +158,11 @@ function App() {
             <Route path="" element={<Slides />} />
             <Route path="create_slide" element={<SlideForm />} />
             <Route path="slide_edit/:slideId" element={<SlideEditForm />} />
+          </Route>
+          <Route path="users">
+            <Route path="" element={<Users />} />
+            <Route path="create_user" element={<UserForm />} />
+            <Route path="user_edit/:userId" element={<UserEditForm />} />
           </Route>
         </Route>
       </Route>

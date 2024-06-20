@@ -6,6 +6,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getBasket } from "../store/basketPersistSlice.js";
 import { clearError, registerUser } from "../store/userPersistSlice.js";
+import Loading from "../components/Loading.jsx";
 
 export default function Register() {
   const {
@@ -18,8 +19,10 @@ export default function Register() {
 
   const [error, setError] = useState("");
   const dispatch = useDispatch();
+  const [loaded, setLoaded] = useState(true)
 
   const onSubmit = async function (data) {
+    setLoaded(false)
     try {
       const response = await dispatch(registerUser(data));
       if (response.error) {
@@ -29,7 +32,10 @@ export default function Register() {
       dispatch(getBasket()).then(() => {
         navigate("/profile/personal");
       });
+      setLoaded(true)
     } catch (e) {
+      setLoaded(true)
+      console.log(e)
       setError(e.message);
     }
   };
@@ -37,6 +43,8 @@ export default function Register() {
   useEffect(() => {
     document.title = "МногоСуши | Регистрация";
   }, []);
+
+  if(!loaded) return <Loading />
 
   return (
     <div className="profile-modal login block flex-col absolute md:static items-center rounded-xl w-80 md:mx-auto bg-main pb-4">

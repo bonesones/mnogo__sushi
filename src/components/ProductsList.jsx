@@ -9,6 +9,7 @@ export default function ProductsList({ category }) {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
+    setLoaded(false)
     const getProducts = async function () {
       const response = await api.get(
         `/api/product/getall/categoryId/${category}`,

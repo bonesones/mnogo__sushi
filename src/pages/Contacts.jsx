@@ -118,7 +118,7 @@ export default function Contacts() {
                 mask="+7(999)-999-99-99"
                 type="tel"
                 name="phone"
-                alwaysShowMask={isAuthenticated}
+                alwaysShowMask={!isAuthenticated}
                 className="reply__input pb-1 font-medium bg-inherit border-b border-black"
               />
               <div className="text-area-wrapper">

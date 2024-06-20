@@ -20,12 +20,12 @@ export default function Promotion({ promotion, setPromotions, setOpenModal }) {
       await api.delete(`/api/promotion/delete/${promotion.id}`, {
         withCredentials: true,
       });
-
+      setOpenDeleteSubmit(false)
       setPromotions((prev) => [
         ...prev.filter(({ id }) => id !== promotion.id),
       ]);
       setOpenModal(true);
-      setTimeout(() => setOpenDeleteSubmit(false), 2000);
+      setTimeout(() => setOpenModal(false), 2000);
     } catch (e) {
       console.log(e);
     }
@@ -35,7 +35,7 @@ export default function Promotion({ promotion, setPromotions, setOpenModal }) {
     <article className="flex flex-col gap-5 w-80">
       {openDeleteSubmit && (
         <div className="fixed  z-20 flex flex-col border-2 border-red-600 items-center gap-3 top-1/2 left-1/2 rounded-md -translate-x-1/2 -translate-y-1/2 bg-white w-5/6 md:w-120 px-6 py-4">
-          <p className="text-center">Вы точно хотите удалить продукт?</p>
+          <p className="text-center">Вы точно хотите удалить акцию?</p>
           <form
             className="flex flex-col gap-5 mt-4 mb-2"
             onSubmit={(e) => handleSubmitDelete(e)}
@@ -51,7 +51,7 @@ export default function Promotion({ promotion, setPromotions, setOpenModal }) {
           </form>
         </div>
       )}
-      <img src={import.meta.env.VITE_API_URL + promotion.image} width="100%" />
+      <img src={promotion.image} width="100%" />
       <h2 className="text-xl font-semibold text-center">{promotion.title}</h2>
       <p className="text-center">{promotion.description}</p>
       <div className="flex gap-8 justify-center">

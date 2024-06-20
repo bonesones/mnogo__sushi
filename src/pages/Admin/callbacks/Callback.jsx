@@ -3,7 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import api from "../../../services/api.js";
 
-export default function Callback({ callback, options }) {
+export default function Callback({ callback, options, fetchCallbacks }) {
   const [currentOption, setCurrentOption] = useState({
     value: callback.status,
     label: callback.status,
@@ -43,6 +43,7 @@ export default function Callback({ callback, options }) {
       setEditing(false);
       setOpenModal(true);
       setTimeout(() => setOpenModal(false), 2000);
+      await fetchCallbacks();
     } catch (e) {
       console.log(e);
     }

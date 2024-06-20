@@ -65,7 +65,7 @@ export default function PromotionEditForm() {
       <div className="w-full flex gap-4 mb-12 font-medium">
         <Link to="/admin/promotions">Акции</Link>><span>Изменить акцию</span>
       </div>
-      <h2 className="text-2xl font-semibold">Создать акцию</h2>
+      <h2 className="text-2xl font-semibold">Редактировать акцию</h2>
       {openModal && (
         <div className="fixed top-10 left-1/2 sm:text-lg -translate-x-1/2 bg-red-400 px-6 sm:px-10 w-fit rounded-md text-white py-5 sm:py-8">
           Акция сохранена!
@@ -131,7 +131,7 @@ export default function PromotionEditForm() {
         )}
         <input
           type="submit"
-          value="Создать акцию"
+          value="Сохранить акцию"
           className="bg-second px-8 py-2 rounded-md text-white w-fit mx-auto mt-6"
         />
       </form>

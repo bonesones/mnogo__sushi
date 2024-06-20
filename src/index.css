@@ -252,6 +252,7 @@ footer {
 
 .answer_active {
     max-height: 400px;
+    overflow-y: auto;
     transition: max-height .3s, padding-top .3s, padding-bottom .3s;
     padding-top: 1rem;
     padding-bottom: 1rem;

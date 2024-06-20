@@ -9,7 +9,7 @@ import { getCategories, setActive } from "../store/categoriesSlice.js";
 import Loading from "../components/Loading.jsx";
 
 export default function Menu() {
-  const [category, setCategory] = useState(1);
+  const [category, setCategory] = useState(null);
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.categories.categories);
   const [loading, setLoading] = useState(true);
@@ -18,7 +18,6 @@ export default function Menu() {
     document.title = "МногоСуши | Меню";
     if (categories.length <= 1) {
       dispatch(getCategories());
-      setLoading(false);
     }
   }, []);
 
@@ -32,7 +31,9 @@ export default function Menu() {
 
   const handleChangeCategory = function (id) {
     setCategory(id);
+    setLoading(true)
     dispatch(setActive(id));
+    setLoading(false)
   };
 
   const isCategoryActive = function (id) {

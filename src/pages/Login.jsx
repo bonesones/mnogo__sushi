@@ -24,8 +24,8 @@ export default function Login() {
   }, []);
 
   const onSubmit = async function (data) {
+    setLoaded(false)
     try {
-      setLoaded(false)
       const response = await dispatch(loginUser(data));
       if (response.error) {
         throw new Error("Неверный логин или пароль");
@@ -35,9 +35,11 @@ export default function Login() {
       dispatch(getBasket()).then(() => {
         navigate(state?.path || "/");
       });
+      setLoaded(true)
     } catch (e) {
       setLoaded(true)
       setError(e.message);
+      console.log(e)
     }
   };
 
@@ -100,7 +102,6 @@ export default function Login() {
       </form>
       <div className="flex flex-col gap-5 text-center mt-[2rem]">
         <Link to="/register">Зарегистрироваться</Link>
-        <a>Забыли пароль?</a>
       </div>
     </div>
   );

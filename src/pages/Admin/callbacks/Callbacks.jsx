@@ -15,18 +15,19 @@ export default function Callbacks() {
     value: "Все",
   });
 
+  const fetchCallbacks = async function() {
+    try {
+      const response = await api.get("/api/callback/getall", {
+        withCredentials: true,
+      });
+      setCallbacks(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     document.title = "МногоСуши | Обратная связь";
-    const fetchCallbacks = async () => {
-      try {
-        const response = await api.get("/api/callback/getall", {
-          withCredentials: true,
-        });
-        setCallbacks(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     fetchCallbacks().finally(() => {
       setLoaded(true);
     });
@@ -95,7 +96,7 @@ export default function Callbacks() {
         </div>
         <div className="flex flex-col gap-6">
           {filteredCallbacks.map((callback) => (
-            <Callback key={callback.id} callback={callback} options={options} />
+            <Callback key={callback.id} callback={callback} options={options} fetchCallbacks={fetchCallbacks} />
           ))}
         </div>
       </div>

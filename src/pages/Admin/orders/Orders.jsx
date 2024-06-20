@@ -17,18 +17,19 @@ export default function AdminOrders() {
   const [currentOrders, setCurrentOrders] = useState([])
 
 
+  const fetchOrders = async function() {
+    try {
+      const response = await api.get("/api/order/admin/getall", {
+        withCredentials: true,
+      });
+      setOrders(response.data);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   useEffect(() => {
     document.title = "МногоСуши | Заказы";
-    const fetchOrders = async () => {
-      try {
-        const response = await api.get("/api/order/admin/getall", {
-          withCredentials: true,
-        });
-        setOrders(response.data);
-      } catch (e) {
-        console.log(e);
-      }
-    };
     fetchOrders().finally(() => {
       setLoaded(true);
     });
@@ -102,7 +103,7 @@ export default function AdminOrders() {
         />
       </div>
       <div className="orders mb-12 mt-4 w-full flex flex-col gap-6">
-        {currentOrders.length > 0 && currentOrders.map((order) => <Order key={order.id} order={order}/>)}
+        {currentOrders.length > 0 && currentOrders.map((order) => <Order key={order.id} fetchOrders={fetchOrders} order={order}/>)}
         {currentOrders.length > 0 && (
             <div className="flex justify-center flex-col gap-6">
               <Pagination

@@ -9,6 +9,7 @@ import InputMask from "react-input-mask";
 import { getUserInfo } from "../store/userPrivateSlice.js";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api.js";
+import Loading from "../components/Loading.jsx";
 
 export default function Cart() {
   const [orderGetMethod, setOrderGetMethod] = useState("delivery");
@@ -99,7 +100,7 @@ export default function Cart() {
       await dispatch(getBasket());
       await dispatch(getUserInfo());
     };
-    fetchData().then(() => {
+    fetchData().finally(() => {
       setLoaded(true);
     });
     let counter = 0;
@@ -169,6 +170,7 @@ export default function Cart() {
   }, [deliveryHour, availbaleDeliveryHours, availibaleDeliveryMinutes]);
 
   const onSubmit = async function (data) {
+    setLoaded(false)
     try {
       if (orderGetMethod === "delivery") {
         await api.post('/api/order/user/create', {
@@ -193,8 +195,10 @@ export default function Cart() {
       }
       dispatch(getBasket());
       navigate("/profile/orders");
+      setLoaded(true)
     } catch (e) {
       console.log(e);
+      setLoaded(false)
     }
   };
 
@@ -227,6 +231,8 @@ export default function Cart() {
       console.log(e);
     }
   };
+
+if(!loaded) return <Loading />
 
   return (
     <div className="wrapper mx-auto mb-28">
@@ -507,6 +513,7 @@ export default function Cart() {
                     />
                   ) : (
                     <button
+                        disabled={loaded}
                       onClick={onSelfDeliverySubmit}
                       className="border text-xl self-center font-medium mt-10 text-center w-full md:max-w-[32rem] px-16 rounded-lg bg-[#F35E62] text-white py-1"
                     >

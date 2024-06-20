@@ -39,7 +39,7 @@ export default function Promocode({ promocode, setPromocodes, setOpenModal }) {
     <div key={promocode.id} className="flex flex-col gap-2 items-center w-full">
       {openDeleteModal && (
         <div className="fixed  z-20 flex flex-col border-2 border-red-600 items-center gap-3 top-1/2 left-1/2 rounded-md -translate-x-1/2 -translate-y-1/2 bg-white w-5/6 md:w-120 px-6 py-4">
-          <p className="text-center">Вы точно хотите удалить продукт?</p>
+          <p className="text-center">Вы точно хотите удалить промокод?</p>
           <form
             className="flex flex-col gap-5 mt-4 mb-2"
             onSubmit={(e) => handleSubmitDelete(e)}

@@ -44,7 +44,6 @@ const CategoriesSlice = createSlice({
           };
         }
       });
-      console.log(state.categories);
     },
   },
   extraReducers: (builder) => {

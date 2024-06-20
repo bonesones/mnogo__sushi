@@ -53,6 +53,7 @@ export default function Personal() {
       }
     } catch (e) {
       console.log(e);
+      setLoaded(true)
       if (e.response && e.response.status === 500) {
         navigate("/500", { replace: true, state: { path: location.pathname } });
       }
@@ -61,10 +62,12 @@ export default function Personal() {
 
   const handleDeleteUserSubmit = async function (e) {
     e.preventDefault();
+    setLoaded(false)
     setDeleteModalActive(false);
     await dispatch(deleteUser());
     await dispatch(logoutUser());
     navigate("/login");
+    setLoaded(true)
   };
 
   const handleOpenModalDeleteUser = function () {
@@ -154,7 +157,7 @@ export default function Personal() {
                   {...register("birthday", {
                     validate: {
                       isTwelveAtLeast: (date) => {
-                        if(date == null) {
+                        if(date == null || date === '') {
                           return true
                         } else {
                           return new Date().getFullYear() - new Date(date).getFullYear() >= 12 || "Вам должно быть не меньше 12"
@@ -262,6 +265,7 @@ export default function Personal() {
               <input
                 type="submit"
                 value="Сохранить"
+                disabled={loaded}
                 className="border bg-[#F35E62] text-white w-fit py-1.5 px-20 place-self-center mt-10 rounded-r-md rounded-tl-md hover:cursor-pointer"
               />
               <button

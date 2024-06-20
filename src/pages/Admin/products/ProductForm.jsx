@@ -122,6 +122,7 @@ export default function ProductForm() {
       reset();
       setOpenModal(true);
       setError("");
+      setComboProducts([])
       setTimeout(() => setOpenModal(false), 2000);
     } catch (e) {
       setError(e.response?.data?.message);

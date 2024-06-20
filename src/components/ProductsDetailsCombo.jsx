@@ -42,7 +42,7 @@ export default function ProductDetailsCombo({ active, product, handleChange }) {
               alt={product.name}
             />
             <div className="flex flex-col items-center w-full lg:h-96">
-              <div className="mx-auto mt-12 lg:mt-0 flex flex-col gap-8 overflow-y-auto h-full">
+              <div className="mx-auto mt-12 lg:mt-0 flex flex-col gap-8 overflow-y-auto h-[600px]">
                 {product.Sibling.map(({ id, name, image, description }) => {
                   return (
                     <ProductDetailsContainsCard
@@ -61,16 +61,29 @@ export default function ProductDetailsCombo({ active, product, handleChange }) {
               {product.price.toLocaleString("ru-RU")} ₽
             </span>
             {isAuthenticated ? (
-              <button className="product-card__cart-btn rounded-lg px-7 font-medium hover:bg-second">
-                В корзину
-              </button>
+                basketProducts &&
+                basketProducts.find(({ id }) => id === product.id) ? (
+                    <Link
+                        to="/cart"
+                        className="product-card__cart-btn bg-second text-white rounded-lg px-7 font-medium"
+                    >
+                      Уже в корзине
+                    </Link>
+                ) : (
+                    <button
+                        className="product-card__cart-btn text-[#F35E62] rounded-lg px-7 font-medium hover:bg-second"
+                        onClick={handleAddProductToCart}
+                    >
+                      В корзину
+                    </button>
+                )
             ) : (
-              <Link
-                to="/login"
-                className="product-card__cart-btn rounded-lg px-7 font-medium hover:bg-second"
-              >
-                В корзину
-              </Link>
+                <Link
+                    to="/login"
+                    className="product-card__cart-btn text-[#F35E62] rounded-lg px-7 font-medium hover:bg-second"
+                >
+                  В корзину
+                </Link>
             )}
           </div>
           <button

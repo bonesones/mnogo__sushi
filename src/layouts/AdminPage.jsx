@@ -62,6 +62,11 @@ export default function AdminPage() {
             link={"slides"}
             activePath={activePath}
           />
+          <AdminPageButton
+              title={"Пользователи"}
+              link={"users"}
+              activePath={activePath}
+          />
         </ul>
       </nav>
       <Outlet />

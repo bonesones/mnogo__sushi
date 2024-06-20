@@ -51,34 +51,38 @@ export default function Orders() {
                 У вас нет заказов
               </h2>
             )}
-            <div className="flex justify-center flex-col gap-6">
-              <Pagination
-                ordersPerPage={ordersPerPage}
-                totalOrders={orders.length}
-                paginate={paginate}
-                currentPage={currentPage}
-              />
-              {currentOrder.length > 5 && (
-                <div className="flex justify-center gap-12 mb-12">
-                  <button
-                    type="button"
-                    className="text-xl"
-                    onClick={prevPage}
-                    disabled={currentPage === 1}
-                  >
-                    Назад
-                  </button>
-                  <button
-                    type="button"
-                    className="text-xl"
-                    onClick={nextPage}
-                    disabled={!currentOrder[lastOrderIndex - 1]}
-                  >
-                    Далее
-                  </button>
-                </div>
-              )}
-            </div>
+            {
+              currentOrder.length > 5 && (
+                    <div className="flex justify-center flex-col gap-6">
+                      <Pagination
+                          ordersPerPage={ordersPerPage}
+                          totalOrders={orders.length}
+                          paginate={paginate}
+                          currentPage={currentPage}
+                      />
+                      {currentOrder.length > 5 && (
+                          <div className="flex justify-center gap-12 mb-12">
+                            <button
+                                type="button"
+                                className="text-xl"
+                                onClick={prevPage}
+                                disabled={currentPage === 1}
+                            >
+                              Назад
+                            </button>
+                            <button
+                                type="button"
+                                className="text-xl"
+                                onClick={nextPage}
+                                disabled={!currentOrder[lastOrderIndex - 1]}
+                            >
+                              Далее
+                            </button>
+                          </div>
+                      )}
+                    </div>
+                )
+            }
           </>
         )}
       </div>

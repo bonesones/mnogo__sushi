@@ -1,11 +1,8 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/pagination";
 import "swiper/css";
-import { Pagination } from "swiper/modules";
-import Slide1 from "./../assets/bg-slide-1.png";
-import Combo7 from "./../assets/Combo7.png";
+import { Pagination, Autoplay } from "swiper/modules";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import api from "../services/api.js";
 
 export default function Slider() {
@@ -27,8 +24,12 @@ export default function Slider() {
 
   return (
     <Swiper
-      pagination={window.innerWidth > 700 ? true : false}
-      modules={[Pagination]}
+      pagination={window.innerWidth > 700}
+      modules={[Pagination, Autoplay]}
+      autoplay={{
+        delay: 4000,
+        disableOnInteraction: false,
+      }}
       className="mySwiper w-full max-w-[1920px] max-h-[500px]"
     >
       {slides.map((slide) => (

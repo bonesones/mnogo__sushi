@@ -5,7 +5,7 @@ import axios from "axios";
 import api from "../../../services/api.js";
 import Select from "react-select";
 
-export default function Order({ order }) {
+export default function Order({ order, fetchOrders }) {
   const [orderOpened, setOrderOpened] = useState(false);
   const [orderStatus, setOrderStatus] = useState(order.status);
   const [showSaveBtn, setShowSaveBtn] = useState(false);
@@ -55,6 +55,7 @@ export default function Order({ order }) {
       setOpenModal(true);
       setShowSaveBtn(false);
       setTimeout(() => setOpenModal(false), 2000);
+      await fetchOrders()
     } catch (e) {
       console.log(e);
     }
