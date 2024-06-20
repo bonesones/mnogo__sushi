@@ -12,7 +12,7 @@ export default function ProductDetailsContainsCard({
       <article className="product-card w-60 md:w-full flex flex-col lg:flex-row lg:gap-2 items-center">
         <img
           className="w-10/12 mb-3 h-30 lg:w-6/12 md:h-44 product-card__image object-contain"
-          src={image}
+          src={import.meta.env.VITE_STATIC_URL + image}
         />
         <div className="w-[12rem]">
           <h3 className="text-center lg:text-start font-medium text-xl">
