@@ -266,7 +266,7 @@ export default function Products() {
                       type="button"
                       className="text-xl"
                       onClick={nextPage}
-                      disabled={!currentPageProducts[lastProductIndex - 1]}
+                      disabled={!currentProducts[lastProductIndex - 1]}
                   >
                     Далее
                   </button>

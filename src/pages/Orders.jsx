@@ -52,7 +52,7 @@ export default function Orders() {
               </h2>
             )}
             {
-              currentOrder.length > 5 && (
+              orders.length > 5 && (
                     <div className="flex justify-center flex-col gap-6">
                       <Pagination
                           ordersPerPage={ordersPerPage}
@@ -74,7 +74,7 @@ export default function Orders() {
                                 type="button"
                                 className="text-xl"
                                 onClick={nextPage}
-                                disabled={!currentOrder[lastOrderIndex - 1]}
+                                disabled={!orders[lastOrderIndex - 1]}
                             >
                               Далее
                             </button>
