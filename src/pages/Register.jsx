@@ -47,7 +47,7 @@ export default function Register() {
   if(!loaded) return <Loading />
 
   return (
-    <div className="profile-modal login block flex-col absolute md:static items-center rounded-xl w-80 md:mx-auto bg-main pb-4">
+    <div className="profile-modal mt-12g login block flex-col absolute md:static items-center rounded-xl w-80 md:mx-auto bg-main pb-4">
       <div className="text-center text-black font-semibold text-2xl md:mt-12">
         Регистрация
       </div>
