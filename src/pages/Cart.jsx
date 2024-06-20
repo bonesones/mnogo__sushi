@@ -457,7 +457,7 @@ if(!loaded) return <Loading />
                 <div className="mt-16 max-w-[32rem] self-center flex flex-col">
                   <p className="text-xl font-medium">
                     <span className="opacity-70">Доставка: </span>
-                    <span>Бесплатно</span>
+                    <span>стоимость уточнит оператор</span>
                   </p>
                   <div className="grid grid-cols-1 sp:grid-cols-3 gap-x-3 gap-y-3 my-8">
                     <input
