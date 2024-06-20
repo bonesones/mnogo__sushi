@@ -51,7 +51,7 @@ export default function Promotion({ promotion, setPromotions, setOpenModal }) {
           </form>
         </div>
       )}
-      <img src={promotion.image} width="100%" />
+      <img src={import.meta.env.VITE_STATIC_URL + promotion.image} width="100%" />
       <h2 className="text-xl font-semibold text-center">{promotion.title}</h2>
       <p className="text-center">{promotion.description}</p>
       <div className="flex gap-8 justify-center">

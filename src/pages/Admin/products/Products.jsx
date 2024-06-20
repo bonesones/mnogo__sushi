@@ -224,7 +224,7 @@ export default function Products() {
                 )}
                 <div className="w-full">
                   <img
-                      src={product.image}
+                      src={import.meta.env.VITE_STATIC_URL + product.image}
                       className="h-60 mx-auto object-contain"
                       alt={""}
                   />

@@ -54,12 +54,12 @@ export default function Slide({ slide, setOpenModal, setSlides }) {
       <picture>
         <source
           media="(min-width: 1100px)"
-          srcSet={slide.desktop_image}
+          srcSet={import.meta.env.VITE_STATIC_URL + slide.desktop_image}
           className="max-h-[500px]"
         />
         <img
           className="w-full max-h-[500px]"
-          src={slide.tablet_phone_image}
+          src={import.meta.env.VITE_STATIC_URL + slide.tablet_phone_image}
           alt={slide.title}
         />
       </picture>
