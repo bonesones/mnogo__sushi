@@ -13,7 +13,7 @@ export default function User({ user, setUsers, setOpenModal }) {
         setOpenDeleteModal(false)
     }
 
-    сonst [loaded, setLoaded] = useState(true);
+    const [loaded, setLoaded] = useState(true);
 
     const handleSubmitDelete = async function (e) {
         setLoaded(false)
