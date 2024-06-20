@@ -90,6 +90,7 @@ export default function Personal() {
           >
             <input
               type="submit"
+              disabled={!loaded}
               className="bg-second text-white px-12 py-2 rounded-md"
               value="Да, удалить"
             />
@@ -265,7 +266,7 @@ export default function Personal() {
               <input
                 type="submit"
                 value="Сохранить"
-                disabled={loaded}
+                disabled={!loaded}
                 className="border bg-[#F35E62] text-white w-fit py-1.5 px-20 place-self-center mt-10 rounded-r-md rounded-tl-md hover:cursor-pointer"
               />
               <button

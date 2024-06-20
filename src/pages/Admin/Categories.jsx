@@ -28,6 +28,7 @@ export default function Categories() {
   };
 
   const handleSubmitCreateCategory = async function () {
+    setLoaded(false)
     try {
       await api.post(
         "/api/category/create",
@@ -44,9 +45,11 @@ export default function Categories() {
       setTimeout(() => setOpenCreateModal(false), 2000);
       setNewCategoryInput("");
       setCategoryCreating(false);
+      setLoaded(true)
     } catch (e) {
       setError(e.response?.data?.message);
       console.log(e);
+      setLoaded(true)
     }
   };
 
@@ -61,6 +64,7 @@ export default function Categories() {
 
   const handleSubmitDelete = async function (e) {
     e.preventDefault();
+    setLoaded(false)
     try {
       await api.delete(`/api/category/delete/${currentCategoryId}`, {
         withCredentials: true
@@ -71,8 +75,10 @@ export default function Categories() {
       setTimeout(() => {
         setOpenDeleteModal(false);
       }, 2000);
+      setLoaded(true)
     } catch (e) {
       console.log(e);
+      setLoaded(true)
     }
   };
 

@@ -32,14 +32,13 @@ export default function Contacts() {
         if (response.error) {
           throw new Error(response.payload.response.status);
         }
-        setLoaded(true);
       } catch (e) {
-        if (e !== 500) {
-          setLoaded(true);
-        }
+        console.log(e)
       }
     };
-    tryGetUser();
+    tryGetUser().finally(() => {
+      setLoaded(true)
+    });
   }, []);
 
   const handleMessageInput = function (e) {
@@ -56,6 +55,7 @@ export default function Contacts() {
   };
 
   const onSubmit = async function (data) {
+    setLoaded(false)
     try {
       await api.post("/api/callback/create", {
         name: data.name.trim(),
@@ -67,8 +67,10 @@ export default function Contacts() {
       setTimeout(() => {
         setOpenModal(false);
       }, 2500);
+      setLoaded(true)
     } catch (e) {
       console.log(e);
+      setLoaded(true)
     }
   };
 
@@ -152,6 +154,7 @@ export default function Contacts() {
               <input
                 type="submit"
                 value="Отправить"
+                disabled={!loaded}
                 className="w-fit px-10 py-1 self-start product-card__cart-btn text-red-500 reply__btn text-center bg-inherit rounded-lg font-medium hover:bg-second mx-auto sm:mx-0"
               />
             </form>
@@ -159,7 +162,7 @@ export default function Contacts() {
           <div className="mt-20 md:mt-0 mb-16 md:mb-0">
             <div className="flex flex-col items-center md:items-start">
               <h2 className="text-2xl font-semibold mb-6">Адрес</h2>
-              <span>г. Вологда, ул. Ветошкина 84Б</span>
+              <span>г. Вологда, ул. Ветошкина 76</span>
             </div>
             <div className="flex flex-col items-center md:items-start">
               <h2 className="text-2xl font-semibold mt-8 mb-6">Время работы</h2>

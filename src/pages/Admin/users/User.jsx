@@ -13,7 +13,10 @@ export default function User({ user, setUsers, setOpenModal }) {
         setOpenDeleteModal(false)
     }
 
+    сonst [loaded, setLoaded] = useState(true);
+
     const handleSubmitDelete = async function (e) {
+        setLoaded(false)
         e.preventDefault();
         try {
             await api.delete(`/api/user/admin/delete/${user.id}`, {
@@ -25,7 +28,9 @@ export default function User({ user, setUsers, setOpenModal }) {
             ]);
             setOpenModal(true);
             setTimeout(() => setOpenModal(false), 2000);
+            setLoaded(true)
         } catch (e) {
+            setLoaded(true)
             console.log(e);
         }
     };
@@ -43,6 +48,7 @@ export default function User({ user, setUsers, setOpenModal }) {
                             type="submit"
                             className="bg-second text-white px-12 py-2 rounded-md"
                             value="Да, удалить"
+                            disabled={!loaded}
                         />
                         <button type="button px-12 py-2" onClick={handleCancel}>
                             Нет, я передумал

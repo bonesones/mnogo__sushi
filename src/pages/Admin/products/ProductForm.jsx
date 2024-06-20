@@ -94,6 +94,7 @@ export default function ProductForm() {
     } else {
       setComboError("");
     }
+    setLoaded(false)
     const formData = new FormData();
     Object.entries(data).forEach(([key, value]) => {
       if (key === "image") {
@@ -124,8 +125,10 @@ export default function ProductForm() {
       setError("");
       setComboProducts([])
       setTimeout(() => setOpenModal(false), 2000);
+      setLoaded(true)
     } catch (e) {
       setError(e.response?.data?.message);
+      setLoaded(true)
       console.log(e);
     }
   };
@@ -286,6 +289,7 @@ export default function ProductForm() {
         <input
           type="submit"
           value="Создать товар"
+          disabled={!loaded}
           className="border bg-[#F35E62] text-white w-fit py-1.5 px-20 self-center rounded-md rounded-tl-md hover:cursor-pointer mt-12"
         />
       </form>

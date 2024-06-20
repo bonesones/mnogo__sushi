@@ -48,7 +48,7 @@ export default function Register() {
 
   return (
     <div className="profile-modal login block flex-col absolute md:static items-center rounded-xl w-80 md:mx-auto bg-main pb-4">
-      <div className="text-center text-black font-semibold text-2xl mt-12">
+      <div className="text-center text-black font-semibold text-2xl md:mt-12">
         Регистрация
       </div>
       <form
@@ -142,6 +142,7 @@ export default function Register() {
         )}
         <input
           type="submit"
+          disabled={!loaded}
           value="Зарегистрироваться"
           className="border bg-[#F35E62] text-white w-fit py-1.5 px-10 rounded-md rounded-tl-md hover:cursor-pointer mt-12"
         />

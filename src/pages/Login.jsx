@@ -97,6 +97,7 @@ export default function Login() {
         <input
           type="submit"
           value="Войти"
+          disabled={!loaded}
           className="border bg-[#F35E62] text-white w-fit py-1.5 px-20 rounded-md rounded-tl-md hover:cursor-pointer mt-12"
         />
       </form>

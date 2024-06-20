@@ -63,6 +63,7 @@ export default function UserEditForm() {
     }, []);
 
     const onSubmit = async function(data) {
+        setLoaded(false)
         try {
             await api.put(`/api/user/admin/update/${userId}`, {
                 email: data.email,
@@ -74,9 +75,11 @@ export default function UserEditForm() {
                 withCredentials: true
             })
             setOpenModal(true);
+            setLoaded(true)
             setTimeout(() => { setOpenModal(false); }, 2000);
         } catch (e) {
             setError(e.response?.data?.message)
+            setLoaded(true)
         }
     }
 
@@ -193,6 +196,7 @@ export default function UserEditForm() {
                 <input
                     type="submit"
                     value="Сохранить пользователя"
+                    disabled={!loaded}
                     className="border bg-[#F35E62] text-white w-fit py-1.5 px-10 rounded-md rounded-tl-md hover:cursor-pointer mt-12"
                 />
             </form>

@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import api from "../../../services/api.js";
+import Loading from "../../../components/Loading.jsx";
 
 export default function QuestionForm() {
   const {
@@ -14,12 +15,14 @@ export default function QuestionForm() {
 
   const [openModal, setOpenModal] = useState(false);
   const [error, setError] = useState(null);
+  const [loaded, setLoaded] = useState(true)
 
   useEffect(() => {
     document.title = "МногоСуши | Создание вопроса";
   }, []);
 
   const onSubmit = async function (data) {
+    setLoaded(false)
     try {
       await api.post("/api/question/create", data, {
         withCredentials: true,
@@ -30,11 +33,15 @@ export default function QuestionForm() {
       setTimeout(() => {
         setOpenModal(false);
       }, 2000);
+      setLoaded(true)
     } catch (e) {
       setError(e.response?.data?.message);
       console.log(e);
+      setLoaded(true)
     }
   };
+
+  if(!loaded) return <Loading />
 
   return (
     <div className="mt-16 mb-16 flex flex-col items-center w-full">
@@ -82,6 +89,7 @@ export default function QuestionForm() {
         <input
           type="submit"
           value="Создать вопрос - ответ"
+          disabled={!loaded}
           className="bg-second px-8 py-2 rounded-md text-white w-fit mx-auto mt-6"
         />
       </form>

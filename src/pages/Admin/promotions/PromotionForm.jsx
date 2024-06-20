@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import api from "../../../services/api.js";
+import Loading from "../../../components/Loading.jsx";
 
 export default function PromotionForm() {
   const {
@@ -14,12 +15,14 @@ export default function PromotionForm() {
 
   const [openModal, setOpenModal] = useState(false);
   const [error, setError] = useState(null);
+  const [loaded, setLoaded] = useState(true)
 
   useEffect(() => {
     document.title = "МногоСуши | Создание акции";
   }, []);
 
   const onSubmit = async function (data) {
+    setLoaded(false);
     const formData = new FormData();
     Object.entries(data).forEach(([key, value]) => {
       if (key === "image") {
@@ -38,11 +41,15 @@ export default function PromotionForm() {
       setTimeout(() => {
         setOpenModal(false);
       }, 2000);
+      setLoaded(true)
     } catch (e) {
       setError(e.response?.data?.message);
       console.log(e);
+      setLoaded(true)
     }
   };
+
+  if(!loaded) return <Loading />
 
   return (
     <div className="mt-16 mb-16 flex flex-col items-center w-full">

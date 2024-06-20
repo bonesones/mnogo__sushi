@@ -169,6 +169,7 @@ export default function UserForm() {
                 )}
                 <input
                     type="submit"
+                    disabled={!loaded}
                     value="Создать пользователя"
                     className="border bg-[#F35E62] text-white w-fit py-1.5 px-10 rounded-md rounded-tl-md hover:cursor-pointer mt-12"
                 />

@@ -419,7 +419,7 @@ if(!loaded) return <Loading />
                   </form>
                 ) : (
                   <p className="mt-24">
-                    Адрес самовывоза: г. Вологда, ул. Ветошкина 84Б
+                    Адрес самовывоза: г. Вологда, ул. Ветошкина 76
                   </p>
                 )}
               </div>
@@ -513,7 +513,7 @@ if(!loaded) return <Loading />
                     />
                   ) : (
                     <button
-                        disabled={loaded}
+                        disabled={!loaded}
                       onClick={onSelfDeliverySubmit}
                       className="border text-xl self-center font-medium mt-10 text-center w-full md:max-w-[32rem] px-16 rounded-lg bg-[#F35E62] text-white py-1"
                     >

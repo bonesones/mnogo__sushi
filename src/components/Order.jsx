@@ -30,7 +30,7 @@ export default function Order({ order }) {
           </span>
           <span>Адрес</span>
           <span className="text-lg">
-            {order.is_delivery ? order.street_house : "Ветошкина 85Б"}
+            {order.is_delivery ? order.street_house : "Ветошкина 76"}
           </span>
           <span>Сумма</span>
           <span className="text-lg font-medium">{order.amount} ₽</span>
@@ -60,7 +60,7 @@ export default function Order({ order }) {
             {new Date(order.createdAt).toLocaleDateString("ru")}
           </span>
           <span className="text-lg font-medium">
-            {order.is_delivery ? order.street_house : "Ветошкина 85Б"}
+            {order.is_delivery ? order.street_house : "Ветошкина 76"}
           </span>
           <span className="text-lg font-medium">{Math.ceil(order.amount)} ₽</span>
           <span className="text-lg font-medium">{order.id}</span>

@@ -14,6 +14,8 @@ export default function PromocodeForm() {
     reset,
   } = useForm();
 
+  const [loaded, setLoaded] = useState(true)
+
   const [currentDiscountType, setCurrentDiscountType] = useState({
     value: "fix",
     label: "Фиксированный",
@@ -26,6 +28,7 @@ export default function PromocodeForm() {
   }, []);
 
   const onSubmit = async function (data) {
+    setLoaded(false)
     try {
       const response = await api.post(
         "/api/promocode/create",
@@ -43,7 +46,9 @@ export default function PromocodeForm() {
       setTimeout(() => {
         setOpenModal(false);
       }, 2000);
+      setLoaded(true)
     } catch (e) {
+      setLoaded(true)
       setError(e.response?.data?.message);
       console.log(e);
     }
@@ -138,6 +143,7 @@ export default function PromocodeForm() {
         <input
           type="submit"
           value="Создать промокод"
+          disabled={!loaded}
           className="bg-second w-fit px-4 py-1 text-white mt-6 self-center rounded-md"
         />
       </form>

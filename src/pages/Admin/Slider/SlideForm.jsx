@@ -14,6 +14,7 @@ export default function SlideForm() {
 
   const [firstImage, setFirstImage] = useState()
   const [secondImage, setSecondImage] = useState()
+  const [loaded, setLoaded] = useState(true)
 
   const [openModal, setOpenModal] = useState(false);
   const [error, setError] = useState(null);
@@ -22,11 +23,9 @@ export default function SlideForm() {
     document.title = "МногоСуши | Создание слайда";
   }, []);
 
-  useEffect(() => {
-    console.log(secondImage)
-  }, [setSecondImage]);
 
   const onSubmit = async function (data) {
+    setLoaded(false)
     const formData = new FormData();
     formData.append("desktop_image", data.desktop_image[0]);
     formData.append("tablet_phone_image", data.tablet_phone_image[0]);
@@ -45,9 +44,11 @@ export default function SlideForm() {
       setTimeout(() => {
         setOpenModal(false);
       }, 2000);
+      setLoaded(true)
     } catch (e) {
       setError(e.response?.data?.message);
       console.log(e);
+      setLoaded(true)
     }
   };
 
@@ -125,6 +126,7 @@ export default function SlideForm() {
         <input
           type="submit"
           value="Создать слайд"
+          disabled={!loaded}
           className="bg-second px-8 py-2 rounded-md text-white w-fit mx-auto mt-6"
         />
       </form>
