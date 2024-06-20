@@ -38,11 +38,11 @@ export default function Slider() {
             <source
               media="(min-width: 1100px)"
               className="max-h-[500px]"
-              srcSet={slide.desktop_image}
+              srcSet={import.meta.env.STATIC + slide.desktop_image}
             />
             <img
               className="w-full max-h-[500px]"
-              src={slide.tablet_phone_image}
+              src={import.meta.env.STATIC + slide.tablet_phone_image}
               alt={slide.title}
             />
           </picture>
