@@ -129,7 +129,7 @@ export default function Order({ order, fetchOrders }) {
               : "Самовывоз"}
           </span>
           <span>Сумма</span>
-          <span className="text-lg font-medium">{order.amount.toLocaleString("ru-RU")} ₽</span>
+          <span className="text-lg font-medium">{Math.ceil(order.amount).toLocaleString("ru-RU")} ₽</span>
           <span>Оплата</span>
           <span className="text-lg font-medium">
             {order.payment_method === "card" ? "Картой" : "Наличными"}
@@ -317,7 +317,7 @@ export default function Order({ order, fetchOrders }) {
                 <span className="mr-7 font-medium w-max">
                   {order.promocode && Object.keys(order.promocode).length > 0
                     ? order.promocode.discount_type === "fix"
-                      ? (product.quantity * product.price -
+                      ? Math.ceil(product.quantity * product.price -
                         order.promocode.discount_amount / order.items.length).toLocaleString("ru-RU")
                       : Math.ceil(product.quantity *
                         product.price *

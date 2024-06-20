@@ -18,7 +18,7 @@ export default function Cart() {
   const [availbaleDeliveryHours, setAvailbaleDeliveryHours] = useState([]);
   const [availibaleDeliveryMinutes, setAvailbaleDeliveryMinutes] = useState([]);
   const [deliveryHour, setDeliveryHour] = useState(
-    availbaleDeliveryHours[0]?.value,
+      new Date(Date.now() + 1000 * 60 * 60 * 1.5).getHours(),
   );
   const [promocodeInput, setPromocodeInput] = useState("");
   const [isPromocodeUsed, setPromocodeUsed] = useState(false);
@@ -30,7 +30,7 @@ export default function Cart() {
   const user = useSelector((state) => state.userPrivate.user.personal);
 
   const [deliveryMinutes, setDeliveryMinutes] = useState(
-    availibaleDeliveryMinutes[0]?.value,
+      new Date(Date.now() + 1000 * 60 * 60 * 1.5).getMinutes(),
   );
 
   const [loaded, setLoaded] = useState(false);
@@ -217,7 +217,7 @@ export default function Cart() {
           ready_minutes:
               orderGetTimeMethod === "now"
                   ? new Date(Date.now() + 1000 * 60 * 60 * 1.5).getMinutes()
-                  : deliveryHour,
+                  : deliveryMinutes,
           amount: orderAmount,
           payment_method: orderPayMethod,
           promocodeId: isPromocodeUsed ? promocodeId : null,
@@ -481,7 +481,7 @@ if(!loaded) return <Loading />
                         }}
                         className="text-[#F35E62] text-center rounded-lg font-medium px-3"
                       >
-                        Отменить промокод
+                        Отменить
                       </button>
                     ) : (
                       <button

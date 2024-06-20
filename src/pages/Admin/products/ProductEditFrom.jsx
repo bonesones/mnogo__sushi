@@ -201,7 +201,7 @@ export default function ProductEditFrom() {
       </div>
       <h2 className="text-2xl font-semibold">Редактировать товар</h2>
       {openModal && (
-        <div className="fixed top-10 left-1/2 sm:text-lg -translate-x-1/2 bg-red-400 px-6 sm:px-10 w-fit rounded-md text-white py-5 sm:py-8">
+        <div className="fixed top-10 z-30 left-1/2 sm:text-lg -translate-x-1/2 bg-red-400 px-6 sm:px-10 w-fit rounded-md text-white py-5 sm:py-8">
           Товар обновлен!
         </div>
       )}

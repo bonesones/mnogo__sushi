@@ -33,7 +33,7 @@ export default function Order({ order }) {
             {order.is_delivery ? order.street_house : "Ветошкина 76"}
           </span>
           <span>Сумма</span>
-          <span className="text-lg font-medium">{order.amount} ₽</span>
+          <span className="text-lg font-medium">{Math.ceil(order.amount).toLocaleString("ru-RU")} ₽</span>
           <span>Номер заказа</span>
           <span className="text-lg font-medium">{order.id}</span>
           <button
@@ -62,7 +62,7 @@ export default function Order({ order }) {
           <span className="text-lg font-medium">
             {order.is_delivery ? order.street_house : "Ветошкина 76"}
           </span>
-          <span className="text-lg font-medium">{Math.ceil(order.amount)} ₽</span>
+          <span className="text-lg font-medium">{Math.ceil(order.amount).toLocaleString("ru-RU")} ₽</span>
           <span className="text-lg font-medium">{order.id}</span>
           <button
             type="button"
@@ -107,11 +107,11 @@ export default function Order({ order }) {
                   <span className="mr-7 font-medium">
                     {order.promocode && Object.keys(order.promocode).length > 0
                       ? order.promocode.discount_type === "fix"
-                        ? product.quantity * product.price -
-                          order.promocode.discount_amount / order.items.length
+                        ? Math.ceil(product.quantity * product.price -
+                          order.promocode.discount_amount / order.items.length).toLocaleString("ru-RU")
                         : Math.ceil(product.quantity *
                           product.price *
-                          (1 - order.promocode.discount_amount / 100))
+                          (1 - order.promocode.discount_amount / 100)).toLocaleString("ru-RU")
                       : product.price * product.quantity}{" "}
                     ₽
                   </span>

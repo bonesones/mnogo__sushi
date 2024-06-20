@@ -29,6 +29,7 @@ export default function UserForm() {
         handleSubmit,
         getValues,
         formState: { errors },
+        clear
     } = useForm();
 
 
@@ -50,6 +51,7 @@ export default function UserForm() {
             })
             setLoaded(true)
             setOpenModal(true);
+            clear()
             setTimeout(() => { setOpenModal(false); }, 2000);
         } catch (e) {
             console.log(e)
