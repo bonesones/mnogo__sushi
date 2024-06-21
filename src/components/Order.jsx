@@ -116,7 +116,7 @@ export default function Order({ order }) {
                     ₽
                   </span>
                   {basketProducts &&
-                  basketProducts.find(({ id }) => id === product.id) ? (
+                  basketProducts.find(({ productId }) => productId === product.productId) ? (
                     <Link
                       to="/cart"
                       className="text-white bg-[#F35E62] border-2 border-[#F35E62] rounded-lg px-5 text-medium"
@@ -126,7 +126,7 @@ export default function Order({ order }) {
                   ) : (
                     <button
                       type="button"
-                      onClick={() => handleAddProductToCart(product.id)}
+                      onClick={() => handleAddProductToCart(product.productId)}
                       className="border-2 border-[#F35E62] text-[#F35E62] hover:text-white hover:bg-[#F35E62] rounded-lg px-5 text-medium"
                     >
                       В корзину
