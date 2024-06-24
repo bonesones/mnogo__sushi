@@ -12,13 +12,17 @@ export default function MainPage({ scroll }) {
     <CheckAuth>
         <Header />
     </CheckAuth>
-      <div className="px-2 py-3 bg-second fixed right-1 bottom-2">
-        <img src={"/ArrowScrollTop.svg"} alt={"Перейти вверх"} />
-      </div>
+      {
+        scroll > 1200 && (
+              <div className="px-5 py-5 rounded-lg bg-second fixed right-9 bottom-16 mix-blend-difference">
+                <img src={"/ArrowScrollTop.svg"} className="w-[40px]" alt={"Перейти вверх"}/>
+              </div>
+          )
+      }
       <main className="mx-auto">
-        <Outlet />
+        <Outlet/>
       </main>
-      <Footer />
+      <Footer/>
     </>
   );
 }
