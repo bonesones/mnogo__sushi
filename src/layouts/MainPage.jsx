@@ -16,7 +16,7 @@ export default function MainPage(props) {
     </CheckAuth>
       {
         props.scroll > 1200 && (
-              <div className="px-5 py-5 rounded-lg bg-second fixed right-9 bottom-16 md:mix-blend-color-dodge cursor-pointer z-50" onClick={handleGoToTop}>
+              <div className="px-3 py-3.5 sm:px-5 sm:py-5 rounded-lg bg-second fixed right-9 bottom-16 md:mix-blend-color-dodge cursor-pointer z-50" onClick={handleGoToTop}>
                 <img src={"/ArrowScrollTop.svg"} className="w-[40px] rotate-180" alt={"Перейти вверх"}/>
               </div>
           )
