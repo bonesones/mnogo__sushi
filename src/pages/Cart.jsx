@@ -422,10 +422,10 @@ if(!loaded) return <Loading />
                   </form>
                 ) : (
                     <>
-                      <p className="mt-24">
+                      <p className="mt-24 text-xl">
                         Адрес самовывоза: г. Вологда, ул. Ветошкина 76
                       </p>
-                      <img src='/road_map.png' alt="Как добраться"/>
+                      <img src='/road_map.png' className="mt-10" alt="Как добраться"/>
                     </>
                 )}
               </div>
