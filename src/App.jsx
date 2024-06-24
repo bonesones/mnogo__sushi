@@ -61,7 +61,7 @@ function App() {
       try {
         await api.get("/api");
       } catch (e) {
-        if (e.response && e.response.status === 500) {
+        if (e.response && (e.response.status === 500 || e.response.status === 502)) {
           navigate("/500", {
             replace: true,
             state: { path: location.pathname },
