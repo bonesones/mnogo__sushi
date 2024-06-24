@@ -49,7 +49,7 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [scroll, setScroll] = React.useState(0);
+  const [scroll, setScroll] = useState(0);
 
   const handleScroll = () => {
     setScroll(window.scrollY);
