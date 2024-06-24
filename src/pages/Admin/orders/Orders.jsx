@@ -94,6 +94,7 @@ export default function AdminOrders() {
       <div className="mt-12 flex gap-4 items-center">
         <span>Фильтровать по:</span>
         <Select
+            className="w-[170px]"
           options={options}
           value={{
             label: filterValue,
