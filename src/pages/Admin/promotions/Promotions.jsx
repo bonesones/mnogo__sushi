@@ -41,7 +41,7 @@ export default function Promotions() {
       >
         Создать акцию
       </Link>
-      <div className="flex flex-col md:flex-row md:flex-wrap items-center md:justify-between w-full gap-6 mt-12">
+      <div className="flex flex-col md:flex-row md:flex-wrap items-center md:items-baseline md:justify-between w-full gap-6 mt-12">
         {promotions.map((promotion) => (
           <Promotion
             key={promotion.id}
