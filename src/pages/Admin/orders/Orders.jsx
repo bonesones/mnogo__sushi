@@ -125,7 +125,7 @@ export default function AdminOrders() {
                       type="button"
                       className="text-xl"
                       onClick={nextPage}
-                      disabled={!currentOrders[lastOrderIndex - 1]}
+                      disabled={!filteredOrders[lastOrderIndex - 1]}
                   >
                     Далее
                   </button>

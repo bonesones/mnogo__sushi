@@ -49,6 +49,13 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const [scroll, setScroll] = React.useState(0);
+
+  const handleScroll = () => {
+    setScroll(window.scrollY);
+    console.log(window.scrollY)
+  };
+
   useEffect(() => {
     const fetchServer = async () => {
       try {
@@ -63,12 +70,14 @@ function App() {
       }
     };
     fetchServer();
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <Routes>
       <Route path="500" element={<Error_500 />} />
-      <Route path="/" element={<MainPage />}>
+      <Route path="/" element={<MainPage scroll={scroll} />}>
         <Route path="*" element={<Error_404 />} />
         <Route index element={<Menu />} />
 
