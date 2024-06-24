@@ -26,6 +26,7 @@ export default function Contacts() {
     (state) => state.userPersist.user.isAuthenticated,
   );
   useEffect(() => {
+    document.title = "МногоСуши | Контакты";
     const tryGetUser = async () => {
       try {
         const response = await dispatch(getUserInfo());
